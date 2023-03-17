@@ -11,9 +11,11 @@
         android:id="@+id/arrowBackBtn"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/iconback"
+        android:layout_marginStart="٠dp"
         android:scaleType="centerCrop"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:src="@drawable/iconback"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/fillInYourBio"
