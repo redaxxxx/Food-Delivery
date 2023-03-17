@@ -1,66 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.SecondOnbaordingFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/imageView2"
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/onboarding2"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        tools:context=".fragments.SecondOnbaordingFragment">
 
-    <TextView
-        android:id="@+id/find_your_comfort"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="Find your Comfort"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        android:gravity="center_horizontal"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="#09051C"/>
-    <TextView
-        android:id="@+id/food_here"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:text="Food here"
-        app:layout_constraintTop_toBottomOf="@+id/find_your_comfort"
-        android:gravity="center_horizontal"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="#09051C"/>
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:src="@drawable/onboarding2"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/find_chef"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:text="Here You Can find a chef or dish for every \n taste and color. Enjoy!"
-        app:layout_constraintTop_toBottomOf="@+id/food_here"
-        android:gravity="center_horizontal"
-        android:textSize="13sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/find_your_comfort"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Find your Comfort \n Food here"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            android:gravity="center_horizontal"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#09051C" />
 
-    <TextView
-        android:id="@+id/nextBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Next"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:background="@drawable/next_btn_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/find_chef" />
-    
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/find_chef"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Here You Can find a chef or dish for every \n taste and color. Enjoy!"
+            app:layout_constraintTop_toBottomOf="@+id/find_your_comfort"
+            android:gravity="center_horizontal"
+            android:textSize="10sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/nextBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Next"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:background="@drawable/next_btn_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/find_chef" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

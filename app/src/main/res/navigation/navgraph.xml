@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navgraph"
+    app:startDestination="@id/onbaordingFragment">
+
+    <fragment
+        android:id="@+id/secondOnbaordingFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.fragments.SecondOnbaordingFragment"
+        android:label="fragment_second_onbaording"
+        tools:layout="@layout/fragment_second_onbaording" >
+        <action
+            android:id="@+id/action_secondOnbaordingFragment_to_thirdOnboardingFragment2"
+            app:destination="@id/thirdOnboardingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/thirdOnboardingFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.fragments.ThirdOnboardingFragment"
+        android:label="fragment_third_onboarding"
+        tools:layout="@layout/fragment_third_onboarding" />
+    <fragment
+        android:id="@+id/onbaordingFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.fragments.OnbaordingFragment"
+        android:label="OnbaordingFragment" >
+        <action
+            android:id="@+id/action_onbaordingFragment_to_secondOnbaordingFragment"
+            app:destination="@id/secondOnbaordingFragment" />
+    </fragment>
+
+</navigation>
