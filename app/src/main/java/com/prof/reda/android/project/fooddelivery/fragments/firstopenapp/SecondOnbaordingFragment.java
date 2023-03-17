@@ -1,4 +1,4 @@
-package com.prof.reda.android.project.fooddelivery.fragments;
+package com.prof.reda.android.project.fooddelivery.fragments.firstopenapp;
 
 import android.os.Bundle;
 

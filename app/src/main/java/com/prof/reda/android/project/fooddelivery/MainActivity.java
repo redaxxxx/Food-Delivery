@@ -7,15 +7,9 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 
 import com.prof.reda.android.project.fooddelivery.databinding.ActivityMainBinding;
-import com.prof.reda.android.project.fooddelivery.fragments.SecondOnbaordingFragment;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
     

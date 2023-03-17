@@ -1,4 +1,4 @@
-package com.prof.reda.android.project.fooddelivery.fragments;
+package com.prof.reda.android.project.fooddelivery.fragments.firstopenapp;
 
 import android.os.Bundle;
 
@@ -23,6 +23,9 @@ public class ThirdOnboardingFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_third_onboarding, container, false);
 
+        binding.nextBtn.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_thirdOnboardingFragment_to_signUpFragment);
+        });
 
         return binding.getRoot();
     }

@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragments.SecondOnbaordingFragment">
+        tools:context=".fragments.firstopenapp.SecondOnbaordingFragment">
 
         <ImageView
             android:id="@+id/imageView2"
@@ -27,7 +27,7 @@
             android:text="Find your Comfort \n Food here"
             app:layout_constraintTop_toBottomOf="@+id/imageView2"
             android:gravity="center_horizontal"
-            android:textSize="22sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="#09051C" />
 
@@ -41,7 +41,7 @@
             android:text="Here You Can find a chef or dish for every \n taste and color. Enjoy!"
             app:layout_constraintTop_toBottomOf="@+id/find_your_comfort"
             android:gravity="center_horizontal"
-            android:textSize="10sp"
+            android:textSize="11sp"
             android:textStyle="bold" />
 
         <TextView
