@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.firstopenapp.FillInBioFragment"
+    android:padding="15dp">
+
+    <ImageView
+        android:id="@+id/arrowBackBtn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/iconback"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/fillInYourBio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fill in your bio to get \n started"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/arrowBackBtn" />
+
+    <TextView
+        android:id="@+id/dataDisplayedInProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="This data will be displayed in your \n account profile for security"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/fillInYourBio"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/first_name_edit_text"
+        android:layout_width="360dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:hint="First name"
+        android:textSize="15sp"
+        android:fontFamily="sans-serif-light"
+        android:background="@drawable/edit_text_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dataDisplayedInProfile" />
+
+    <EditText
+    android:id="@+id/last_name_edit_text"
+    android:layout_width="360dp"
+    android:layout_height="50dp"
+    android:layout_marginTop="15dp"
+    android:hint="Last name"
+    android:textSize="15sp"
+    android:fontFamily="sans-serif-light"
+    android:background="@drawable/edit_text_background"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/first_name_edit_text" />
+
+    <EditText
+        android:id="@+id/phoneNumber_edit_text"
+        android:layout_width="360dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        android:hint="Mobile Number"
+        android:textSize="15sp"
+        android:fontFamily="sans-serif-light"
+        android:background="@drawable/edit_text_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/last_name_edit_text" />
+
+    <TextView
+        android:id="@+id/NextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/next_btn_background"
+        android:layout_marginTop="17dp"
+        app:layout_constraintEnd_toEndOf="@+id/phoneNumber_edit_text"
+        app:layout_constraintStart_toStartOf="@+id/phoneNumber_edit_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="30dp"
+        android:text="Next"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="17sp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
