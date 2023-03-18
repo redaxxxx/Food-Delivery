@@ -1,4 +1,4 @@
-package com.prof.reda.android.project.fooddelivery.fragments.firstopenapp;
+package com.prof.reda.android.project.fooddelivery.views.fragments.firstopenapp;
 
 import android.content.Context;
 import android.content.Intent;

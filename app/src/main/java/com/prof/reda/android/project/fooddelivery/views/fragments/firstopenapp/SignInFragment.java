@@ -1,4 +1,4 @@
-package com.prof.reda.android.project.fooddelivery.fragments.firstopenapp;
+package com.prof.reda.android.project.fooddelivery.views.fragments.firstopenapp;
 
 import android.os.Bundle;
 
@@ -42,6 +42,7 @@ public class SignInFragment extends Fragment {
                 getEnteredData();
                 if (isValidEmail(email)){
                     if (isValidPassword(password)){
+                        loginFirebase(email, password);
                         Toast.makeText(getActivity(), "Success Login", Toast.LENGTH_SHORT).show();
                     }
                 }

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/secondOnbaordingFragment"
-        android:name="com.prof.reda.android.project.fooddelivery.fragments.firstopenapp.SecondOnbaordingFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.firstopenapp.SecondOnbaordingFragment"
         android:label="fragment_second_onbaording"
         tools:layout="@layout/fragment_second_onbaording" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/thirdOnboardingFragment"
-        android:name="com.prof.reda.android.project.fooddelivery.fragments.firstopenapp.ThirdOnboardingFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.firstopenapp.ThirdOnboardingFragment"
         android:label="fragment_third_onboarding"
         tools:layout="@layout/fragment_third_onboarding" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/onbaordingFragment"
-        android:name="com.prof.reda.android.project.fooddelivery.fragments.firstopenapp.OnbaordingFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.firstopenapp.OnbaordingFragment"
         android:label="OnbaordingFragment" >
         <action
             android:id="@+id/action_onbaordingFragment_to_secondOnbaordingFragment"
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.prof.reda.android.project.fooddelivery.fragments.firstopenapp.SignUpFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.firstopenapp.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
@@ -45,11 +45,11 @@
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.prof.reda.android.project.fooddelivery.fragments.firstopenapp.SignInFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.firstopenapp.SignInFragment"
         android:label="SignInFragment" />
     <fragment
         android:id="@+id/fillInBioFragment"
-        android:name="com.prof.reda.android.project.fooddelivery.fragments.firstopenapp.FillInBioFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.firstopenapp.FillInBioFragment"
         android:label="FillInBioFragment" />
 
 </navigation>
