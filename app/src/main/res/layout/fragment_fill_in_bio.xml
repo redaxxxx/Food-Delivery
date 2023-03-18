@@ -87,7 +87,7 @@
             app:layout_constraintTop_toBottomOf="@+id/last_name_edit_text" />
 
         <TextView
-            android:id="@+id/NextButton"
+            android:id="@+id/nextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/next_btn_background"
