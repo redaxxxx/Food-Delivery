@@ -27,7 +27,7 @@ public class SignUpFragment extends Fragment {
         });
 
         binding.createBtn.setOnClickListener(view -> {
-            createAccountWithFirebase();
+            Navigation.findNavController(view).navigate(R.id.action_signUpFragment_to_fillInBioFragment);
         });
         return binding.getRoot();
     }

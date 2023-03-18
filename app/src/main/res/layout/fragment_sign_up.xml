@@ -59,8 +59,8 @@
             android:textSize="15sp"
             android:fontFamily="sans-serif-light"
             android:background="@drawable/edit_text_background"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/username_edit_text"
+            app:layout_constraintStart_toStartOf="@id/username_edit_text"
             app:layout_constraintTop_toBottomOf="@+id/username_edit_text"
             android:paddingStart="15dp" />
 
@@ -74,10 +74,10 @@
             android:drawablePadding="10dp"
             android:fontFamily="sans-serif-light"
             android:hint="Password"
-            android:paddingStart="15dp"
+            android:paddingStart="13dp"
             android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/email_edit_text"
+            app:layout_constraintStart_toStartOf="@id/email_edit_text"
             app:layout_constraintTop_toBottomOf="@+id/email_edit_text" />
 
         <TextView
@@ -130,7 +130,6 @@
             android:layout_width="360dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="٠dp"
             android:gravity="center"
             android:text="already have an account?"
             android:textColor="@color/green"

@@ -39,10 +39,17 @@
         <action
             android:id="@+id/action_signUpFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_fillInBioFragment"
+            app:destination="@id/fillInBioFragment" />
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.prof.reda.android.project.fooddelivery.fragments.firstopenapp.SignInFragment"
         android:label="SignInFragment" />
+    <fragment
+        android:id="@+id/fillInBioFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.fragments.firstopenapp.FillInBioFragment"
+        android:label="FillInBioFragment" />
 
 </navigation>
