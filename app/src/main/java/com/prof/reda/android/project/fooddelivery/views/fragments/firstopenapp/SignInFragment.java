@@ -1,5 +1,6 @@
 package com.prof.reda.android.project.fooddelivery.views.fragments.firstopenapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,8 +21,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.prof.reda.android.project.fooddelivery.R;
 import com.prof.reda.android.project.fooddelivery.databinding.FragmentSignInBinding;
-import com.prof.reda.android.project.fooddelivery.databinding.FragmentSignUpBinding;
 import com.prof.reda.android.project.fooddelivery.utils.Config;
+import com.prof.reda.android.project.fooddelivery.views.activities.HomeActivity;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -60,6 +61,7 @@ public class SignInFragment extends Fragment {
                                 FirebaseUser firebaseUser = auth.getCurrentUser();
                                 String id = firebaseUser.getUid();
                                 Config.firebaseUSerID = id;
+                                startActivity(new Intent(getActivity(), HomeActivity.class));
                                 Log.d("Firebase Id", firebaseUser.getUid());
                             }else {
                                 Toast.makeText(getActivity(), "Check Email", Toast.LENGTH_LONG).show();

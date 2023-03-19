@@ -45,6 +45,6 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         ActionBar supportActionBar = ((AppCompatActivity) this).getSupportActionBar();
         if (supportActionBar != null)
-            supportActionBar.show();
+            supportActionBar.hide();
     }
 }
