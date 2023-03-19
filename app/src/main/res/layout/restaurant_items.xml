@@ -10,11 +10,12 @@
         android:id="@+id/cardView"
         android:layout_width="147dp"
         android:layout_height="184dp"
-        android:elevation="15dp"
+        android:elevation="3dp"
         app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:cardBackgroundColor="@color/white">
+        app:cardBackgroundColor="@color/white"
+        app:cardUseCompatPadding="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

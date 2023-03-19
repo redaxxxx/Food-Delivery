@@ -59,8 +59,6 @@ public class HomeFragment extends Fragment {
         binding.rvNearestRestaurant.setItemAnimator(new DefaultItemAnimator());
         binding.rvNearestRestaurant.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
         restroAdapter = new RestroAdapter(restaurantsList);
-        DividerItemDecoration itemDecoration = new DividerItemDecoration(getActivity(), DividerItemDecoration.HORIZONTAL);
-        binding.rvNearestRestaurant.addItemDecoration(itemDecoration);
         binding.rvNearestRestaurant.setAdapter(restroAdapter);
     }
 
