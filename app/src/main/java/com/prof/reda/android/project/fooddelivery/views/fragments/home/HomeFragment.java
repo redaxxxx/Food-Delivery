@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.badge.BadgeDrawable;
 import com.prof.reda.android.project.fooddelivery.R;
 import com.prof.reda.android.project.fooddelivery.adapters.PopularMenuAdapter;
 import com.prof.reda.android.project.fooddelivery.adapters.RestroAdapter;
@@ -48,6 +49,7 @@ public class HomeFragment extends Fragment {
 
         prepareRestaurantRV(restaurants);
         prepareMenuRV(menus);
+
         return binding.getRoot();
     }
 

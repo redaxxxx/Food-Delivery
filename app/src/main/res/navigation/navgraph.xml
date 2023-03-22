@@ -26,7 +26,8 @@
     <fragment
         android:id="@+id/onbaordingFragment"
         android:name="com.prof.reda.android.project.fooddelivery.views.fragments.firstopenapp.OnbaordingFragment"
-        android:label="OnbaordingFragment" >
+        android:label="OnbaordingFragment"
+        tools:layout="@layout/fragment_onbaording">
         <action
             android:id="@+id/action_onbaordingFragment_to_secondOnbaordingFragment"
             app:destination="@id/secondOnbaordingFragment" />
@@ -46,10 +47,12 @@
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.prof.reda.android.project.fooddelivery.views.fragments.firstopenapp.SignInFragment"
-        android:label="SignInFragment" />
+        android:label="SignInFragment"
+        tools:layout="@layout/fragment_sign_in"/>
     <fragment
         android:id="@+id/fillInBioFragment"
         android:name="com.prof.reda.android.project.fooddelivery.views.fragments.firstopenapp.FillInBioFragment"
-        android:label="FillInBioFragment" />
+        android:label="FillInBioFragment"
+        tools:layout="@layout/fragment_fill_in_bio"/>
 
 </navigation>

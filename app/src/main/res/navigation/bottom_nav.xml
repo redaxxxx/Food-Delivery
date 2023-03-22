@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+    </fragment>
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.ChatFragment"
+        android:label="ChatFragment"
+        tools:layout="@layout/fragment_chat">
+        <action
+            android:id="@+id/action_chatFragment2_to_chatDetailsFragment"
+            app:destination="@id/chatDetailsFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/chatDetailsFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.ChatDetailsFragment"
+        android:label="ChatDetailsFragment"
+        tools:layout="@layout/fragment_chat_details"/>
+    <argument
+        android:name="name"
+        app:argType="string" />
+    <argument
+        android:name="image"
+        app:argType="integer" />
+</navigation>
