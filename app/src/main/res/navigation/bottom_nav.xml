@@ -10,6 +10,20 @@
         android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_popularRestroFragment"
+            app:destination="@id/popularRestroFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_homeFragment_to_popularMenuFragment"
+            app:destination="@id/popularMenuFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
@@ -36,10 +50,15 @@
         android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.ChatDetailsFragment"
         android:label="ChatDetailsFragment"
         tools:layout="@layout/fragment_chat_details"/>
-    <argument
-        android:name="name"
-        app:argType="string" />
-    <argument
-        android:name="image"
-        app:argType="integer" />
+    <fragment
+        android:id="@+id/popularRestroFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.PopularRestaurantFragment"
+        android:label="PopularRestroFragment"
+        tools:layout="@layout/fragment_popular_restaurant"/>
+
+    <fragment
+        android:id="@+id/popularMenuFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.PopularMenuFragment"
+        android:label="PopularMenuFragment"
+        tools:layout="@layout/fragment_popular_menu"/>
 </navigation>

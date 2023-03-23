@@ -2,65 +2,53 @@ package com.prof.reda.android.project.fooddelivery.views.fragments.home;
 
 import android.os.Bundle;
 
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.prof.reda.android.project.fooddelivery.R;
+import com.prof.reda.android.project.fooddelivery.adapters.RestroAdapter;
+import com.prof.reda.android.project.fooddelivery.databinding.FragmentPopularRestaurantBinding;
+import com.prof.reda.android.project.fooddelivery.models.Restaurants;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PopularRestaurantFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class PopularRestaurantFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public PopularRestaurantFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PopularRestaurantFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PopularRestaurantFragment newInstance(String param1, String param2) {
-        PopularRestaurantFragment fragment = new PopularRestaurantFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
+    private FragmentPopularRestaurantBinding binding;
+    private List<Restaurants> restaurants;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_popular_restaurant, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_popular_restaurant, container, false);
+
+        restaurants = new ArrayList<>();
+        restaurants.add(new Restaurants(R.drawable.restaurant1, "Vegan Resto", "12 Min"));
+        restaurants.add(new Restaurants(R.drawable.restaurant2, "Healthy Food", "8 Min"));
+        restaurants.add(new Restaurants(R.drawable.restaurant3, "Good Food", "12 Min"));
+        restaurants.add(new Restaurants(R.drawable.restaurant4, "Smart Resto", "8 Min"));
+        restaurants.add(new Restaurants(R.drawable.restaurant5, "Vegan Resto", "12 Min"));
+        restaurants.add(new Restaurants(R.drawable.restaurant6, "Healthy Food", "8 Min"));
+
+        prepareRestaurantRV(restaurants);
+        return binding.getRoot();
+    }
+
+    private void prepareRestaurantRV(List<Restaurants> restaurantsList){
+        binding.rvPopularRestro.setLayoutManager(new GridLayoutManager(getActivity(),2, GridLayoutManager.VERTICAL, false));
+
+        binding.rvPopularRestro.setHasFixedSize(true);
+        binding.rvPopularRestro.setItemAnimator(new DefaultItemAnimator());
+        RestroAdapter restroAdapter = new RestroAdapter(restaurantsList);
+        binding.rvPopularRestro.setAdapter(restroAdapter);
     }
 }

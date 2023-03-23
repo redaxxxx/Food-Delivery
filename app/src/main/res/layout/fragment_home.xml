@@ -52,7 +52,7 @@
 
             <EditText
                 android:id="@+id/editText"
-                android:layout_width="230dp"
+                android:layout_width="235dp"
                 android:layout_height="50dp"
                 android:background="@drawable/search_icon_background"
                 android:drawableLeft="@drawable/iconsearch"
@@ -61,7 +61,7 @@
                 android:hint="What do you want to order?"
                 android:paddingStart="8dp"
                 android:layout_marginStart="15dp"
-                android:textSize="13sp"
+                android:textSize="11sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/filterBtn" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -134,6 +134,7 @@
                     app:layout_constraintTop_toBottomOf="@id/frameLayout" />
 
                 <TextView
+                    android:id="@+id/viewMoreRestroTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="View More"
@@ -166,6 +167,7 @@
                     app:layout_constraintTop_toBottomOf="@id/rv_nearestRestaurant" />
 
                 <TextView
+                    android:id="@+id/viewMoreMenuTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="View More"

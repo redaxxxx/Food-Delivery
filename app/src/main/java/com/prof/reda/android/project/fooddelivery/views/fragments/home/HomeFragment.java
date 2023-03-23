@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -31,6 +33,7 @@ public class HomeFragment extends Fragment {
     private PopularMenuAdapter menuAdapter;
     private List<Restaurants> restaurants;
     private List<Restaurants> menus;
+    private Fragment fragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,6 +52,14 @@ public class HomeFragment extends Fragment {
 
         prepareRestaurantRV(restaurants);
         prepareMenuRV(menus);
+
+        binding.viewMoreRestroTV.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_popularRestroFragment);
+        });
+
+        binding.viewMoreMenuTV.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_popularMenuFragment);
+        });
 
         return binding.getRoot();
     }
@@ -74,4 +85,5 @@ public class HomeFragment extends Fragment {
         binding.rvPopularMenu.setAdapter(menuAdapter);
 
     }
+
 }
