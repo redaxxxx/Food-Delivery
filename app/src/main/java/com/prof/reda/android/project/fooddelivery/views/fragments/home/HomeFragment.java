@@ -61,6 +61,10 @@ public class HomeFragment extends Fragment {
             Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_popularMenuFragment);
         });
 
+        binding.filterBtn.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_filterFragment);
+        });
+
         return binding.getRoot();
     }
 

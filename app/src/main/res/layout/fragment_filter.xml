@@ -1,14 +1,255 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".views.fragments.home.FilterFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:context=".views.fragments.home.FilterFragment">
 
-</FrameLayout>
+
+        <TextView
+            android:id="@+id/findYourFoodTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:text="Find Your \nFavorite Food"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/iconBtn"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/notify_icon_background"
+            android:src="@drawable/notifyicon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/search_editText"
+            android:layout_width="275dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/search_icon_background"
+            android:drawableLeft="@drawable/iconsearch"
+            android:drawablePadding="8dp"
+            android:hint="What do you want to order?"
+            android:paddingStart="8dp"
+            android:textColorHint="@color/orange"
+            android:textSize="11sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/findYourFoodTV" />
+
+        <TextView
+            android:id="@+id/typeTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Type"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/search_editText"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="@id/search_editText" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/typeChipGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/typeTV"
+            app:layout_constraintStart_toStartOf="@id/typeTV"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="10dp"
+            app:selectionRequired="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/RestroChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Restaurants"
+                android:checked="true"
+                android:textStyle="bold"
+                android:textColor="@color/orange"
+                android:backgroundTint="#FADBB8"
+                style="@style/Widget.MaterialComponents.Chip.Filter" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/menuChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Menus"
+                android:checked="true"
+                android:textColor="@color/orange"
+                android:textStyle="bold"
+                android:backgroundTint="#FADBB8"
+                style="@style/Widget.MaterialComponents.Chip.Filter" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <TextView
+            android:id="@+id/locationTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/typeChipGroup"
+            app:layout_constraintStart_toStartOf="@id/typeTV"
+            android:text="Location"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/locationChipGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/locationTV"
+            app:layout_constraintStart_toStartOf="@id/locationTV"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="10dp"
+            app:selectionRequired="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/locationChip1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1 Km"
+                android:checked="true"
+                android:textStyle="bold"
+                android:textColor="@color/orange"
+                android:backgroundTint="#FADBB8"
+                style="@style/Widget.MaterialComponents.Chip.Filter"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/locationChipLessThan1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="less than 10 Km"
+                android:textColor="@color/orange"
+                android:textStyle="bold"
+                android:backgroundTint="#FADBB8"
+                android:checked="true"
+                style="@style/Widget.MaterialComponents.Chip.Filter"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/locationChipMoreThan1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="more than 10 Km"
+                android:textColor="@color/orange"
+                android:textStyle="bold"
+                android:backgroundTint="#FADBB8"
+                android:checked="true"
+                style="@style/Widget.MaterialComponents.Chip.Filter"/>
+        </com.google.android.material.chip.ChipGroup>
+
+        <TextView
+            android:id="@+id/foodTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/locationChipGroup"
+            app:layout_constraintStart_toStartOf="@id/typeTV"
+            android:text="Food"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/foodChipGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/foodTV"
+            app:layout_constraintStart_toStartOf="@id/foodTV"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginTop="10dp"
+            app:selectionRequired="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/cakeChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cake"
+                android:textStyle="bold"
+                android:textColor="@color/orange"
+                android:backgroundTint="#FADBB8"
+                android:layout_marginEnd="15dp"
+                android:checked="true"
+                style="@style/Widget.MaterialComponents.Chip.Filter"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/soupChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Soup"
+                android:textColor="@color/orange"
+                android:textStyle="bold"
+                android:backgroundTint="#FADBB8"
+                android:layout_marginEnd="15dp"
+                android:checked="true"
+                style="@style/Widget.MaterialComponents.Chip.Filter"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/mainCourseChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Main Course"
+                android:textColor="@color/orange"
+                android:textStyle="bold"
+                android:backgroundTint="#FADBB8"
+                android:layout_marginEnd="15dp"
+                android:checked="true"
+                style="@style/Widget.MaterialComponents.Chip.Filter"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/appetizerChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Appetizer"
+                android:textColor="@color/orange"
+                android:textStyle="bold"
+                android:backgroundTint="#FADBB8"
+                android:checked="true"
+                style="@style/Widget.MaterialComponents.Chip.Filter"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/dessertChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dessert"
+                android:textColor="@color/orange"
+                android:textStyle="bold"
+                android:backgroundTint="#FADBB8"
+                android:checked="true"
+                style="@style/Widget.MaterialComponents.Chip.Filter"/>
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/background_search_btn"
+            android:text="search"
+            android:textAllCaps="false"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -59,6 +59,14 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.chatFragment:
                         showBottomView();
                         break;
+
+                    case R.id.popularRestroFragment:
+                        showBottomView();
+                        break;
+
+                    case R.id.popularMenuFragment:
+                        showBottomView();
+                        break;
                     default:
                         hideBottomView();
                         break;
@@ -73,50 +81,6 @@ public class HomeActivity extends AppCompatActivity {
     private void hideBottomView(){
         binding.bottomNav.setVisibility(View.GONE);
     }
-
-//    private void setupBottomView(){
-//        binding.bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//
-//                switch (item.getItemId()){
-//                    case R.id.homeFragment:
-//                        fragment = new HomeFragment();
-//                        loadFragment(fragment);
-//                        return true;
-//
-//                    case R.id.profile:
-//                        fragment = new ProfileFragment();
-//                        loadFragment(fragment);
-//                        return true;
-//
-//                    case R.id.cartFragment:
-//                        fragment = new CartFragment();
-//                        loadFragment(fragment);
-//                        return true;
-//
-//                    case R.id.chatFragment:
-//                        fragment = new ChatFragment();
-//                        loadFragment(fragment);
-//                        return true;
-//                }
-//                return false;
-//            }
-//        });
-//
-//        BadgeDrawable badgeDrawable = binding.bottomNav.getOrCreateBadge(R.id.cartFragment);
-//        badgeDrawable.isVisible();
-//        badgeDrawable.setNumber(7);
-//
-//        BadgeDrawable badgeDrawable2 = binding.bottomNav.getOrCreateBadge(R.id.chatFragment);
-//        badgeDrawable2.isVisible();
-//        badgeDrawable2.setNumber(5);
-//    }
-
-//    private void loadFragment(Fragment fragment){
-//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        transaction.replace(binding.container.getId(), fragment).commitAllowingStateLoss();
-//    }
 
     public void onResume() {
         super.onResume();

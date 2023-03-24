@@ -24,6 +24,9 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_homeFragment_to_filterFragment"
+            app:destination="@id/filterFragment" />
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
@@ -49,7 +52,11 @@
         android:id="@+id/chatDetailsFragment"
         android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.ChatDetailsFragment"
         android:label="ChatDetailsFragment"
-        tools:layout="@layout/fragment_chat_details"/>
+        tools:layout="@layout/fragment_chat_details">
+        <action
+            android:id="@+id/action_chatDetailsFragment_to_finishOrderFragment"
+            app:destination="@id/finishOrderFragment" />
+    </fragment>
     <fragment
         android:id="@+id/popularRestroFragment"
         android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.PopularRestaurantFragment"
@@ -61,4 +68,23 @@
         android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.PopularMenuFragment"
         android:label="PopularMenuFragment"
         tools:layout="@layout/fragment_popular_menu"/>
+    <fragment
+        android:id="@+id/filterFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.FilterFragment"
+        android:label="FilterFragment"
+        tools:layout="@layout/fragment_filter"/>
+    <fragment
+        android:id="@+id/finishOrderFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.FinishOrderFragment"
+        android:label="FinishOrderFragment"
+        tools:layout="@layout/fragment_finish_order">
+        <action
+            android:id="@+id/action_finishOrderFragment_to_rateFoodFragment"
+            app:destination="@id/rateFoodFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/rateFoodFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.RateFoodFragment"
+        android:label="RateFoodFragment"
+        tools:layout="@layout/fragment_rate_food"/>
 </navigation>
