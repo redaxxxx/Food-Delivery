@@ -53,16 +53,24 @@ public class HomeFragment extends Fragment {
         prepareRestaurantRV(restaurants);
         prepareMenuRV(menus);
 
+        //button view more Restaurant
         binding.viewMoreRestroTV.setOnClickListener(view -> {
             Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_popularRestroFragment);
         });
 
+        //button view more menu
         binding.viewMoreMenuTV.setOnClickListener(view -> {
             Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_popularMenuFragment);
         });
 
+        // button filter
         binding.filterBtn.setOnClickListener(view -> {
             Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_filterFragment);
+        });
+
+        // notification button
+        binding.iconBtn.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_homeFragment_to_notificationFragment);
         });
 
         return binding.getRoot();

@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_homeFragment_to_filterFragment"
             app:destination="@id/filterFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
@@ -86,5 +89,28 @@
         android:id="@+id/rateFoodFragment"
         android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.RateFoodFragment"
         android:label="RateFoodFragment"
-        tools:layout="@layout/fragment_rate_food"/>
+        tools:layout="@layout/fragment_rate_food">
+        <action
+            android:id="@+id/action_rateFoodFragment_to_rateRestroFragment"
+            app:destination="@id/rateRestroFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/rateRestroFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.RateRestroFragment"
+        android:label="RateRestroFragment"
+        tools:layout="@layout/fragment_rate_restro">
+        <action
+            android:id="@+id/action_rateRestroFragment_to_voucherPromoFragment"
+            app:destination="@id/voucherPromoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/voucherPromoFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.VoucherPromoFragment"
+        android:label="VoucherPromoFragment"
+        tools:layout="@layout/fragment_voucher_promo"/>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
 </navigation>
