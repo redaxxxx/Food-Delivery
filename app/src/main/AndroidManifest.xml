@@ -21,7 +21,7 @@
         tools:targetApi="31">
 
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCcd4xAPKj3E08T2lZpUCa0hL55oGMMEAE"/>
+            android:value="AIzaSyAxO9iHjr1gYX8-B7jq0rQ9hNBCuPRgvlo"/>
 
         <meta-data android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version"/>
@@ -29,16 +29,16 @@
         <activity
             android:name=".views.activities.SetLocationActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
             android:name=".views.activities.HomeActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity

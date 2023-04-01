@@ -1,6 +1,7 @@
 package com.prof.reda.android.project.fooddelivery.views.activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -8,26 +9,37 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.libraries.places.api.model.Place;
+import com.google.android.gms.location.places.AutocompletePrediction;
+import com.google.android.gms.location.places.GeoDataClient;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.PlaceBuffer;
+import com.google.android.gms.location.places.PlaceBufferResponse;
+import com.google.android.gms.location.places.PlaceDetectionClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -35,29 +47,30 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.RuntimeRemoteException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.net.FetchPlaceRequest;
-import com.google.android.libraries.places.api.net.FetchPlaceResponse;
-import com.google.android.libraries.places.api.net.PlacesClient;
-import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
-import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
+import com.google.android.gms.location.places.Places;
+import com.google.android.gms.tasks.Tasks;
 import com.prof.reda.android.project.fooddelivery.R;
+import com.prof.reda.android.project.fooddelivery.adapters.PlaceAutocompleteAdapter;
 import com.prof.reda.android.project.fooddelivery.databinding.ActivitySetLocationBinding;
+import com.prof.reda.android.project.fooddelivery.models.PlaceDataModel;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class SetLocationActivity extends AppCompatActivity implements OnMapReadyCallback{
+public class SetLocationActivity extends AppCompatActivity implements OnMapReadyCallback,
+GoogleApiClient.OnConnectionFailedListener{
 
     //    private static final String TAG = SetLocationActivity.class.getSimpleName();
 //    private static final int ERROR_DIALOG_REQUEST = 9001;
     private static final String TAG = SetLocationActivity.class.getSimpleName();
-    private static final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(new LatLng(30, 6),
-            new LatLng(31, 25));
+    private static final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(new LatLng(-40,-168),
+            new LatLng(71,136));
+
     private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
     private ActivitySetLocationBinding binding;
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
@@ -67,43 +80,23 @@ public class SetLocationActivity extends AppCompatActivity implements OnMapReady
     private boolean mLocationPermissionGranted = false;
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private GoogleMap mMap;
+    private PlaceDetectionClient mPlaceDetectionClient;
     private GoogleApiClient mGoogleApiClient;
-    private PlacesClient mPlaceClient;
-    private AutocompleteSupportFragment autocompleteFragment;
+    private PlaceAutocompleteAdapter placeAdapter;
+
+    private PlaceDataModel mPlace;
     private static final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
-    private String placeId = "INSERT_PLACE_ID_HERE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_set_location);
 
-        String apiKey = "AIzaSyCcd4xAPKj3E08T2lZpUCa0hL55oGMMEAE";
-        Places.initialize(this, apiKey);
-
-
-//        List<Place.Field> placeFields = Arrays.asList(Place.Field.ID, Place.Field.NAME);
-//
-//        FetchPlaceRequest request = FetchPlaceRequest.builder(placeId, placeFields)
-//                .build();
-//
-//        placesClient.fetchPlace(request).addOnSuccessListener(new OnSuccessListener<FetchPlaceResponse>() {
-//            @Override
-//            public void onSuccess(FetchPlaceResponse fetchPlaceResponse) {
-//                Place place = fetchPlaceResponse.getPlace();
-//                Log.i(TAG, "Place found: " + place.getName());
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                // Handle error with given status code.
-//                Log.e(TAG, "Place not found: " + e.getMessage());
-//            }
-//        });
         getLocationPermission();
-
         init();
+
     }
+
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
@@ -123,6 +116,16 @@ public class SetLocationActivity extends AppCompatActivity implements OnMapReady
     }
 
     private void init(){
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(Places.GEO_DATA_API)
+                .addApi(Places.PLACE_DETECTION_API)
+                .enableAutoManage(this, this)
+                .build();
+
+        placeAdapter = new PlaceAutocompleteAdapter(this, mGoogleApiClient, LAT_LNG_BOUNDS, null);
+        binding.autoCompleteEditText.setAdapter(placeAdapter);
+
+//        binding.autoCompleteEditText.setOnItemClickListener(mAutoCompleteClickListener);
 
         binding.autoCompleteEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -131,10 +134,13 @@ public class SetLocationActivity extends AppCompatActivity implements OnMapReady
                 actionId == EditorInfo.IME_ACTION_DONE ||
                 keyEvent.getAction() == KeyEvent.KEYCODE_ENTER ||
                 keyEvent.getAction() == KeyEvent.ACTION_DOWN){
+                    //execute our method for searching
+
                     geoLocate();
                 }
                 return false;
             }
+
         });
     }
 
@@ -145,7 +151,6 @@ public class SetLocationActivity extends AppCompatActivity implements OnMapReady
         List<Address> addressList = new ArrayList<>();
 
         try {
-
 
             addressList = geocoder.getFromLocationName(searchText, 1);
         }catch (IOException e){
@@ -181,7 +186,7 @@ public class SetLocationActivity extends AppCompatActivity implements OnMapReady
                             }
 
                         } else {
-                            Log.d(TAG, "onComplete: current location is null");
+                            Log.d(TAG, "onComplete: task current location is null");
                             Toast.makeText(SetLocationActivity.this, "onComplete: current location is null", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -257,8 +262,10 @@ public class SetLocationActivity extends AppCompatActivity implements OnMapReady
     private void hideSoftKeyboard(){
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
-
+    }
 
     public void onResume() {
         super.onResume();
@@ -274,6 +281,55 @@ public class SetLocationActivity extends AppCompatActivity implements OnMapReady
         if (supportActionBar != null)
             supportActionBar.hide();
     }
+
+//    private AdapterView.OnItemClickListener mAutoCompleteClickListener =
+//            new AdapterView.OnItemClickListener() {
+//                @Override
+//                public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+//                    hideSoftKeyboard();
+//                    final AutocompletePrediction item = placeAdapter.getItem(position);
+//                    final String placeId = item.getPlaceId();
+//
+//                    Task<PlaceBufferResponse> placeResult = mGeoDataClient.getPlaceById(placeId);
+//                    placeResult.addOnCompleteListener(mUpdatePlaceDetailsCallback);
+//                }
+//            };
+
+//    private PlaceBufferResponse places;
+//    private OnCompleteListener<PlaceBufferResponse> mUpdatePlaceDetailsCallback =
+//            new OnCompleteListener<PlaceBufferResponse>() {
+//                @Override
+//                public void onComplete(@NonNull Task<PlaceBufferResponse> task) {
+//                    if (!task.isSuccessful()){
+//                        places = task.getResult();
+//                        Log.d(TAG, "SetLocationActivity: task is not complete" + places);
+//                        places.release();
+//                        return;
+//                    }
+//
+//                    final Place place = places.get(0);
+//
+//                    try {
+//                        mPlace = new PlaceDataModel();
+//                        mPlace.setName(place.getName().toString());
+//                        mPlace.setAddress(place.getAddress().toString());
+//                        mPlace.setPlaceId(place.getId());
+//                        mPlace.setAttributions(place.getAttributions().toString());
+//                        mPlace.setLatLng(place.getLatLng());
+//                        mPlace.setPhoneNumber(place.getPhoneNumber().toString());
+//                        mPlace.setWebsiteUri(place.getWebsiteUri());
+//                        Log.d(TAG, "Place: " + mPlace.toString());
+//
+//                    }catch (NullPointerException e){
+//                        Log.d(TAG, "NullPointerException" + e.getMessage());
+//                    }
+//
+//                    moveCamera(mPlace.getLatLng(), DEFAULT_ZOOM, mPlace.getName());
+//
+//                    places.release();
+//                }
+//            };
+
 
 
 

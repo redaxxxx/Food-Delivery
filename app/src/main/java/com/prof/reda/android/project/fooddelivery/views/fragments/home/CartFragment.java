@@ -2,65 +2,71 @@ package com.prof.reda.android.project.fooddelivery.views.fragments.home;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.prof.reda.android.project.fooddelivery.R;
+import com.prof.reda.android.project.fooddelivery.adapters.OrderAdapter;
+import com.prof.reda.android.project.fooddelivery.adapters.PopularMenuAdapter;
+import com.prof.reda.android.project.fooddelivery.databinding.FragmentCartBinding;
+import com.prof.reda.android.project.fooddelivery.models.Order;
+import com.prof.reda.android.project.fooddelivery.models.Restaurants;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CartFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class CartFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public CartFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CartFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CartFragment newInstance(String param1, String param2) {
-        CartFragment fragment = new CartFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private FragmentCartBinding binding;
+    OrderAdapter orderAdapter;
+    private List<Order> orderList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cart, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_cart, container, false);
+
+        orderList.add(new Order(R.drawable.orderimg1, "Spacy fresh crab", "Waroenk kita", 35,1));
+        orderList.add(new Order(R.drawable.orderimg2, "Spacy fresh crab", "Waroenk kita", 35,1));
+        orderList.add(new Order(R.drawable.orderimg3, "Spacy fresh crab", "Waroenk kita", 35,1));
+
+        prepareOrderRV(orderList);
+
+        ItemTouchHelper.SimpleCallback itemTouchCallback = new ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                orderList.remove(viewHolder.getAdapterPosition());
+                orderAdapter.notifyDataSetChanged();
+            }
+        };
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(binding.orderDetailsRv);
+
+        return binding.getRoot();
+    }
+
+    private void prepareOrderRV(List<Order> orders) {
+        binding.orderDetailsRv.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL
+                , false));
+
+        binding.orderDetailsRv.setHasFixedSize(true);
+        binding.orderDetailsRv.setItemAnimator(new DefaultItemAnimator());
+        orderAdapter = new OrderAdapter(orders);
+        binding.orderDetailsRv.setAdapter(orderAdapter);
     }
 }
