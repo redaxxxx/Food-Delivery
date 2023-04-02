@@ -1,6 +1,7 @@
 package com.prof.reda.android.project.fooddelivery.adapters;
 
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -51,7 +52,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
                 holder.binding.quantityTv.setText(String.valueOf(quantity));
             }
         });
-
     }
 
     @Override

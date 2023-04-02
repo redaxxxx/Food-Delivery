@@ -170,7 +170,7 @@
             </LinearLayout>
 
             <TextView
-                android:layout_width="325dp"
+                android:layout_width="320dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="12dp"
