@@ -5,10 +5,10 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.MANAGE_OWN_CALLS" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -19,18 +19,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodDelivery"
         tools:targetApi="31">
+        <activity
+            android:name=".DetailsProductActivity"
+            android:exported="false" />
 
-        <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAxO9iHjr1gYX8-B7jq0rQ9hNBCuPRgvlo"/>
-
-        <meta-data android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAxO9iHjr1gYX8-B7jq0rQ9hNBCuPRgvlo" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
         <activity
             android:name=".views.activities.SetLocationActivity"
-            android:exported="true">
-        </activity>
-
+            android:exported="true"></activity>
         <activity
             android:name=".views.activities.HomeActivity"
             android:exported="true">
@@ -40,10 +42,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".views.activities.MainActivity"
-            android:exported="true"/>
+            android:exported="true" />
     </application>
 
 </manifest>

@@ -67,6 +67,7 @@ public class HomeActivity extends AppCompatActivity {
                     case R.id.popularMenuFragment:
                         showBottomView();
                         break;
+
                     default:
                         hideBottomView();
                         break;

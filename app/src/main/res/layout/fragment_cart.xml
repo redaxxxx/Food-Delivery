@@ -30,7 +30,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:text="Order details"
-            android:textSize="20sp"
+            android:textSize="17sp"
             android:textStyle="bold"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,8 +51,8 @@
 
         <LinearLayout
             android:id="@+id/linearLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="330dp"
+            android:layout_height="206dp"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
             android:layout_marginBottom="8dp"
@@ -65,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="8dp">
 
                 <TextView
@@ -145,7 +145,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="8dp">
 
                 <TextView
@@ -154,7 +154,7 @@
                     android:layout_weight="1"
                     android:text="Total"
                     android:textColor="@color/white"
-                    android:textSize="17sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -165,15 +165,16 @@
                     android:gravity="end"
                     android:text="150 $"
                     android:textColor="@color/white"
-                    android:textSize="17sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
             <TextView
+                android:id="@+id/placeMyOrderBtn"
                 android:layout_width="320dp"
                 android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="12dp"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/place_order_button_rectangle"
                 android:gravity="center"
                 android:text="Place My Order"

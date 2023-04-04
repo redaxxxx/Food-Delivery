@@ -45,7 +45,11 @@
         android:id="@+id/cartFragment"
         android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.CartFragment"
         android:label="fragment_cart"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_cartFragment_to_fragmentPayments"
+            app:destination="@id/fragmentPayments" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.ProfileFragment"
@@ -113,4 +117,34 @@
         android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.NotificationFragment"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/fragmentPayments"
+        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.PaymentsFragment"
+        android:label="FragmentPayments"
+        tools:layout="@layout/fragment_payments">
+        <action
+            android:id="@+id/action_fragmentPayments_to_editLocationFragment"
+            app:destination="@id/editLocationFragment" />
+        <action
+            android:id="@+id/action_fragmentPayments_to_editPaymentFragment"
+            app:destination="@id/editPaymentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editLocationFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.EditLocationFragment"
+        android:label="fragment_edit_location"
+        tools:layout="@layout/fragment_edit_location" >
+        <action
+            android:id="@+id/action_editLocationFragment_to_fragmentPayments"
+            app:destination="@id/fragmentPayments" />
+    </fragment>
+    <fragment
+        android:id="@+id/editPaymentFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.EditPaymentFragment"
+        android:label="fragment_edit_payment"
+        tools:layout="@layout/fragment_edit_payment" >
+        <action
+            android:id="@+id/action_editPaymentFragment_to_fragmentPayments"
+            app:destination="@id/fragmentPayments" />
+    </fragment>
 </navigation>

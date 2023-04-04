@@ -15,6 +15,8 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -76,27 +78,7 @@ public class CartFragment extends Fragment {
 
                 icon = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.trashicon);
 
-//                background = new ColorDrawable(Color.parseColor("#FEAD1D"));
                 View itemView = viewHolder.itemView;
-//
-//                int top = itemView.getTop() + (itemView.getHeight() - icon.getIntrinsicHeight()) / 2;
-//                int left = itemView.getWidth() - icon.getIntrinsicWidth() -
-//                        (itemView.getHeight() - icon.getIntrinsicHeight()) / 2;
-//                int right = itemView.getLeft() + icon.getIntrinsicHeight();
-//                int bottom = itemView.getTop() + icon.getIntrinsicHeight();
-//
-//                if (dX < 0){
-//                    background.setBounds(itemView.getRight() + (int)dX,
-//                            itemView.getTop(), itemView.getRight(), itemView.getBottom());
-//                    icon.setBounds(left, top, right, bottom);
-//                } else if (dX > 0) {
-//                    background.setBounds(itemView.getLeft() + (int)dX,
-//                            itemView.getTop(), itemView.getLeft(), itemView.getBottom());
-//                    icon.setBounds(left, top, right, bottom);
-//                }
-//
-//                background.draw(c);
-//                icon.draw(c);
 
                 Paint p = new Paint();
                 p.setColor(Color.parseColor("#FEAD1D"));
@@ -120,7 +102,6 @@ public class CartFragment extends Fragment {
                             p);
                 }
 
-
                 super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
 
             }
@@ -128,6 +109,10 @@ public class CartFragment extends Fragment {
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchCallback);
         itemTouchHelper.attachToRecyclerView(binding.orderDetailsRv);
+
+        binding.placeMyOrderBtn.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_cartFragment_to_fragmentPayments);
+        });
 
         return binding.getRoot();
     }
