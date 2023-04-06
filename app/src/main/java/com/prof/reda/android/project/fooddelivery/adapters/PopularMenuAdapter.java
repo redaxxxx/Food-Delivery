@@ -7,16 +7,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.prof.reda.android.project.fooddelivery.databinding.MenuItemsBinding;
+import com.prof.reda.android.project.fooddelivery.models.Menu;
 import com.prof.reda.android.project.fooddelivery.models.Restaurants;
 
 import java.util.List;
 
 public class PopularMenuAdapter extends RecyclerView.Adapter<PopularMenuAdapter.PopularViewHolder> {
 
-    private List<Restaurants> restaurants;
+    private List<Menu> menus;
 
-    public PopularMenuAdapter(List<Restaurants> restaurants){
-        this.restaurants = restaurants;
+    public PopularMenuAdapter(List<Menu> menus){
+        this.menus = menus;
     }
 
     @NonNull
@@ -28,17 +29,17 @@ public class PopularMenuAdapter extends RecyclerView.Adapter<PopularMenuAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull PopularViewHolder holder, int position) {
-        Restaurants restaurant = restaurants.get(position);
-        holder.binding.menuImgView.setImageResource(restaurant.getMenuImg());
-        holder.binding.menuNameTV.setText(restaurant.getMenuName());
-        holder.binding.restroName.setText(restaurant.getRestroName());
+        Menu menu = menus.get(position);
+        holder.binding.menuImgView.setImageResource(menu.getMenuImg());
+        holder.binding.menuNameTV.setText(menu.getName());
+        holder.binding.restroName.setText(menu.getRestroName());
         holder.binding.priceTV.setText("$");
-        holder.binding.priceTV.append(String.valueOf(restaurant.getPrice()));
+        holder.binding.priceTV.append(String.valueOf(menu.getPrice()));
     }
 
     @Override
     public int getItemCount() {
-        return restaurants.size();
+        return menus.size();
     }
 
     public class PopularViewHolder extends RecyclerView.ViewHolder {

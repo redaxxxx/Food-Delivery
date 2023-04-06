@@ -1,5 +1,6 @@
 package com.prof.reda.android.project.fooddelivery.views.fragments.home;
 
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.os.Bundle;
 
@@ -22,18 +23,22 @@ import com.prof.reda.android.project.fooddelivery.R;
 import com.prof.reda.android.project.fooddelivery.adapters.PopularMenuAdapter;
 import com.prof.reda.android.project.fooddelivery.adapters.RestroAdapter;
 import com.prof.reda.android.project.fooddelivery.databinding.FragmentHomeBinding;
+import com.prof.reda.android.project.fooddelivery.models.Menu;
 import com.prof.reda.android.project.fooddelivery.models.Restaurants;
+import com.prof.reda.android.project.fooddelivery.views.activities.DetailsProductActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements RestroAdapter.OnClickItemListener{
     private FragmentHomeBinding binding;
     private RestroAdapter restroAdapter;
     private PopularMenuAdapter menuAdapter;
     private List<Restaurants> restaurants;
-    private List<Restaurants> menus;
-    private Fragment fragment;
+    private List<Menu> menus;
+
+    public static final String RESTRO_NAME = "com.prof.reda.android.project.fooddelivery.views.fragments.home";
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,8 +52,8 @@ public class HomeFragment extends Fragment {
         restaurants.add(new Restaurants(R.drawable.restaurant3, "Good Food", "12 Min"));
 
         menus = new ArrayList<>();
-        menus.add(new Restaurants(R.drawable.menu1, "Herbal Pancake", "Warung Herbal", 7));
-        menus.add(new Restaurants(R.drawable.menu2, "Fruit Salad", "Wijie Resto", 5));
+        menus.add(new Menu(R.drawable.menu1, "Herbal Pancake", "Warung Herbal", 7));
+        menus.add(new Menu(R.drawable.menu2, "Fruit Salad", "Wijie Resto", 5));
 
         prepareRestaurantRV(restaurants);
         prepareMenuRV(menus);
@@ -83,11 +88,11 @@ public class HomeFragment extends Fragment {
         binding.rvNearestRestaurant.setHasFixedSize(true);
         binding.rvNearestRestaurant.setItemAnimator(new DefaultItemAnimator());
         binding.rvNearestRestaurant.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
-        restroAdapter = new RestroAdapter(restaurantsList);
+        restroAdapter = new RestroAdapter(restaurantsList, this);
         binding.rvNearestRestaurant.setAdapter(restroAdapter);
     }
 
-    private void prepareMenuRV(List<Restaurants> menusList){
+    private void prepareMenuRV(List<Menu> menusList){
         binding.rvPopularMenu.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL
                 , false));
 
@@ -98,4 +103,10 @@ public class HomeFragment extends Fragment {
 
     }
 
+    @Override
+    public void onClickRestroItem(Restaurants restaurants) {
+        Intent intent = new Intent(getActivity(), DetailsProductActivity.class);
+        intent.putExtra(RESTRO_NAME, restaurants.getRestroName());
+        startActivity(intent);
+    }
 }

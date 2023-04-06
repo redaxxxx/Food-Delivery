@@ -29,7 +29,6 @@ import android.view.ViewGroup;
 
 import com.prof.reda.android.project.fooddelivery.R;
 import com.prof.reda.android.project.fooddelivery.adapters.OrderAdapter;
-import com.prof.reda.android.project.fooddelivery.adapters.PopularMenuAdapter;
 import com.prof.reda.android.project.fooddelivery.databinding.FragmentCartBinding;
 import com.prof.reda.android.project.fooddelivery.models.Order;
 import com.prof.reda.android.project.fooddelivery.models.Restaurants;
@@ -42,8 +41,11 @@ public class CartFragment extends Fragment {
     OrderAdapter orderAdapter;
     private List<Order> orderList = new ArrayList<>();
 
+    private int priceTotal = 0;
+    private int mQuantity = 0;
+    private int mPrice = 0;
+
     private Bitmap icon;
-    private ColorDrawable background;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -113,6 +115,22 @@ public class CartFragment extends Fragment {
         binding.placeMyOrderBtn.setOnClickListener(view -> {
             Navigation.findNavController(view).navigate(R.id.action_cartFragment_to_fragmentPayments);
         });
+
+
+        for (int i = 0; i < orderList.size(); i++){
+            int quantity = orderList.get(i).getmQuantity();
+            int price = orderList.get(i).getPrice();
+
+            mPrice += quantity * price;
+        }
+
+
+        binding.subTotalPriceTv.setText(String.valueOf(mPrice));
+        binding.subTotalPriceTv.append(" $");
+
+        int total = mPrice + 10-20;
+        binding.totalPriceTv.setText(String.valueOf(total));
+        binding.totalPriceTv.append(" $");
 
         return binding.getRoot();
     }

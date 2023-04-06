@@ -38,7 +38,7 @@
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
                         app:layout_collapseMode="parallax"
-                        android:src="@drawable/photorestaurant" />
+                        android:src="@drawable/menu6" />
                 </androidx.cardview.widget.CardView>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
@@ -147,47 +147,12 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/description_tv"
+                    android:text="@string/menuDescription"
                     android:layout_marginStart="15dp"
                     android:layout_marginEnd="15dp"
                     android:layout_marginTop="8dp"
                     android:textSize="13sp"
                     android:textColor="@color/black" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginTop="8dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="Popular Menu"
-                        android:textSize="13sp"
-                        android:textColor="@color/black"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/viewAllBtn"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="View All"
-                        android:textColor="#FF7C32"
-                        android:gravity="end" />
-                </LinearLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/detailsProduct_rv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -199,7 +164,7 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginStart="15dp"/>
 
-                
+
                 <androidx.cardview.widget.CardView
                     android:layout_width="335dp"
                     android:layout_height="128dp"
@@ -290,7 +255,15 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
-
         </androidx.core.widget.NestedScrollView>
+
+        <Button
+            android:layout_width="325dp"
+            android:layout_height="57dp"
+            app:layout_anchor="@id/details_view"
+            app:layout_anchorGravity="center"
+            android:text="Add To Chart"
+            android:textAllCaps="false"
+            android:background="@drawable/add_to_cart_btn_background"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -48,7 +48,6 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
         holder.binding.minusImageButton.setOnClickListener(view -> {
             if (quantity > 1){
                 quantity -= 1;
-
                 holder.binding.quantityTv.setText(String.valueOf(quantity));
             }
         });

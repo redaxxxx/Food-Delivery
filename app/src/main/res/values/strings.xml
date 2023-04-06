@@ -2,4 +2,17 @@
     <string name="app_name">Food Delivery</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="description_tv">Most whole Alaskan Red King Crabs get broken down into legs, claws, and lump meat. We offer all of these options as well in our online shop, but there is nothing like getting the whole . . . .</string>
+
+    <string name="TestimonialsText">This Is great, So delicious! You Must Here, With Your family . . </string>
+
+    <string name="menuDescription">Nulla occaecat velit laborum exercitation ullamco. Elit labore eu aute elit nostrud culpa velit excepteur deserunt sunt. Velit non est cillum consequat cupidatat ex Lorem laboris labore aliqua ad duis eu laborum.
+        \n . Strowberry
+        \n . Cream
+        \n . Wheat
+        \n Nulla occaecat velit laborum exercitation ullamco. Elit labore eu aute elit nostrud culpa velit excepteur deserunt sunt.
+    </string>
+
+
 </resources>

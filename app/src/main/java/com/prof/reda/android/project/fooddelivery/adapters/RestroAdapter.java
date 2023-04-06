@@ -16,9 +16,11 @@ import java.util.List;
 public class RestroAdapter extends RecyclerView.Adapter<RestroAdapter.RestroViewHolder> {
 
     private List<Restaurants> restaurants;
+    private OnClickItemListener onClickItemListener;
 
-    public RestroAdapter(List<Restaurants> restaurantsList){
+    public RestroAdapter(List<Restaurants> restaurantsList, OnClickItemListener onClickItemListener){
         restaurants = restaurantsList;
+        this.onClickItemListener = onClickItemListener;
     }
     @NonNull
     @Override
@@ -33,6 +35,10 @@ public class RestroAdapter extends RecyclerView.Adapter<RestroAdapter.RestroView
         holder.binding.restaurantImgView.setImageResource(restaurant.getRestroImg());
         holder.binding.restroNameTv.setText(restaurant.getRestroName());
         holder.binding.distanceInMinute.setText(restaurant.getDistanceInMins());
+
+        holder.itemView.setOnClickListener(view -> {
+            onClickItemListener.onClickRestroItem(restaurant);
+        });
     }
 
     @Override
@@ -46,5 +52,9 @@ public class RestroAdapter extends RecyclerView.Adapter<RestroAdapter.RestroView
             super(restaurantItemsBinding.getRoot());
             binding = restaurantItemsBinding;
         }
+    }
+
+    public interface OnClickItemListener{
+        void onClickRestroItem(Restaurants restaurants);
     }
 }

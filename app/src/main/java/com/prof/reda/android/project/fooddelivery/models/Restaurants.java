@@ -24,6 +24,12 @@ public class Restaurants {
         this.distanceInMins = distanceInMins;
     }
 
+    public Restaurants(int menuImg, String menuName, int price){
+        this.menuImg = menuImg;
+        this.menuName = menuName;
+        this.price = price;
+    }
+
     public int getRestroImg() {
         return restroImg;
     }

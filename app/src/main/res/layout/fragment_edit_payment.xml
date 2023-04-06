@@ -66,8 +66,8 @@
                     android:layout_height="wrap_content"
                     android:text="2121 6352 8465 ****"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/paypalLogoImgView"
+                    app:layout_constraintBottom_toBottomOf="@id/paypalLogoImgView"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/gray" />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -104,8 +104,8 @@
                     android:layout_height="wrap_content"
                     android:text="2121 6352 8465 ****"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/visaLogoImgView"
+                    app:layout_constraintBottom_toBottomOf="@id/visaLogoImgView"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/gray" />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -142,8 +142,8 @@
                     android:layout_height="wrap_content"
                     android:text="2121 6352 8465 ****"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/payoneerLogoImgView"
+                    app:layout_constraintBottom_toBottomOf="@id/payoneerLogoImgView"
                     android:layout_marginEnd="10dp"
                     android:textColor="@color/gray" />
             </androidx.constraintlayout.widget.ConstraintLayout>
