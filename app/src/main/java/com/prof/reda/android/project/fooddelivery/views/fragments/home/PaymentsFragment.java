@@ -37,6 +37,13 @@ public class PaymentsFragment extends Fragment {
             binding.paymentImgView.setImageResource(bundle.getInt(EditPaymentFragment.LOGO_IMG_VIEW));
         }
 
+        binding.arrowBackBtn.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_fragmentPayments_to_orderDetailsFragment);
+        });
+
+
+
+
         return binding.getRoot();
     }
 }

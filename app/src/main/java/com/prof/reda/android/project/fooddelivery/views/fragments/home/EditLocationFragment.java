@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,11 @@ public class EditLocationFragment extends Fragment {
             Intent intent = new Intent(getActivity(), MapActivity.class);
             startActivity(intent);
         });
+
+        binding.arrowBackBtn.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_editLocationFragment_to_fragmentPayments);
+        });
+
         return binding.getRoot();
     }
 }

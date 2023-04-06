@@ -42,6 +42,10 @@ public class EditPaymentFragment extends Fragment {
             bundle.putInt(LOGO_IMG_VIEW, R.drawable.payoneerlogo);
             Navigation.findNavController(view).navigate(R.id.action_editPaymentFragment_to_fragmentPayments, bundle);
         });
+
+        binding.arrowBackBtn.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_editPaymentFragment_to_fragmentPayments);
+        });
         return binding.getRoot();
     }
 }

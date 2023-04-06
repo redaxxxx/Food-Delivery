@@ -7,10 +7,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.navigation.Navigation;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -41,8 +44,10 @@ import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.prof.reda.android.project.fooddelivery.R;
 import com.prof.reda.android.project.fooddelivery.databinding.ActivityMapBinding;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -50,11 +55,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private static final int AUTOCOMPLETE_REQUEST_CODE = 1;
     private String apiKey = "AIzaSyAxO9iHjr1gYX8-B7jq0rQ9hNBCuPRgvlo";
     private ActivityMapBinding binding;
-    private List<Place.Field> fields;
     private GoogleMap mMap;
-    private String Longitude;
-    private String latitude;
-    private TextView searchText;
+    private String address;
 
     private Marker marker;
     private FusedLocationProviderClient mFusedLocationProviderClient;
@@ -63,6 +65,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
+    private Geocoder geocoder;
+    private List<Address> addresses;
 
 
     @Override
@@ -120,6 +124,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             public void onPlaceSelected(@NonNull Place place) {
                 Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
 
+
                 final LatLng latLng = place.getLatLng();
                 if (marker != null){
                     marker.remove();
@@ -138,7 +143,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         });
 
         getLocationPermission();
+
+        binding.setLocationBtn.setOnClickListener(view -> {
+
+        });
     }
+
 
     private void initMap(){
         // Get the SupportMapFragment and request notification when the map is ready to be used.
@@ -163,6 +173,16 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 //                                moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
 //                                        14, "My Location");
 
+                                try {
+                                    geocoder = new Geocoder(MapActivity.this, Locale.getDefault());
+                                    addresses = geocoder.getFromLocation(currentLocation.getLatitude(),
+                                            currentLocation.getLongitude(), 1);
+                                    address = addresses.get(0).getAddressLine(0);
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+
+                                binding.locationAddressTv.setText(address);
                                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                         new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),
                                         15));

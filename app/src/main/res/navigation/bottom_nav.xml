@@ -46,9 +46,10 @@
         android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.CartFragment"
         android:label="fragment_cart"
         tools:layout="@layout/fragment_cart" >
+
         <action
-            android:id="@+id/action_cartFragment_to_fragmentPayments"
-            app:destination="@id/fragmentPayments" />
+            android:id="@+id/action_cartFragment_to_orderDetailsFragment"
+            app:destination="@id/orderDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -124,10 +125,18 @@
         tools:layout="@layout/fragment_payments">
         <action
             android:id="@+id/action_fragmentPayments_to_editLocationFragment"
-            app:destination="@id/editLocationFragment" />
+            app:destination="@id/editLocationFragment"
+            app:popUpTo="@id/editLocationFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_fragmentPayments_to_editPaymentFragment"
-            app:destination="@id/editPaymentFragment" />
+            app:destination="@id/editPaymentFragment"
+            app:popUpTo="@id/editPaymentFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_fragmentPayments_to_orderDetailsFragment"
+            app:destination="@id/orderDetailsFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/editLocationFragment"
@@ -149,6 +158,22 @@
             android:id="@+id/action_editPaymentFragment_to_fragmentPayments"
             app:destination="@id/fragmentPayments"
             app:popUpTo="@id/fragmentPayments"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderDetailsFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.OrderDetailsFragment"
+        android:label="OrderDetailsFragment"
+        tools:layout="@layout/fragment_order_details">
+        <action
+            android:id="@+id/action_orderDetailsFragment_to_fragmentPayments"
+            app:destination="@id/fragmentPayments"
+            app:popUpTo="@id/fragmentPayments"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_orderDetailsFragment_to_cartFragment"
+            app:destination="@id/cartFragment"
+            app:popUpTo="@id/cartFragment"
             app:popUpToInclusive="true" />
     </fragment>
 </navigation>
