@@ -30,7 +30,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:cardCornerRadius="20dp">
+                    app:cardCornerRadius="10dp">
 
                     <ImageView
                         android:id="@+id/img_meal_detail"
@@ -166,6 +166,7 @@
 
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/testimonialsCardView"
                     android:layout_width="335dp"
                     android:layout_height="128dp"
                     app:cardCornerRadius="15dp"
@@ -254,16 +255,19 @@
                             android:layout_marginBottom="10dp"/>
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
+
+                <Button
+                    android:layout_width="325dp"
+                    android:layout_height="57dp"
+                    app:layout_anchor="@id/testimonialsCardView"
+                    android:layout_marginBottom="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Add To Chart"
+                    android:textAllCaps="false"
+                    android:background="@drawable/add_to_cart_btn_background"/>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <Button
-            android:layout_width="325dp"
-            android:layout_height="57dp"
-            app:layout_anchor="@id/details_view"
-            app:layout_anchorGravity="center"
-            android:text="Add To Chart"
-            android:textAllCaps="false"
-            android:background="@drawable/add_to_cart_btn_background"/>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

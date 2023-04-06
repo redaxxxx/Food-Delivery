@@ -54,17 +54,21 @@ public class SignUpFragment extends Fragment {
             Navigation.findNavController(view).navigate(R.id.action_signUpFragment_to_signInFragment);
         });
 
-        binding.createBtn.setOnClickListener(view -> {
-            getEnteredData();
-            if (isValidUserName(username)){
-                if (isValidEmail(email)){
-                    if (isValidPassword(password)){
-                        createAccountWithFirebase(username, email, password);
-                        Navigation.findNavController(view).navigate(R.id.action_signUpFragment_to_fillInBioFragment);
-                    }
-                }
-            }
+//        binding.createBtn.setOnClickListener(view -> {
+//            getEnteredData();
+//            if (isValidUserName(username)){
+//                if (isValidEmail(email)){
+//                    if (isValidPassword(password)){
+//                        createAccountWithFirebase(username, email, password);
+//                        Navigation.findNavController(view).navigate(R.id.action_signUpFragment_to_fillInBioFragment);
+//                    }
+//                }
+//            }
+//
+//        });
 
+        binding.createBtn.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_signUpFragment_to_fillInBioFragment);
         });
         return binding.getRoot();
     }

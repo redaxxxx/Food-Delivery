@@ -1,5 +1,6 @@
 package com.prof.reda.android.project.fooddelivery.views.fragments.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.view.menu.MenuAdapter;
@@ -17,11 +18,12 @@ import com.prof.reda.android.project.fooddelivery.adapters.PopularMenuAdapter;
 import com.prof.reda.android.project.fooddelivery.databinding.FragmentPopularMenuBinding;
 import com.prof.reda.android.project.fooddelivery.models.Menu;
 import com.prof.reda.android.project.fooddelivery.models.Restaurants;
+import com.prof.reda.android.project.fooddelivery.views.activities.DetailMenuActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PopularMenuFragment extends Fragment {
+public class PopularMenuFragment extends Fragment implements PopularMenuAdapter.OnItemClickListener{
 
     private FragmentPopularMenuBinding binding;
     private List<Menu> menus;
@@ -44,8 +46,12 @@ public class PopularMenuFragment extends Fragment {
 
         binding.rvPopularViewMoreMenu.setHasFixedSize(true);
         binding.rvPopularViewMoreMenu.setItemAnimator(new DefaultItemAnimator());
-        PopularMenuAdapter menuAdapter = new PopularMenuAdapter(menusList);
+        PopularMenuAdapter menuAdapter = new PopularMenuAdapter(menusList,this);
         binding.rvPopularViewMoreMenu.setAdapter(menuAdapter);
     }
 
+    @Override
+    public void onClickItem(Menu menu) {
+        startActivity(new Intent(getActivity(), DetailMenuActivity.class));
+    }
 }

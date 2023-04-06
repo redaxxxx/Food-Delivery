@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
@@ -49,9 +50,7 @@ public class FillInBioFragment extends Fragment {
 
 
         binding.nextButton.setOnClickListener(view -> {
-            if (isValidPhoneNumber(mobileNumber)) {
-                addInfoToFirebaseDB();
-            }
+            Navigation.findNavController(view).navigate(R.id.action_fillInBioFragment_to_paymentMethodsFragment);
         });
         return binding.getRoot();
     }

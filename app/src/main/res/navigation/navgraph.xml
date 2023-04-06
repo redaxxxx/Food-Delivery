@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_second_onbaording" >
         <action
             android:id="@+id/action_secondOnbaordingFragment_to_thirdOnboardingFragment2"
-            app:destination="@id/thirdOnboardingFragment" />
+            app:destination="@id/thirdOnboardingFragment"
+            app:popUpTo="@id/secondOnbaordingFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/thirdOnboardingFragment"
@@ -21,7 +23,9 @@
         tools:layout="@layout/fragment_third_onboarding" >
         <action
             android:id="@+id/action_thirdOnboardingFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
+            app:destination="@id/signUpFragment"
+            app:popUpTo="@id/thirdOnboardingFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/onbaordingFragment"
@@ -30,7 +34,9 @@
         tools:layout="@layout/fragment_onbaording">
         <action
             android:id="@+id/action_onbaordingFragment_to_secondOnbaordingFragment"
-            app:destination="@id/secondOnbaordingFragment" />
+            app:destination="@id/secondOnbaordingFragment"
+            app:popUpTo="@id/onbaordingFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -42,7 +48,9 @@
             app:destination="@id/signInFragment" />
         <action
             android:id="@+id/action_signUpFragment_to_fillInBioFragment"
-            app:destination="@id/fillInBioFragment" />
+            app:destination="@id/fillInBioFragment"
+            app:popUpTo="@id/signUpFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
@@ -53,6 +61,50 @@
         android:id="@+id/fillInBioFragment"
         android:name="com.prof.reda.android.project.fooddelivery.views.fragments.firstopenapp.FillInBioFragment"
         android:label="FillInBioFragment"
-        tools:layout="@layout/fragment_fill_in_bio"/>
+        tools:layout="@layout/fragment_fill_in_bio">
+        <action
+            android:id="@+id/action_fillInBioFragment_to_paymentMethodsFragment"
+            app:destination="@id/paymentMethodsFragment"
+            app:popUpTo="@id/fillInBioFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentMethodsFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.firstopenapp.PaymentMethodsFragment"
+        android:label="fragment_payment_methods"
+        tools:layout="@layout/fragment_payment_methods" >
+        <action
+            android:id="@+id/action_paymentMethodsFragment_to_uploadPhotoFragment"
+            app:destination="@id/uploadPhotoFragment"
+            app:popUpTo="@id/paymentMethodsFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/uploadPhotoFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.firstopenapp.UploadPhotoFragment"
+        android:label="UploadPhotoFragment"
+        tools:layout="@layout/fragment_upload_photo">
+        <action
+            android:id="@+id/action_uploadPhotoFragment_to_setLocationFragment"
+            app:destination="@id/setLocationFragment"
+            app:popUpTo="@id/uploadPhotoFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/setLocationFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.firstopenapp.SetLocationFragment"
+        android:label="SetLocationFragment"
+        tools:layout="@layout/fragment_set_location">
+        <action
+            android:id="@+id/action_setLocationFragment_to_signUpSuccessFragment"
+            app:destination="@id/signUpSuccessFragment"
+            app:popUpTo="@id/setLocationFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpSuccessFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.firstopenapp.SignUpSuccessFragment"
+        android:label="fragment_sign_up_success"
+        tools:layout="@layout/fragment_sign_up_success" />
 
 </navigation>

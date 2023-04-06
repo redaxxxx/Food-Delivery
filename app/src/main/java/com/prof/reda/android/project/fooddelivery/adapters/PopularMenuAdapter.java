@@ -15,9 +15,10 @@ import java.util.List;
 public class PopularMenuAdapter extends RecyclerView.Adapter<PopularMenuAdapter.PopularViewHolder> {
 
     private List<Menu> menus;
-
-    public PopularMenuAdapter(List<Menu> menus){
+    private OnItemClickListener onItemClickListener;
+    public PopularMenuAdapter(List<Menu> menus, OnItemClickListener onItemClickListener){
         this.menus = menus;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
@@ -35,6 +36,10 @@ public class PopularMenuAdapter extends RecyclerView.Adapter<PopularMenuAdapter.
         holder.binding.restroName.setText(menu.getRestroName());
         holder.binding.priceTV.setText("$");
         holder.binding.priceTV.append(String.valueOf(menu.getPrice()));
+
+        holder.itemView.setOnClickListener(view -> {
+            onItemClickListener.onClickItem(menu);
+        });
     }
 
     @Override
@@ -48,5 +53,9 @@ public class PopularMenuAdapter extends RecyclerView.Adapter<PopularMenuAdapter.
             super(menuItemsBinding.getRoot());
             binding = menuItemsBinding;
         }
+    }
+
+    public interface OnItemClickListener{
+        void onClickItem(Menu menu);
     }
 }

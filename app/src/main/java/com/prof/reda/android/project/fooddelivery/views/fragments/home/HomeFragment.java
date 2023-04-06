@@ -25,12 +25,14 @@ import com.prof.reda.android.project.fooddelivery.adapters.RestroAdapter;
 import com.prof.reda.android.project.fooddelivery.databinding.FragmentHomeBinding;
 import com.prof.reda.android.project.fooddelivery.models.Menu;
 import com.prof.reda.android.project.fooddelivery.models.Restaurants;
+import com.prof.reda.android.project.fooddelivery.views.activities.DetailMenuActivity;
 import com.prof.reda.android.project.fooddelivery.views.activities.DetailsProductActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment implements RestroAdapter.OnClickItemListener{
+public class HomeFragment extends Fragment implements RestroAdapter.OnClickItemListener,
+        PopularMenuAdapter.OnItemClickListener{
     private FragmentHomeBinding binding;
     private RestroAdapter restroAdapter;
     private PopularMenuAdapter menuAdapter;
@@ -98,7 +100,7 @@ public class HomeFragment extends Fragment implements RestroAdapter.OnClickItemL
 
         binding.rvPopularMenu.setHasFixedSize(true);
         binding.rvPopularMenu.setItemAnimator(new DefaultItemAnimator());
-        menuAdapter = new PopularMenuAdapter(menusList);
+        menuAdapter = new PopularMenuAdapter(menusList,this);
         binding.rvPopularMenu.setAdapter(menuAdapter);
 
     }
@@ -108,5 +110,10 @@ public class HomeFragment extends Fragment implements RestroAdapter.OnClickItemL
         Intent intent = new Intent(getActivity(), DetailsProductActivity.class);
         intent.putExtra(RESTRO_NAME, restaurants.getRestroName());
         startActivity(intent);
+    }
+
+    @Override
+    public void onClickItem(Menu menu) {
+        startActivity(new Intent(getActivity(), DetailMenuActivity.class));
     }
 }

@@ -40,15 +40,19 @@ public class SignInFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sign_in,container, false);
         auth = FirebaseAuth.getInstance();
-            binding.loginBtn.setOnClickListener(view -> {
-                getEnteredData();
-                if (isValidEmail(email)){
-                    if (isValidPassword(password)){
-                        loginFirebase(email, password);
-                        Toast.makeText(getActivity(), "Success Login", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+//            binding.loginBtn.setOnClickListener(view -> {
+//                getEnteredData();
+//                if (isValidEmail(email)){
+//                    if (isValidPassword(password)){
+//                        loginFirebase(email, password);
+//                        Toast.makeText(getActivity(), "Success Login", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//            });
+
+        binding.loginBtn.setOnClickListener(view -> {
+
+        });
         return binding.getRoot();
     }
 
