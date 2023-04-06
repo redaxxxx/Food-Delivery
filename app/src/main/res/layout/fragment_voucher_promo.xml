@@ -39,7 +39,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/first_frameLayout"
             android:layout_width="330dp"
-            android:layout_height="150dp"
+            android:layout_height="120dp"
             android:background="@drawable/homeframe"
             android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@id/voucherPromoTV"
@@ -48,7 +48,7 @@
             <ImageView
                 android:id="@+id/img_person"
                 android:layout_width="220dp"
-                android:layout_height="150dp"
+                android:layout_height="120dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/personimg"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -83,7 +83,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/second_frameLayout"
             android:layout_width="330dp"
-            android:layout_height="150dp"
+            android:layout_height="120dp"
             android:background="@drawable/frame2"
             android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@id/first_frameLayout"
@@ -92,7 +92,7 @@
             <ImageView
                 android:id="@+id/flowers_img"
                 android:layout_width="275dp"
-                android:layout_height="150dp"
+                android:layout_height="120dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/flowerimg"
                 app:layout_constraintBottom_toBottomOf="parent"
