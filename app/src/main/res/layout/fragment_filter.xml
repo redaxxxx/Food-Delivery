@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".views.fragments.home.FilterFragment">
+        tools:context=".ui.fragments.home.FilterFragment">
 
 
         <TextView
@@ -23,7 +23,7 @@
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline3"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
@@ -34,14 +34,13 @@
             android:layout_marginTop="5dp"
             android:background="@drawable/notify_icon_background"
             android:src="@drawable/notifyicon"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/search_editText"
-            android:layout_width="275dp"
+            android:layout_width="0dp"
             android:layout_height="50dp"
-            android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/search_icon_background"
             android:drawableLeft="@drawable/iconsearch"
@@ -50,7 +49,8 @@
             android:paddingStart="8dp"
             android:textColorHint="@color/orange"
             android:textSize="11sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="@id/guideline3"
             app:layout_constraintTop_toBottomOf="@id/findYourFoodTV" />
 
         <TextView
@@ -67,36 +67,35 @@
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/typeChipGroup"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/typeTV"
-            app:layout_constraintStart_toStartOf="@id/typeTV"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
             android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="@id/guideline3"
+            app:layout_constraintTop_toBottomOf="@id/typeTV"
             app:selectionRequired="true">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/RestroChip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Restaurants"
-                android:checked="true"
-                android:textStyle="bold"
-                android:textColor="@color/orange"
                 android:backgroundTint="#FADBB8"
-                style="@style/Widget.MaterialComponents.Chip.Filter" />
+                android:checked="true"
+                android:text="Restaurants"
+                android:textColor="@color/orange"
+                android:textStyle="bold" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/menuChip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Menus"
-                android:checked="true"
-                android:textColor="@color/orange"
-                android:textStyle="bold"
                 android:backgroundTint="#FADBB8"
-                style="@style/Widget.MaterialComponents.Chip.Filter" />
+                android:checked="true"
+                android:text="Menus"
+                android:textColor="@color/orange"
+                android:textStyle="bold" />
         </com.google.android.material.chip.ChipGroup>
 
         <TextView
@@ -104,7 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/typeChipGroup"
-            app:layout_constraintStart_toStartOf="@id/typeTV"
+            app:layout_constraintStart_toStartOf="@id/typeChipGroup"
             android:text="Location"
             android:textSize="15sp"
             android:textStyle="bold"
@@ -113,47 +112,46 @@
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/locationChipGroup"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/locationTV"
-            app:layout_constraintStart_toStartOf="@id/locationTV"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
             android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="@id/locationTV"
+            app:layout_constraintTop_toBottomOf="@id/locationTV"
             app:selectionRequired="true">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/locationChip1"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1 Km"
-                android:checked="true"
-                android:textStyle="bold"
-                android:textColor="@color/orange"
                 android:backgroundTint="#FADBB8"
-                style="@style/Widget.MaterialComponents.Chip.Filter"/>
+                android:checked="true"
+                android:text="1 Km"
+                android:textColor="@color/orange"
+                android:textStyle="bold" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/locationChipLessThan1"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="less than 10 Km"
-                android:textColor="@color/orange"
-                android:textStyle="bold"
                 android:backgroundTint="#FADBB8"
                 android:checked="true"
-                style="@style/Widget.MaterialComponents.Chip.Filter"/>
+                android:text="less than 10 Km"
+                android:textColor="@color/orange"
+                android:textStyle="bold" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/locationChipMoreThan1"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="more than 10 Km"
-                android:textColor="@color/orange"
-                android:textStyle="bold"
                 android:backgroundTint="#FADBB8"
                 android:checked="true"
-                style="@style/Widget.MaterialComponents.Chip.Filter"/>
+                android:text="more than 10 Km"
+                android:textColor="@color/orange"
+                android:textStyle="bold" />
         </com.google.android.material.chip.ChipGroup>
 
         <TextView
@@ -161,7 +159,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/locationChipGroup"
-            app:layout_constraintStart_toStartOf="@id/typeTV"
+            app:layout_constraintStart_toStartOf="@id/locationChipGroup"
             android:text="Food"
             android:textSize="15sp"
             android:textStyle="bold"
@@ -170,86 +168,97 @@
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/foodChipGroup"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/foodTV"
-            app:layout_constraintStart_toStartOf="@id/foodTV"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
             android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="@id/foodTV"
+            app:layout_constraintTop_toBottomOf="@id/foodTV"
             app:selectionRequired="true">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/cakeChip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cake"
-                android:textStyle="bold"
-                android:textColor="@color/orange"
-                android:backgroundTint="#FADBB8"
                 android:layout_marginEnd="15dp"
+                android:backgroundTint="#FADBB8"
                 android:checked="true"
-                style="@style/Widget.MaterialComponents.Chip.Filter"/>
+                android:text="Cake"
+                android:textColor="@color/orange"
+                android:textStyle="bold" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/soupChip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:backgroundTint="#FADBB8"
+                android:checked="true"
                 android:text="Soup"
                 android:textColor="@color/orange"
-                android:textStyle="bold"
-                android:backgroundTint="#FADBB8"
-                android:layout_marginEnd="15dp"
-                android:checked="true"
-                style="@style/Widget.MaterialComponents.Chip.Filter"/>
+                android:textStyle="bold" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/mainCourseChip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:backgroundTint="#FADBB8"
+                android:checked="true"
                 android:text="Main Course"
                 android:textColor="@color/orange"
-                android:textStyle="bold"
-                android:backgroundTint="#FADBB8"
-                android:layout_marginEnd="15dp"
-                android:checked="true"
-                style="@style/Widget.MaterialComponents.Chip.Filter"/>
+                android:textStyle="bold" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/appetizerChip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Appetizer"
-                android:textColor="@color/orange"
-                android:textStyle="bold"
                 android:backgroundTint="#FADBB8"
                 android:checked="true"
-                style="@style/Widget.MaterialComponents.Chip.Filter"/>
+                android:text="Appetizer"
+                android:textColor="@color/orange"
+                android:textStyle="bold" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/dessertChip"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dessert"
-                android:textColor="@color/orange"
-                android:textStyle="bold"
                 android:backgroundTint="#FADBB8"
                 android:checked="true"
-                style="@style/Widget.MaterialComponents.Chip.Filter"/>
+                android:text="Dessert"
+                android:textColor="@color/orange"
+                android:textStyle="bold" />
 
         </com.google.android.material.chip.ChipGroup>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="25dp"
             android:background="@drawable/background_search_btn"
             android:text="search"
             android:textAllCaps="false"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="@id/guideline"
+            app:layout_constraintStart_toStartOf="@id/guideline3" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.048661802" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.951338198" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

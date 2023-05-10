@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.HomeFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.ui.fragments.home.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home">
         <action
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/chatFragment"
-        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.ChatFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.ui.fragments.home.ChatFragment"
         android:label="ChatFragment"
         tools:layout="@layout/fragment_chat">
         <action
@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/cartFragment"
-        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.CartFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.ui.fragments.home.CartFragment"
         android:label="fragment_cart"
         tools:layout="@layout/fragment_cart" >
 
@@ -53,12 +53,12 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.ProfileFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.ui.fragments.home.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/chatDetailsFragment"
-        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.ChatDetailsFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.ui.fragments.home.ChatDetailsFragment"
         android:label="ChatDetailsFragment"
         tools:layout="@layout/fragment_chat_details">
         <action
@@ -67,23 +67,23 @@
     </fragment>
     <fragment
         android:id="@+id/popularRestroFragment"
-        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.PopularRestaurantFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.ui.fragments.home.PopularRestaurantFragment"
         android:label="PopularRestroFragment"
         tools:layout="@layout/fragment_popular_restaurant"/>
 
     <fragment
         android:id="@+id/popularMenuFragment"
-        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.PopularMenuFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.ui.fragments.home.PopularMenuFragment"
         android:label="PopularMenuFragment"
         tools:layout="@layout/fragment_popular_menu"/>
     <fragment
         android:id="@+id/filterFragment"
-        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.FilterFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.ui.fragments.home.FilterFragment"
         android:label="FilterFragment"
         tools:layout="@layout/fragment_filter"/>
     <fragment
         android:id="@+id/finishOrderFragment"
-        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.FinishOrderFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.ui.fragments.home.FinishOrderFragment"
         android:label="FinishOrderFragment"
         tools:layout="@layout/fragment_finish_order">
         <action
@@ -92,7 +92,7 @@
     </fragment>
     <fragment
         android:id="@+id/rateFoodFragment"
-        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.RateFoodFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.ui.fragments.home.RateFoodFragment"
         android:label="RateFoodFragment"
         tools:layout="@layout/fragment_rate_food">
         <action
@@ -101,7 +101,7 @@
     </fragment>
     <fragment
         android:id="@+id/rateRestroFragment"
-        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.RateRestroFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.ui.fragments.home.RateRestroFragment"
         android:label="RateRestroFragment"
         tools:layout="@layout/fragment_rate_restro">
         <action
@@ -110,17 +110,17 @@
     </fragment>
     <fragment
         android:id="@+id/voucherPromoFragment"
-        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.VoucherPromoFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.ui.fragments.home.VoucherPromoFragment"
         android:label="VoucherPromoFragment"
         tools:layout="@layout/fragment_voucher_promo"/>
     <fragment
         android:id="@+id/notificationFragment"
-        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.NotificationFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.ui.fragments.home.NotificationFragment"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" />
     <fragment
         android:id="@+id/fragmentPayments"
-        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.PaymentsFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.ui.fragments.home.PaymentsFragment"
         android:label="FragmentPayments"
         tools:layout="@layout/fragment_payments">
         <action
@@ -140,7 +140,7 @@
     </fragment>
     <fragment
         android:id="@+id/editLocationFragment"
-        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.EditLocationFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.ui.fragments.home.EditLocationFragment"
         android:label="fragment_edit_location"
         tools:layout="@layout/fragment_edit_location" >
         <action
@@ -151,7 +151,7 @@
     </fragment>
     <fragment
         android:id="@+id/editPaymentFragment"
-        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.EditPaymentFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.ui.fragments.home.EditPaymentFragment"
         android:label="fragment_edit_payment"
         tools:layout="@layout/fragment_edit_payment" >
         <action
@@ -162,7 +162,7 @@
     </fragment>
     <fragment
         android:id="@+id/orderDetailsFragment"
-        android:name="com.prof.reda.android.project.fooddelivery.views.fragments.home.OrderDetailsFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.ui.fragments.home.OrderDetailsFragment"
         android:label="OrderDetailsFragment"
         tools:layout="@layout/fragment_order_details">
         <action

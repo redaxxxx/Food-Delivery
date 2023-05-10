@@ -14,11 +14,15 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo_app"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodDelivery"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".AuthActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -28,34 +32,33 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name=".views.activities.MapActivity"
-            android:exported="true" >
-
-        </activity>
-
-        <activity
-            android:name=".views.activities.DetailMenuActivity"
+            android:name=".ui.activities.OnboardActivity"
             android:exported="false" />
         <activity
-            android:name=".views.activities.DetailsProductActivity"
-            android:exported="false" />
-        <activity
-            android:name=".views.activities.HomeActivity"
+            android:name=".ui.activities.MapActivity"
             android:exported="true">
 
+        </activity>
+        <activity
+            android:name=".ui.activities.DetailMenuActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.DetailsProductActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activities.HomeActivity"
+            android:exported="true">
 
         </activity>
-
         <activity
-            android:name=".views.activities.MainActivity"
-            android:exported="true" >
+            android:name=".ui.activities.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

@@ -10,40 +10,37 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".views.fragments.home.ChatDetailsFragment"
+        tools:context=".ui.fragments.home.ChatDetailsFragment"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/arrowBackBtn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:scaleType="centerCrop"
             android:src="@drawable/iconback"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="17dp" />
+            app:layout_constraintStart_toStartOf="@id/guideline3"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/chat_tV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:text="Chat"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline3"
             app:layout_constraintTop_toBottomOf="@id/arrowBackBtn" />
 
         <LinearLayout
-            android:layout_width="345dp"
+            android:layout_width="0dp"
             android:layout_height="87dp"
-            android:layout_marginStart="10dp"
             android:layout_marginTop="15dp"
             android:orientation="vertical"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="@id/guideline3"
             app:layout_constraintTop_toBottomOf="@id/chat_tV">
 
             <androidx.cardview.widget.CardView
@@ -121,13 +118,13 @@
         </LinearLayout>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="350dp"
+            android:layout_width="0dp"
             android:layout_height="75dp"
             android:layout_marginBottom="5dp"
             app:cardCornerRadius="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintEnd_toEndOf="@id/guideline"
+            app:layout_constraintStart_toStartOf="@id/guideline3">
 
             <EditText
                 android:id="@+id/send_editText"
@@ -152,5 +149,17 @@
         </androidx.cardview.widget.CardView>
 
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.048661802" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.951338198" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

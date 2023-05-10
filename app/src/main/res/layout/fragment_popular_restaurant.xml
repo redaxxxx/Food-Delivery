@@ -8,16 +8,20 @@
 
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/popularRestroFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".views.fragments.home.PopularRestaurantFragment"
+        tools:context=".ui.fragments.home.PopularRestaurantFragment"
         android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:id="@+id/consLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline3"
+            app:layout_constraintEnd_toEndOf="@id/guideline">
 
             <TextView
                 android:id="@+id/findYourFoodTV"
@@ -25,9 +29,8 @@
                 android:layout_height="wrap_content"
                 android:text="Find Your \nFavorite Food"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                android:layout_marginStart="15dp"
                 android:layout_marginTop="5dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -36,7 +39,6 @@
                 android:id="@+id/notifyBtn"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:layout_marginEnd="15dp"
                 android:background="@drawable/notify_icon_background"
                 android:src="@drawable/notifyicon"
                 android:layout_marginTop="5dp"
@@ -63,7 +65,6 @@
                 android:textColorHint="@color/orange"
                 android:hint="What do you want to order?"
                 android:paddingStart="8dp"
-                android:layout_marginStart="15dp"
                 android:textSize="11sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/filterBtn" />
@@ -71,23 +72,38 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/filterEditText"
                 android:layout_marginTop="5dp"
-                android:layout_marginStart="15dp"
                 android:text="Popular Restaurant"
-                android:textStyle="bold"
                 android:textColor="@color/black"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/filterEditText" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_popularRestro"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="15dp"
-            android:layout_gravity="center_horizontal"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/consLayout"
+            app:layout_constraintStart_toStartOf="@id/guideline3"
+            app:layout_constraintEnd_toEndOf="@id/guideline"/>
 
-    </LinearLayout>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.048661802" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.951338198" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
