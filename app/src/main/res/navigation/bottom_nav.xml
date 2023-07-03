@@ -80,7 +80,15 @@
         android:id="@+id/filterFragment"
         android:name="com.prof.reda.android.project.fooddelivery.ui.fragments.home.FilterFragment"
         android:label="FilterFragment"
-        tools:layout="@layout/fragment_filter"/>
+        tools:layout="@layout/fragment_filter">
+
+        <action
+            android:id="@+id/action_filterFragment_to_popularRestroFragment"
+            app:destination="@id/popularRestroFragment" />
+        <action
+            android:id="@+id/action_filterFragment_to_popularMenuFragment"
+            app:destination="@id/popularMenuFragment" />
+    </fragment>
     <fragment
         android:id="@+id/finishOrderFragment"
         android:name="com.prof.reda.android.project.fooddelivery.ui.fragments.home.FinishOrderFragment"

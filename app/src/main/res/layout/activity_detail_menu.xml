@@ -8,6 +8,7 @@
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.activities.DetailsProductActivity">
@@ -50,9 +51,11 @@
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:paddingBottom="50dp"
                 android:background="@drawable/background_details_product">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -90,6 +93,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
+                    android:id="@+id/foodName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Wijie Bar and Resto"
@@ -145,6 +149,7 @@
 
 
                 <TextView
+                    android:id="@+id/description_tv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/menuDescription"
@@ -256,17 +261,20 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
 
-                <Button
-                    android:layout_width="325dp"
-                    android:layout_height="57dp"
-                    app:layout_anchor="@id/testimonialsCardView"
-                    android:layout_marginBottom="10dp"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Add To Chart"
-                    android:textAllCaps="false"
-                    android:background="@drawable/add_to_cart_btn_background"/>
+
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
+
+        <Button
+            android:id="@+id/addToCardBtn"
+            android:layout_width="325dp"
+            android:layout_height="57dp"
+            app:layout_anchor="@id/linearLayout"
+            android:layout_gravity="center_horizontal"
+            android:text="Add To Cart"
+            android:textAllCaps="false"
+            app:layout_anchorGravity="bottom|center_horizontal"
+            android:background="@drawable/add_to_cart_btn_background"/>
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

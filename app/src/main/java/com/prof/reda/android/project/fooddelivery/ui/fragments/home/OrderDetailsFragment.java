@@ -46,10 +46,6 @@ public class OrderDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_order_details, container, false);
 
-        orderList.add(new Order(R.drawable.orderimg1, "Spacy fresh crab", "Waroenk kita", 35,1));
-        orderList.add(new Order(R.drawable.orderimg2, "Spacy fresh crab", "Waroenk kita", 35,1));
-        orderList.add(new Order(R.drawable.orderimg3, "Spacy fresh crab", "Waroenk kita", 35,1));
-
         prepareOrderRV(orderList);
 
 
@@ -112,7 +108,7 @@ public class OrderDetailsFragment extends Fragment {
 
 
         for (int i = 0; i < orderList.size(); i++){
-            int quantity = orderList.get(i).getmQuantity();
+            int quantity = orderList.get(i).getQuantity();
             int price = orderList.get(i).getPrice();
 
             mPrice += quantity * price;

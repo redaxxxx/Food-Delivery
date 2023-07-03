@@ -35,7 +35,7 @@ public class OnboardActivity extends AppCompatActivity {
             if (binding.viewPager.getCurrentItem() == 0){
                 binding.viewPager.setCurrentItem(binding.viewPager.getCurrentItem() + 1);
             }else {
-                startActivity(new Intent(this, HomeActivity.class));
+                startActivity(new Intent(this, AuthActivity.class));
                 finish();
             }
         });

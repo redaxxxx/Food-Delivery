@@ -1,7 +1,6 @@
 package com.prof.reda.android.project.fooddelivery.adapters;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -30,8 +29,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     @Override
     public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
         Order order = orderList.get(position);
-        holder.binding.orderImgView.setImageResource(order.getImage());
-        holder.binding.orderName.setText(order.getMenuName());
+        holder.binding.orderName.setText(order.getFoodName());
         holder.binding.RestroName.setText(order.getRestroName());
         holder.binding.priceTextView.setText("$ ");
         holder.binding.priceTextView.append(String.valueOf(order.getPrice()));

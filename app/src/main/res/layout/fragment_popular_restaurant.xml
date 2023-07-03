@@ -69,6 +69,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/filterBtn" />
 
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/restroChipGroupFilter"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/filterEditText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="5dp"
+                android:visibility="gone">
+
+            </com.google.android.material.chip.ChipGroup>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -79,7 +90,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/filterEditText" />
+                app:layout_constraintTop_toBottomOf="@id/restroChipGroupFilter" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -89,9 +100,9 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/consLayout"
+            app:layout_constraintEnd_toEndOf="@id/guideline"
             app:layout_constraintStart_toStartOf="@id/guideline3"
-            app:layout_constraintEnd_toEndOf="@id/guideline"/>
+            app:layout_constraintTop_toBottomOf="@id/consLayout" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"

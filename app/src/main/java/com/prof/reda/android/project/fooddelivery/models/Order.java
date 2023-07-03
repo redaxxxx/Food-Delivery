@@ -1,36 +1,61 @@
 package com.prof.reda.android.project.fooddelivery.models;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "orderInfo")
 public class Order {
-    private int image;
-    private String menuName;
+    @PrimaryKey
+    private int id;
+    private String image;
+    private String foodName;
     private String restroName;
     private int price;
     private int mQuantity;
 
 
+    public Order(){
 
-    public Order(int image, String menuName, String restroName, int price, int quantity) {
+    }
+
+    public Order(String image, String menuName, String restroName, int price, int quantity) {
         this.image = image;
-        this.menuName = menuName;
+        this.foodName = menuName;
         this.restroName = restroName;
         this.price = price;
         this.mQuantity = quantity;
     }
 
-    public int getImage() {
+    public Order(String image, String menuName, String restroName, int price) {
+        this.image = image;
+        this.foodName = menuName;
+        this.restroName = restroName;
+        this.price = price;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
-    public String getMenuName() {
-        return menuName;
+    public String getFoodName() {
+        return foodName;
     }
 
-    public void setMenuName(String menuName) {
-        this.menuName = menuName;
+    public void setFoodName(String foodName) {
+        this.foodName = foodName;
     }
 
     public String getRestroName() {
@@ -49,11 +74,11 @@ public class Order {
         this.price = price;
     }
 
-    public int getmQuantity() {
+    public int getQuantity() {
         return mQuantity;
     }
 
-    public void setmQuantity(int mQuantity) {
+    public void setQuantity(int mQuantity) {
         this.mQuantity = mQuantity;
     }
 
