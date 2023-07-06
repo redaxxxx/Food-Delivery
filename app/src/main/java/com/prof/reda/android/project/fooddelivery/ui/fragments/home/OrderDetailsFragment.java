@@ -1,5 +1,7 @@
 package com.prof.reda.android.project.fooddelivery.ui.fragments.home;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -10,6 +12,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -23,30 +27,54 @@ import android.view.ViewGroup;
 
 import com.prof.reda.android.project.fooddelivery.R;
 import com.prof.reda.android.project.fooddelivery.adapters.OrderAdapter;
+import com.prof.reda.android.project.fooddelivery.database.FoodDatabase;
 import com.prof.reda.android.project.fooddelivery.databinding.FragmentOrderDetailsBinding;
+import com.prof.reda.android.project.fooddelivery.models.EntityOrder;
 import com.prof.reda.android.project.fooddelivery.models.Order;
+import com.prof.reda.android.project.fooddelivery.viewModel.FoodViewModel;
+import com.prof.reda.android.project.fooddelivery.viewModel.FoodViewModelFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDetailsFragment extends Fragment {
 
     private FragmentOrderDetailsBinding binding;
     private OrderAdapter orderAdapter;
-    private List<Order> orderList = new ArrayList<>();
 
     private int priceTotal = 0;
     private int mQuantity = 0;
     private int mPrice = 0;
+    private FoodViewModel viewModel;
+    private FoodDatabase mDB;
 
+    private SharedPreferences sharedPreferences;
+    private String token;
     private Bitmap icon;
+
+    private List<Order> orderList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_order_details, container, false);
 
-        prepareOrderRV(orderList);
+        sharedPreferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
+
+        token = sharedPreferences.getString("token", null);
+
+        mDB = FoodDatabase.getInstance(getContext());
+
+        FoodViewModelFactory factory = new FoodViewModelFactory(mDB);
+
+        viewModel = new ViewModelProvider(this, factory).get(FoodViewModel.class);
+
+        viewModel.getOrderDetails(getContext(), token).observe(getViewLifecycleOwner(), new Observer<List<Order>>() {
+            @Override
+            public void onChanged(List<Order> orders) {
+                orderList = orders;
+                prepareOrderRV(orders);
+            }
+        });
 
 
         ItemTouchHelper.SimpleCallback itemTouchCallback = new ItemTouchHelper.SimpleCallback(0,
@@ -107,20 +135,13 @@ public class OrderDetailsFragment extends Fragment {
         });
 
 
-        for (int i = 0; i < orderList.size(); i++){
-            int quantity = orderList.get(i).getQuantity();
-            int price = orderList.get(i).getPrice();
 
-            mPrice += quantity * price;
-        }
-
-
-        binding.subTotalPriceTv.setText(String.valueOf(mPrice));
-        binding.subTotalPriceTv.append(" $");
-
-        int total = mPrice + 10-20;
-        binding.totalPriceTv.setText(String.valueOf(total));
-        binding.totalPriceTv.append(" $");
+//        binding.subTotalPriceTv.setText(String.valueOf(mPrice));
+//        binding.subTotalPriceTv.append(" $");
+//
+//        int total = mPrice + 10-20;
+//        binding.totalPriceTv.setText(String.valueOf(total));
+//        binding.totalPriceTv.append(" $");
 
         binding.arrowBackBtn.setOnClickListener(view -> {
             Navigation.findNavController(view).navigate(R.id.action_orderDetailsFragment_to_cartFragment);
@@ -141,5 +162,6 @@ public class OrderDetailsFragment extends Fragment {
         orderAdapter = new OrderAdapter(orders);
         binding.orderDetailsRv.setAdapter(orderAdapter);
     }
+
 
 }

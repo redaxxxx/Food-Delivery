@@ -184,6 +184,11 @@ public class PopularMenuFragment extends Fragment implements FoodAdapter.OnItemC
 
     @Override
     public void onClickItem(Food food) {
-        startActivity(new Intent(getActivity(), DetailMenuActivity.class));
+        Intent intent = new Intent(getActivity(),DetailMenuActivity.class);
+        intent.putExtra("pic", food.getImage());
+        intent.putExtra("name", food.getName());
+        intent.putExtra("price", food.getPrice());
+        intent.putExtra("id", food.getId());
+        startActivity(intent);
     }
 }

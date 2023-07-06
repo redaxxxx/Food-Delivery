@@ -153,7 +153,7 @@ public class HomeFragment extends Fragment implements RestroAdapter.OnClickItemL
         intent.putExtra("pic", food.getImage());
         intent.putExtra("name", food.getName());
         intent.putExtra("price", food.getPrice());
-        intent.putExtra("description", food.getDescription());
+        intent.putExtra("id", food.getId());
         startActivity(intent);
     }
 }

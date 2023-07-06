@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.prof.reda.android.project.fooddelivery.databinding.CartItemBinding;
-import com.prof.reda.android.project.fooddelivery.models.Order;
+import com.prof.reda.android.project.fooddelivery.models.EntityOrder;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -16,9 +16,9 @@ import java.util.List;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
 
     private Context mContext;
-    private List<Order> orders;
+    private List<EntityOrder> orders;
 
-    public CartAdapter(Context context, List<Order> orderList){
+    public CartAdapter(Context context, List<EntityOrder> orderList){
         mContext = context;
         orders = orderList;
     }
@@ -31,7 +31,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull CartHolder holder, int position) {
-        Order order = orders.get(position);
+        EntityOrder order = orders.get(position);
         Picasso.with(mContext).load(order.getImage()).into(holder.binding.menuImgView);
         holder.binding.menuNameTV.setText(order.getFoodName());
         holder.binding.priceTV.setText("$ ");

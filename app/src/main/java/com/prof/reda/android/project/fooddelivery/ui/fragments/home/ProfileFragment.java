@@ -102,14 +102,9 @@ public class ProfileFragment extends Fragment {
                     name = data.getString("name");
                     email = data.getString("email");
                     imgUrl = data.getString("avatar");
-
-                    Log.d(Constants.TAG, "name is " + name);
-                    Log.d(Constants.TAG, "email is " + email);
-                    Log.d(Constants.TAG, "avatar is " + imgUrl);
-
                 }
             } catch (JSONException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
         }, error -> {
             error.printStackTrace();

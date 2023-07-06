@@ -6,9 +6,9 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.prof.reda.android.project.fooddelivery.models.Order;
+import com.prof.reda.android.project.fooddelivery.models.EntityOrder;
 
-@Database(entities = {Order.class}, version = 1, exportSchema = false)
+@Database(entities = {EntityOrder.class}, version = 1, exportSchema = false)
 public abstract class FoodDatabase extends RoomDatabase {
     private static final Object LOCK = new Object();
     private static final String DATABASE_NAME = "food.db";
