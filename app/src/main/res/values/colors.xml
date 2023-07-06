@@ -10,6 +10,7 @@
 
     <color name="green">#53E88B</color>
     <color name="orange">#F9A84D</color>
+    <color name="light_orange">#FADBB8</color>
     <color name="gray">#CECECE</color>
     <color name="gold">#FEAD1D</color>
 </resources>

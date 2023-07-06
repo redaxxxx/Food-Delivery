@@ -10,53 +10,84 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".views.fragments.firstopenapp.SignUpFragment">
+        tools:context=".ui.fragments.firstopenapp.SignUpFragment">
 
+        <FrameLayout
+            android:id="@+id/frame_signup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:src="@drawable/signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:scaleType="centerCrop"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:src="@drawable/onboardinglogo"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:id="@+id/foodNinjaTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/viga"
+            android:text="FoodNinja"
+            android:textColor="@color/green"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@id/imageView" />
+
+        <TextView
+            android:id="@+id/deliver_Favorite_food_Tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Deliever Favorite Food"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            app:layout_constraintEnd_toEndOf="@+id/foodNinjaTitle"
+            app:layout_constraintStart_toStartOf="@+id/foodNinjaTitle"
+            app:layout_constraintTop_toBottomOf="@+id/foodNinjaTitle" />
 
         <TextView
             android:id="@+id/signupFreeTv"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="Sign Up For Free"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="13sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@+id/guideline1"
+            app:layout_constraintTop_toBottomOf="@+id/deliver_Favorite_food_Tv" />
 
         <EditText
             android:id="@+id/username_edit_text"
-            android:layout_width="360dp"
-            android:layout_height="50dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:drawableLeft="@drawable/baseline_account_circle_24"
             android:hint="Anamwp . . |"
             android:drawablePadding="10dp"
-            android:textSize="15sp"
+            android:textSize="13sp"
             android:fontFamily="sans-serif-light"
             android:background="@drawable/edit_text_background"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
             app:layout_constraintTop_toBottomOf="@+id/signupFreeTv"
             android:paddingStart="15dp" />
 
         <EditText
             android:id="@+id/email_edit_text"
-            android:layout_width="360dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:drawableLeft="@drawable/baseline_email_24"
             android:hint="Email"
             android:drawablePadding="10dp"
-            android:textSize="15sp"
+            android:textSize="13sp"
             android:fontFamily="sans-serif-light"
             android:background="@drawable/edit_text_background"
             app:layout_constraintEnd_toEndOf="@id/username_edit_text"
@@ -66,25 +97,25 @@
 
         <EditText
             android:id="@+id/passwordEditText"
-            android:layout_width="350dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:background="@drawable/edit_text_background"
             android:drawableLeft="@drawable/baseline_lock_24"
             android:drawablePadding="10dp"
             android:fontFamily="sans-serif-light"
             android:hint="Password"
             android:paddingStart="13dp"
-            android:textSize="15sp"
+            android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="@id/email_edit_text"
             app:layout_constraintStart_toStartOf="@id/email_edit_text"
             app:layout_constraintTop_toBottomOf="@+id/email_edit_text" />
 
         <TextView
             android:id="@+id/keepMeSignedInTv"
-            android:layout_width="350dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:textSize="11sp"
             android:text="Keep Me Signed In"
             android:drawablePadding="10dp"
@@ -97,7 +128,7 @@
 
         <TextView
             android:id="@+id/emailMeAboutPrice"
-            android:layout_width="350dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:textSize="11sp"
@@ -116,29 +147,45 @@
             android:layout_height="wrap_content"
             android:background="@drawable/next_btn_background"
             android:layout_marginTop="13dp"
-            app:layout_constraintTop_toBottomOf="@id/emailMeAboutPrice"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/passwordEditText"
             app:layout_constraintStart_toStartOf="@+id/passwordEditText"
             android:text="Create Account"
             android:gravity="center"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:textSize="15sp" />
+            android:textSize="13sp"
+            android:layout_marginBottom="35dp"/>
 
         <TextView
             android:id="@+id/alreadyHaveAccount"
-            android:layout_width="360dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:gravity="center"
             android:text="already have an account?"
             android:textColor="@color/green"
-            android:textSize="13sp"
+            android:textSize="11sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/passwordEditText"
             app:layout_constraintStart_toStartOf="@+id/passwordEditText"
             app:layout_constraintTop_toBottomOf="@+id/createBtn" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.048661802" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.951338198" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

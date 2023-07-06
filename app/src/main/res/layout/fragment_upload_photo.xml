@@ -10,47 +10,49 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".views.fragments.firstopenapp.PaymentMethodsFragment">
+        tools:context=".ui.fragments.firstopenapp.PaymentMethodsFragment">
 
         <ImageView
             android:id="@+id/arrowBackBtn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:scaleType="centerCrop"
             android:src="@drawable/iconback"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="17dp" />
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/paymentMethod_tv"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="Upload Your Photo \nProfile"
             android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@id/arrowBackBtn"
-            android:layout_marginStart="15dp" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintTop_toBottomOf="@id/arrowBackBtn" />
 
         <TextView
             android:id="@+id/textview"
-            android:layout_width="225dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="This data will be displayed in your account profile for security"
             android:textSize="11sp"
             android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@id/paymentMethod_tv"
-            app:layout_constraintStart_toStartOf="@id/paymentMethod_tv" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@id/paymentMethod_tv"
+            app:layout_constraintTop_toBottomOf="@id/paymentMethod_tv" />
 
         <FrameLayout
-            android:layout_width="335dp"
+            android:layout_width="0dp"
             android:layout_height="305dp"
+            app:layout_constraintEnd_toEndOf="@+id/textview"
+            app:layout_constraintStart_toStartOf="@id/textview"
             app:layout_constraintTop_toBottomOf="@id/textview"
-            app:layout_constraintStart_toStartOf="@id/textview">
+            android:layout_marginTop="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -61,10 +63,10 @@
                     android:id="@+id/gelleryCardView"
                     android:layout_width="325dp"
                     android:layout_height="117dp"
-                    app:layout_constraintTop_toBottomOf="@id/textview"
-                    app:layout_constraintStart_toStartOf="@id/textview"
                     android:layout_marginTop="15dp"
-                    app:cardCornerRadius="10dp">
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintStart_toStartOf="@id/textview"
+                    app:layout_constraintTop_toBottomOf="@id/textview">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -74,21 +76,22 @@
                             android:id="@+id/galleryImg"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
                             android:src="@drawable/galleryicon"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            android:layout_marginBottom="10dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:layout_constraintTop_toBottomOf="@id/galleryImg"
-                            app:layout_constraintStart_toStartOf="@id/galleryImg"
-                            app:layout_constraintEnd_toEndOf="@id/galleryImg"
                             android:layout_marginTop="8dp"
                             android:text="From Gallery"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="@id/galleryImg"
+                            app:layout_constraintStart_toStartOf="@id/galleryImg"
+                            app:layout_constraintTop_toBottomOf="@id/galleryImg" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.cardview.widget.CardView>
@@ -96,10 +99,10 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="325dp"
                     android:layout_height="117dp"
-                    app:layout_constraintTop_toBottomOf="@id/gelleryCardView"
-                    app:layout_constraintStart_toStartOf="@id/gelleryCardView"
                     android:layout_marginTop="20dp"
-                    app:cardCornerRadius="10dp">
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintStart_toStartOf="@id/gelleryCardView"
+                    app:layout_constraintTop_toBottomOf="@id/gelleryCardView">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -109,21 +112,22 @@
                             android:id="@+id/cameraImg"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
                             android:src="@drawable/cameraimg"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            android:layout_marginBottom="10dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:layout_constraintTop_toBottomOf="@id/cameraImg"
-                            app:layout_constraintStart_toStartOf="@id/cameraImg"
-                            app:layout_constraintEnd_toEndOf="@id/cameraImg"
                             android:layout_marginTop="8dp"
                             android:text="Take Photo"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="@id/cameraImg"
+                            app:layout_constraintStart_toStartOf="@id/cameraImg"
+                            app:layout_constraintTop_toBottomOf="@id/cameraImg" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.cardview.widget.CardView>
@@ -135,14 +139,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/next_btn_background"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="15dp"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            android:layout_marginBottom="25dp"
             android:text="Next"
             android:textSize="17sp"
             android:textStyle="bold"
             android:textAllCaps="false" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.048661802" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.951338198" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

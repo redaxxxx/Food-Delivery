@@ -10,40 +10,38 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".views.fragments.home.VoucherPromoFragment">
+        tools:context=".ui.fragments.home.VoucherPromoFragment">
 
         <ImageView
             android:id="@+id/arrowBackBtn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:scaleType="centerCrop"
             android:src="@drawable/iconback"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="17dp" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/voucherPromoTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:text="Voucher Promo"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline3"
             app:layout_constraintTop_toBottomOf="@id/arrowBackBtn" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/first_frameLayout"
-            android:layout_width="330dp"
+            android:layout_width="0dp"
             android:layout_height="120dp"
-            android:background="@drawable/homeframe"
             android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@id/voucherPromoTV"
-            app:layout_constraintStart_toStartOf="@id/voucherPromoTV">
+            android:background="@drawable/homeframe"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="@id/guideline3"
+            app:layout_constraintTop_toBottomOf="@id/voucherPromoTV">
 
             <ImageView
                 android:id="@+id/img_person"
@@ -82,12 +80,13 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/second_frameLayout"
-            android:layout_width="330dp"
+            android:layout_width="0dp"
             android:layout_height="120dp"
-            android:background="@drawable/frame2"
             android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@id/first_frameLayout"
-            app:layout_constraintStart_toStartOf="@id/first_frameLayout">
+            android:background="@drawable/frame2"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
+            app:layout_constraintStart_toStartOf="@id/guideline3"
+            app:layout_constraintTop_toBottomOf="@id/first_frameLayout">
 
             <ImageView
                 android:id="@+id/flowers_img"
@@ -126,7 +125,7 @@
 
         <Button
             android:id="@+id/checkoutBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:background="@drawable/background_search_btn"
@@ -134,9 +133,20 @@
             android:textAllCaps="false"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="@id/guideline"
+            app:layout_constraintStart_toStartOf="@id/guideline3" />
 
-
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.048661802" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.951338198" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
