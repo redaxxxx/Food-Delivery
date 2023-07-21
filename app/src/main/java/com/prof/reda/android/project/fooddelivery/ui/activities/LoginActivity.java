@@ -1,41 +1,34 @@
-package com.prof.reda.android.project.fooddelivery.ui.fragments.firstopenapp;
-
-import android.app.ProgressDialog;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
+package com.prof.reda.android.project.fooddelivery.ui.activities;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
+
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.prof.reda.android.project.fooddelivery.R;
-import com.prof.reda.android.project.fooddelivery.databinding.FragmentLoginBinding;
+import com.prof.reda.android.project.fooddelivery.databinding.ActivityLoginBinding;
 
-public class LoginFragment extends Fragment {
+public class LoginActivity extends AppCompatActivity {
 
-    private FragmentLoginBinding binding;
+    private ActivityLoginBinding binding;
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
-
-
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
 
         firebaseAuth = FirebaseAuth.getInstance();
-
-        progressDialog = new ProgressDialog(getContext());
-        progressDialog.setCancelable(false);
+        progressDialog = new ProgressDialog(this);
 
         binding.loginBtn.setOnClickListener(view -> {
             // validate fields first
@@ -46,9 +39,9 @@ public class LoginFragment extends Fragment {
             }
         });
 
-
-
-        return binding.getRoot();
+        binding.forgetPasswordTV.setOnClickListener(view -> {
+            startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
+        });
     }
 
     private boolean isValidate(){
@@ -72,13 +65,17 @@ public class LoginFragment extends Fragment {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     progressDialog.dismiss();
+                    startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                    finish();
 
                 }else {
-                    Toast.makeText(getActivity(), "Login Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
     }
+
+
+
 
 }

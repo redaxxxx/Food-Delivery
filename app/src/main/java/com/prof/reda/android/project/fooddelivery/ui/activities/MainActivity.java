@@ -13,24 +13,26 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.prof.reda.android.project.fooddelivery.R;
 import com.prof.reda.android.project.fooddelivery.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
     
     private ActivityMainBinding binding;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
+        auth = FirebaseAuth.getInstance();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("user",Context.MODE_PRIVATE);
+                SharedPreferences sharedPreferences = getSharedPreferences("users", Context.MODE_PRIVATE);
                 boolean isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false);
-
                 if(isLoggedIn){
                     startActivity(new Intent(MainActivity.this, HomeActivity.class));
                     finish();
@@ -49,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
 
         //default value
         if (isFirstTime){
-            //if its true then its first time and we will change it false
             SharedPreferences.Editor editor = preferences.edit();
             editor.putBoolean("isFirstTime", false);
             editor.apply();
