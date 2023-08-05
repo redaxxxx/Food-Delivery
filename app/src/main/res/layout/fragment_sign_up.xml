@@ -12,22 +12,18 @@
         android:layout_height="match_parent"
         tools:context=".ui.fragments.firstopenapp.SignUpFragment">
 
-        <FrameLayout
-            android:id="@+id/frame_signup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"/>
-
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:scaleType="centerCrop"
             android:src="@drawable/onboardinglogo"
+            app:layout_constraintBottom_toTopOf="@id/foodNinjaTitle"
             app:layout_constraintEnd_toEndOf="@id/guideline2"
             app:layout_constraintStart_toStartOf="@id/guideline1"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="16dp"/>
+            app:layout_constraintVertical_chainStyle="spread" />
 
         <TextView
             android:id="@+id/foodNinjaTitle"
@@ -37,6 +33,7 @@
             android:text="FoodNinja"
             android:textColor="@color/green"
             android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@id/deliver_Favorite_food_Tv"
             app:layout_constraintEnd_toEndOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@id/imageView" />
@@ -47,7 +44,7 @@
             android:layout_height="wrap_content"
             android:text="Deliever Favorite Food"
             android:textColor="@color/black"
-            android:textSize="11sp"
+            android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="@+id/foodNinjaTitle"
             app:layout_constraintStart_toStartOf="@+id/foodNinjaTitle"
             app:layout_constraintTop_toBottomOf="@+id/foodNinjaTitle" />
@@ -56,110 +53,135 @@
             android:id="@+id/signupFreeTv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="Sign Up For Free"
             android:textColor="@color/black"
-            android:textSize="13sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@+id/guideline1"
             app:layout_constraintTop_toBottomOf="@+id/deliver_Favorite_food_Tv" />
 
-        <EditText
-            android:id="@+id/username_edit_text"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/username_outline"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:drawableLeft="@drawable/baseline_account_circle_24"
-            android:hint="Anamwp . . |"
-            android:drawablePadding="10dp"
-            android:textSize="13sp"
-            android:fontFamily="sans-serif-light"
-            android:background="@drawable/edit_text_background"
+            android:elevation="4dp"
+            app:boxBackgroundColor="@color/white"
+            app:hintAnimationEnabled="true"
             app:layout_constraintEnd_toEndOf="@id/guideline2"
             app:layout_constraintStart_toStartOf="@id/guideline1"
-            app:layout_constraintTop_toBottomOf="@+id/signupFreeTv"
-            android:paddingStart="15dp"
-            android:importantForAutofill="no"/>
+            app:layout_constraintTop_toBottomOf="@+id/signupFreeTv">
 
-        <EditText
-            android:id="@+id/email_edit_text"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/username_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableStart="@drawable/profile"
+                android:drawablePadding="8dp"
+                android:hint="Username"
+                android:textSize="14sp"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:textColorHint="@color/gray" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_outline"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:drawableLeft="@drawable/baseline_email_24"
-            android:hint="Email"
-            android:drawablePadding="10dp"
-            android:textSize="13sp"
-            android:fontFamily="sans-serif-light"
-            android:background="@drawable/edit_text_background"
-            app:layout_constraintEnd_toEndOf="@id/username_edit_text"
-            app:layout_constraintStart_toStartOf="@id/username_edit_text"
-            app:layout_constraintTop_toBottomOf="@+id/username_edit_text"
-            android:paddingStart="15dp"
-             android:importantForAutofill="no"/>
+            android:elevation="4dp"
+            android:layout_marginTop="3dp"
+            app:boxBackgroundColor="@color/white"
+            app:hintAnimationEnabled="true"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintTop_toBottomOf="@+id/username_outline">
 
-        <EditText
-            android:id="@+id/passwordEditText"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableStart="@drawable/baseline_email_24"
+                android:drawablePadding="8dp"
+                android:hint="Eamil"
+                android:textSize="14sp"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:textColorHint="@color/gray" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_outline"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/edit_text_background"
-            android:drawableLeft="@drawable/baseline_lock_24"
-            android:drawablePadding="10dp"
-            android:fontFamily="sans-serif-light"
-            android:hint="Password"
-            android:paddingStart="13dp"
-            android:textSize="13sp"
-            android:importantForAutofill="no"
-            app:layout_constraintEnd_toEndOf="@id/email_edit_text"
-            app:layout_constraintStart_toStartOf="@id/email_edit_text"
-            app:layout_constraintTop_toBottomOf="@+id/email_edit_text" />
+            android:elevation="4dp"
+            android:layout_marginTop="3dp"
+            app:boxBackgroundColor="@color/white"
+            app:hintAnimationEnabled="true"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintTop_toBottomOf="@+id/email_outline">
 
-        <TextView
-            android:id="@+id/keepMeSignedInTv"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableStart="@drawable/baseline_email_24"
+                android:drawablePadding="8dp"
+                android:hint="Password"
+                android:textSize="14sp"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:textColorHint="@color/gray" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <CheckBox
+            android:id="@+id/keepSignedIn_checkbox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:textSize="11sp"
+            android:shadowColor="@color/green"
             android:text="Keep Me Signed In"
-            android:drawablePadding="10dp"
-            android:drawableLeft="@drawable/baseline_beenhere_24"
-            app:layout_constraintEnd_toEndOf="@+id/passwordEditText"
-            app:layout_constraintStart_toStartOf="@+id/passwordEditText"
-            app:layout_constraintTop_toBottomOf="@+id/passwordEditText"
-            android:paddingStart="15dp"
-            android:gravity="center_vertical" />
+            android:textColor="@color/gray"
+            app:layout_constraintEnd_toEndOf="@+id/password_outline"
+            app:layout_constraintStart_toStartOf="@+id/password_outline"
+            app:layout_constraintTop_toBottomOf="@+id/password_outline"
+            app:layout_constraintVertical_chainStyle="spread_inside" />
 
-        <TextView
-            android:id="@+id/emailMeAboutPrice"
+        <CheckBox
+            android:id="@+id/checkBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:textSize="11sp"
+            android:shadowColor="@color/green"
             android:text="Email Me About Special Pricing"
-            android:drawablePadding="10dp"
-            android:drawableLeft="@drawable/baseline_beenhere_24"
-            app:layout_constraintEnd_toEndOf="@+id/passwordEditText"
-            app:layout_constraintStart_toStartOf="@+id/passwordEditText"
-            app:layout_constraintTop_toBottomOf="@+id/keepMeSignedInTv"
-            android:paddingStart="15dp"
-            android:gravity="center_vertical" />
+            android:textColor="@color/gray"
+            app:layout_constraintBottom_toTopOf="@id/createBtn"
+            app:layout_constraintEnd_toEndOf="@+id/keepSignedIn_checkbox"
+            app:layout_constraintStart_toStartOf="@+id/keepSignedIn_checkbox"
+            app:layout_constraintTop_toBottomOf="@id/keepSignedIn_checkbox"
+            app:layout_constraintVertical_chainStyle="spread_inside" />
 
-        <TextView
+        <Button
             android:id="@+id/createBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/next_btn_background"
             android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@id/alreadyHaveAccount"
-            app:layout_constraintEnd_toEndOf="@+id/passwordEditText"
-            app:layout_constraintStart_toStartOf="@+id/passwordEditText"
-            android:text="Create Account"
+            android:background="@drawable/next_btn_background"
             android:gravity="center"
+            android:text="Create Account"
             android:textColor="@color/white"
+            android:textSize="14sp"
             android:textStyle="bold"
-            android:textSize="13sp" />
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toTopOf="@id/alreadyHaveAccount"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@+id/guideline1"
+            app:layout_constraintTop_toBottomOf="@id/checkBox" />
 
         <TextView
             android:id="@+id/alreadyHaveAccount"
@@ -171,8 +193,8 @@
             android:textSize="11sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/passwordEditText"
-            app:layout_constraintStart_toStartOf="@+id/passwordEditText" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@+id/guideline1" />
 
 
         <androidx.constraintlayout.widget.Guideline

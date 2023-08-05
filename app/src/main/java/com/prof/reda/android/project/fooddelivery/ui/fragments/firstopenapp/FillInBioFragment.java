@@ -1,11 +1,8 @@
 package com.prof.reda.android.project.fooddelivery.ui.fragments.firstopenapp;
 
-import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
@@ -14,18 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.prof.reda.android.project.fooddelivery.R;
 import com.prof.reda.android.project.fooddelivery.databinding.FragmentFillInBioBinding;
-import com.prof.reda.android.project.fooddelivery.ui.activities.HomeActivity;
-import com.prof.reda.android.project.fooddelivery.ui.activities.LoginActivity;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.prof.reda.android.project.fooddelivery.utils.Constants;
 
 
 public class FillInBioFragment extends Fragment {
@@ -44,77 +34,46 @@ public class FillInBioFragment extends Fragment {
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        sharedPreferences = getActivity().getSharedPreferences("users", Context.MODE_PRIVATE);
-        assert getArguments() != null;
-        email = getArguments().getString("email");
+        Bundle bundle = getArguments();
 
         binding.nextButton.setOnClickListener(view -> {
-            if (isValide()){
-                completeRegister();
+            if (isValidate()){
+                if (bundle != null){
+                    bundle.putString(Constants.KEY_FIRST_NAME, binding.firstNameEt.getText().toString());
+                    bundle.putString(Constants.KEY_SECOND_NAME, binding.lastNameEt.getText().toString());
+                    bundle.putString(Constants.KEY_PHONE_NUMBER, binding.phoneNumberEt.getText().toString());
+                }
+
+                Fragment fragment = new PaymentMethodsFragment();
+                fragment.setArguments(bundle);
+
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frameAuthContainer, fragment).commit();
+
             }
         });
         return binding.getRoot();
     }
 
-    private void completeRegister() {
-
-        Map<String, String> hashMap = new HashMap<>();
-//        userIfno.put("firstName", binding.firstNameEditText.getText().toString());
-//        userIfno.put("lastName", binding.lastNameEditText.getText().toString());
-        hashMap.put("email", email);
-        hashMap.put("phoneNumber", binding.phoneNumberEditText.getText().toString());
-
-        String userId = auth.getCurrentUser().getUid();
-        db.collection("users").document(userId).set(hashMap)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Map<String, String> username = new HashMap<>();
-                        username.put("firstName", binding.firstNameEditText.getText().toString());
-                        username.put("lastName", binding.lastNameEditText.getText().toString());
-
-                        db.collection("users").document(userId).collection("username")
-                                .add(username).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                    @Override
-                                    public void onSuccess(DocumentReference documentReference) {
-                                        // Post document added successfully
-
-                                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                                        editor.putBoolean("isLoggedIn", true);
-                                        editor.apply();
-
-                                        startActivity(new Intent(getActivity(), LoginActivity.class));
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        // Handle post document addition failure
-                                        e.printStackTrace();
-                                    }
-                                });
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        e.printStackTrace();
-                    }
-                });
-
-    }
-
-    private boolean isValide(){
-        if (binding.phoneNumberEditText.getText().toString() == null){
-            binding.phoneNumberEditText.setError("phone number required");
+    private boolean isValidate(){
+        if (binding.phoneNumberEt.getText() == null){
+            binding.phoneNumberOutline.setError("phone number required");
+            binding.phoneNumberOutline.setErrorEnabled(true);
         }
 
-        if (TextUtils.isEmpty(binding.firstNameEditText.getText().toString())){
-            binding.firstNameEditText.setError("first name is required");
+        if (TextUtils.isEmpty(binding.firstNameEt.getText())){
+            binding.firstNameOutline.setError("first name is required");
+            binding.firstNameOutline.setErrorEnabled(true);
         }
 
-        if (TextUtils.isEmpty(binding.lastNameEditText.getText().toString())){
-            binding.lastNameEditText.setError("last name is required");
+        if (TextUtils.isEmpty(binding.lastNameEt.getText())){
+            binding.lastNameOutline.setError("last name is required");
+            binding.lastNameOutline.setErrorEnabled(true);
         }
 
+        binding.phoneNumberOutline.setErrorEnabled(false);
+        binding.firstNameOutline.setErrorEnabled(false);
+        binding.lastNameOutline.setErrorEnabled(false);
         return true;
     }
 }

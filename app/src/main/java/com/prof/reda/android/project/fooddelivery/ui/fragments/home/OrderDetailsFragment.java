@@ -58,25 +58,6 @@ public class OrderDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_order_details, container, false);
 
-        sharedPreferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
-
-        token = sharedPreferences.getString("token", null);
-
-        mDB = FoodDatabase.getInstance(getContext());
-
-        FoodViewModelFactory factory = new FoodViewModelFactory(mDB);
-
-        viewModel = new ViewModelProvider(this, factory).get(FoodViewModel.class);
-
-        viewModel.getOrderDetails(getContext(), token).observe(getViewLifecycleOwner(), new Observer<List<Order>>() {
-            @Override
-            public void onChanged(List<Order> orders) {
-                orderList = orders;
-                prepareOrderRV(orders);
-            }
-        });
-
-
         ItemTouchHelper.SimpleCallback itemTouchCallback = new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
             @Override
@@ -136,12 +117,6 @@ public class OrderDetailsFragment extends Fragment {
 
 
 
-//        binding.subTotalPriceTv.setText(String.valueOf(mPrice));
-//        binding.subTotalPriceTv.append(" $");
-//
-//        int total = mPrice + 10-20;
-//        binding.totalPriceTv.setText(String.valueOf(total));
-//        binding.totalPriceTv.append(" $");
 
         binding.arrowBackBtn.setOnClickListener(view -> {
             Navigation.findNavController(view).navigate(R.id.action_orderDetailsFragment_to_cartFragment);

@@ -7,10 +7,11 @@ import androidx.room.PrimaryKey;
 public class EntityOrder {
     @PrimaryKey
     private int id;
+    private String userId;
     private String image;
     private String foodName;
     private String restroName;
-    private int price;
+    private String price;
     private int mQuantity;
 
 
@@ -24,6 +25,14 @@ public class EntityOrder {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getImage() {
@@ -50,11 +59,11 @@ public class EntityOrder {
         this.restroName = restroName;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

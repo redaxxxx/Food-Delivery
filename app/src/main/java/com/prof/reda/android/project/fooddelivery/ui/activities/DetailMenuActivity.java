@@ -1,41 +1,48 @@
 package com.prof.reda.android.project.fooddelivery.ui.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.widget.ImageView;
+import android.util.Log;
+import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.prof.reda.android.project.fooddelivery.R;
 import com.prof.reda.android.project.fooddelivery.database.FoodDatabase;
 import com.prof.reda.android.project.fooddelivery.databinding.ActivityDetailMenuBinding;
 import com.prof.reda.android.project.fooddelivery.models.EntityOrder;
-import com.prof.reda.android.project.fooddelivery.utils.AppExecutors;
+import com.prof.reda.android.project.fooddelivery.models.Order;
 import com.prof.reda.android.project.fooddelivery.utils.Constants;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Objects;
 
 public class DetailMenuActivity extends AppCompatActivity {
 
     private ActivityDetailMenuBinding binding;
-    private String pic;
-    private String name;
-    private int id;
-    private String description;
+    String userId;
+    private int pic;
+    private String foodName;
+    private String restroName;
     private String price;
     private FoodDatabase mDB;
-    private EntityOrder order;
+    private FirebaseFirestore db;
+    private StorageReference storageReference;
+
+    private DocumentReference orderRef;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,71 +50,49 @@ public class DetailMenuActivity extends AppCompatActivity {
 
         mDB = FoodDatabase.getInstance(this);
 
+        db = FirebaseFirestore.getInstance();
+        storageReference = FirebaseStorage.getInstance().getReference();
+
         getInfoFromIntent();
 
-        getPicture(binding.imgMealDetail);
-        binding.foodName.setText(name);
-        order = new EntityOrder();
+        binding.foodName.setText(foodName);
 
-
+        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         binding.addToCardBtn.setOnClickListener(view -> {
-            order.setId(id);
-            order.setImage(pic);
-            order.setFoodName(name);
-            order.setRestroName("Vegan Resto");
-            order.setPrice(Integer.parseInt(price));
-
-            addToCart(order);
+            addToCart();
         });
     }
 
-    private void addToCart(EntityOrder order){
-        AppExecutors.getInstance().networkIO().execute(new Runnable() {
-            @Override
-            public void run() {
-                mDB.foodDao().insertOrder(order);
-            }
-        });
+    private void addToCart(){
+        Order order = new Order();
+        order.setFoodName(foodName);
+        order.setRestroName(restroName);
+        order.setPrice(price);
+
+        db.collection("users").document(userId)
+                .collection("orders").add(order)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        e.printStackTrace();
+                    }
+                });
     }
+
 
     private void getInfoFromIntent(){
         Intent intent = getIntent();
-        pic = intent.getStringExtra("pic");
-        name = intent.getStringExtra("name");
+        pic = intent.getIntExtra("pic", 0);
+        foodName = intent.getStringExtra("foodName");
+        restroName = intent.getStringExtra("restroName");
         price = intent.getStringExtra("price");
-        id = intent.getIntExtra("id", 0);
 
-    }
-
-    private void getPicture(ImageView imageView){
-        StringRequest request = new StringRequest(Request.Method.GET, Constants.HOME + pic,
-                response -> {
-                    try {
-                        JSONObject object = new JSONObject(response);
-                        if (object.getBoolean("status")){
-                            JSONArray jsonArray = new JSONArray(object.getString("data"));
-                            if (jsonArray.length() < 0){
-                                imageView.setImageResource(R.drawable.menu1);
-                            }else {
-
-                            }
-                        }
-                    }catch (JSONException e){
-                        e.printStackTrace();
-                    }
-                }, error -> {
-            error.printStackTrace();
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> map = new HashMap<>();
-                map.put("Authorization", "Bearer 610|NlAqHfcHkLiGtRVFW9Li7wDmdfCm5dl3CCcwccYM");
-                return map;
-            }
-        };
-        RequestQueue queue = Volley.newRequestQueue(this);
-        queue.add(request);
     }
 
 }

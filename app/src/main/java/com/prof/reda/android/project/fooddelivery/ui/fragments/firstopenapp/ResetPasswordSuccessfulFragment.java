@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 import com.prof.reda.android.project.fooddelivery.R;
 import com.prof.reda.android.project.fooddelivery.databinding.FragmentResetPasswordSuccessfulBinding;
-import com.prof.reda.android.project.fooddelivery.ui.activities.LoginActivity;
 
 public class ResetPasswordSuccessfulFragment extends Fragment {
 
@@ -23,7 +22,8 @@ public class ResetPasswordSuccessfulFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_reset_password_successful, container, false);
 
         binding.backBtn.setOnClickListener(view -> {
-            startActivity(new Intent(getActivity(), LoginActivity.class));
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.resetPasswordFrame, new LoginFragment()).commit();
         });
 
         return binding.getRoot();

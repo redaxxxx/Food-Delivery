@@ -16,23 +16,27 @@
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/onboardinglogo"
-            app:layout_constraintEnd_toStartOf="@+id/guideline2"
-            app:layout_constraintStart_toStartOf="@+id/guideline1"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toTopOf="@id/foodNinjaTitle"
+            app:layout_constraintEnd_toEndOf="@id/guideline2"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread" />
 
         <TextView
-            android:id="@+id/FoodTitle"
+            android:id="@+id/foodNinjaTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:fontFamily="@font/viga"
             android:text="FoodNinja"
             android:textColor="@color/green"
-            android:textSize="32sp"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@id/deliver_Favorite_food_Tv"
             app:layout_constraintEnd_toEndOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintTop_toBottomOf="@id/imageView" />
 
         <TextView
             android:id="@+id/deliver_Favorite_food_Tv"
@@ -40,128 +44,145 @@
             android:layout_height="wrap_content"
             android:text="Deliever Favorite Food"
             android:textColor="@color/black"
-            android:textSize="11sp"
-            app:layout_constraintEnd_toEndOf="@+id/FoodTitle"
-            app:layout_constraintStart_toStartOf="@+id/FoodTitle"
-            app:layout_constraintTop_toBottomOf="@+id/FoodTitle" />
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="@+id/foodNinjaTitle"
+            app:layout_constraintStart_toStartOf="@+id/foodNinjaTitle"
+            app:layout_constraintTop_toBottomOf="@+id/foodNinjaTitle" />
 
         <TextView
             android:id="@+id/loginToAccount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="Login To Your Account"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@+id/deliver_Favorite_food_Tv" />
 
-        <EditText
-            android:id="@+id/email_edit_text"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_outline"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:drawableStart="@drawable/baseline_email_24"
-            android:hint="Email"
-            android:drawablePadding="8dp"
-            android:textSize="15sp"
-            android:fontFamily="sans-serif-light"
-            android:background="@drawable/edit_text_background"
+            android:elevation="4dp"
+            app:boxBackgroundColor="@color/white"
+            app:hintAnimationEnabled="true"
             app:layout_constraintEnd_toEndOf="@id/guideline2"
             app:layout_constraintStart_toStartOf="@id/guideline1"
-            app:layout_constraintTop_toBottomOf="@+id/loginToAccount"
-            android:paddingStart="15dp"
-            android:importantForAutofill="no" />
+            app:layout_constraintTop_toBottomOf="@+id/loginToAccount">
 
-        <EditText
-            android:id="@+id/passwordEditText"
-            android:layout_width="350dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/edit_text_background"
-            android:drawableLeft="@drawable/baseline_lock_24"
-            android:drawablePadding="8dp"
-            android:fontFamily="sans-serif-light"
-            android:hint="Password"
-            android:paddingStart="13dp"
-            android:textSize="15sp"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableStart="@drawable/baseline_email_24"
+                android:drawablePadding="8dp"
+                android:hint="Email"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:textColorHint="@color/gray" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_outline"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:elevation="4dp"
+            android:layout_marginTop="3dp"
+            app:boxBackgroundColor="@color/white"
+            app:hintAnimationEnabled="true"
             app:layout_constraintEnd_toEndOf="@id/guideline2"
             app:layout_constraintStart_toStartOf="@id/guideline1"
-            app:layout_constraintTop_toBottomOf="@+id/email_edit_text"
-            android:password="true"
-            android:importantForAutofill="no"/>
+            app:layout_constraintTop_toBottomOf="@+id/email_outline">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password_et"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableStart="@drawable/baseline_email_24"
+                android:drawablePadding="8dp"
+                android:hint="Password"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:textColorHint="@color/gray" />
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <TextView
             android:id="@+id/continueWithTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textSize="13sp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
             android:text="Or Continue With"
             android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="@+id/passwordEditText"
-            app:layout_constraintStart_toStartOf="@+id/passwordEditText"
-            app:layout_constraintTop_toBottomOf="@+id/passwordEditText"
-            android:paddingStart="15dp"
-            android:gravity="center" />
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="@+id/password_outline"
+            app:layout_constraintStart_toStartOf="@+id/password_outline"
+            app:layout_constraintTop_toBottomOf="@+id/password_outline" />
 
         <TextView
             android:id="@+id/loginWithFacebook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:textSize="17sp"
-            android:textColor="@color/black"
-            android:text="Facebook"
-            android:drawablePadding="10dp"
+            android:layout_marginTop="8dp"
             android:drawableLeft="@drawable/facebook"
-            app:layout_constraintStart_toStartOf="@+id/passwordEditText"
-            app:layout_constraintTop_toBottomOf="@+id/continueWithTV"
-            android:paddingStart="15dp" />
+            android:drawablePadding="8dp"
+            android:text="Facebook"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            app:layout_constraintStart_toStartOf="@+id/password_outline"
+            app:layout_constraintTop_toBottomOf="@+id/continueWithTV" />
 
         <TextView
             android:id="@+id/loginWithGoogle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:textSize="17sp"
-            android:textColor="@color/black"
-            android:text="Google"
-            android:drawablePadding="10dp"
+            android:layout_marginTop="8dp"
             android:drawableLeft="@drawable/google"
+            android:drawablePadding="8dp"
+            android:text="Google"
+            android:textColor="@color/black"
+            android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="@id/continueWithTV"
-            app:layout_constraintTop_toBottomOf="@+id/continueWithTV"
-            android:paddingEnd="15dp" />
-
-        <TextView
-            android:id="@+id/loginBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/next_btn_background"
-            android:layout_marginBottom="25dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/guideline2"
-            app:layout_constraintStart_toStartOf="@+id/guideline1"
-            android:text="Login"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="17sp" />
+            app:layout_constraintTop_toBottomOf="@+id/continueWithTV" />
 
         <TextView
             android:id="@+id/forgetPasswordTV"
-            android:layout_width="360dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="Forgot Your Password?"
-            app:layout_constraintEnd_toEndOf="@+id/passwordEditText"
-            app:layout_constraintStart_toStartOf="@+id/passwordEditText"
-            app:layout_constraintTop_toBottomOf="@+id/loginWithFacebook"
+            android:layout_marginTop="8dp"
             android:gravity="center"
+            android:text="Forgot Your Password?"
             android:textColor="@color/green"
-            android:textSize="13sp"
-            android:textStyle="bold" />
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/loginBtn"
+            app:layout_constraintEnd_toEndOf="@+id/password_outline"
+            app:layout_constraintStart_toStartOf="@+id/password_outline"
+            app:layout_constraintTop_toBottomOf="@+id/loginWithFacebook"
+            app:layout_constraintVertical_chainStyle="spread_inside" />
+
+        <Button
+            android:id="@+id/loginBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/next_btn_background"
+            android:gravity="center"
+            android:text="Login"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@+id/guideline1"
+            app:layout_constraintTop_toBottomOf="@+id/forgetPasswordTV" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline1"

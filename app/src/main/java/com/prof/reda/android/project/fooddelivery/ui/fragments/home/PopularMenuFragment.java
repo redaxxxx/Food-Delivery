@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -22,7 +24,14 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.chip.Chip;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.prof.reda.android.project.fooddelivery.R;
 import com.prof.reda.android.project.fooddelivery.adapters.FoodAdapter;
 import com.prof.reda.android.project.fooddelivery.database.FoodDatabase;
@@ -46,113 +55,66 @@ import java.util.Map;
 public class PopularMenuFragment extends Fragment implements FoodAdapter.OnItemClickListener{
 
     private FragmentPopularMenuBinding binding;
-    private List<Food> foodList;
-    private FoodAdapter foodAdapter;
-    private SharedPreferences sharedPreferences;
-    private String token;
     private ArrayList<String> resultsList;
-    private FoodViewModel viewModel;
-    private FoodDatabase mDB;
+    private FirebaseFirestore db;
+    private StorageReference foodRef;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_popular_menu, container, false);
 
-        sharedPreferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
-        token = sharedPreferences.getString("token", null);
+        db = FirebaseFirestore.getInstance();
+        foodRef = FirebaseStorage.getInstance().getReference();
 
-        mDB = FoodDatabase.getInstance(getContext());
-
-        FoodViewModelFactory factory = new FoodViewModelFactory(mDB);
-        viewModel = new ViewModelProvider(this, factory).get(FoodViewModel.class);
-
-        viewModel.getFood(getContext(),token).observe(getViewLifecycleOwner(), new Observer<List<Food>>() {
-            @Override
-            public void onChanged(List<Food> foodList) {
-                Bundle bundle = getArguments();
-                if (bundle != null){
-                    resultsList = bundle.getStringArrayList("selectedChipData");
-                    if (bundle.getBoolean("isFiltering")){
-                        addChip(getActivity());
-                        prepareMenuRVAfterFiltering();
-                    }
-                }else {
-                    prepareMenuRV(foodList);
-                }
-            }
-    });
-
-
+        prepareMenuRV();
 
         return binding.getRoot();
     }
 
-    private void prepareMenuRV(List<Food> foodList) {
-        sharedPreferences = getContext().getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
-
+    private void prepareMenuRV() {
+        List<Food> foods = new ArrayList<>();
         binding.rvPopularViewMoreMenu.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL
                 , false));
 
         binding.rvPopularViewMoreMenu.setHasFixedSize(true);
         binding.rvPopularViewMoreMenu.setItemAnimator(new DefaultItemAnimator());
 
-        foodAdapter = new FoodAdapter(getContext(), foodList, this);
+        FoodAdapter foodAdapter = new FoodAdapter(foods, this);
         binding.rvPopularViewMoreMenu.setAdapter(foodAdapter);
+
+        db.collection("foods").get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if (!queryDocumentSnapshots.isEmpty()){
+                            List<DocumentSnapshot> documentSnapshots = queryDocumentSnapshots.getDocuments();
+                            for (DocumentSnapshot d : documentSnapshots){
+                                Food food = d.toObject(Food.class);
+                                foods.add(food);
+                            }
+                        }else{
+                            Toast.makeText(getActivity(), "No data found in Database", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        e.printStackTrace();
+                    }
+                });
 
     }
 
     //prepare recycler view of all restaurants
     private void prepareMenuRVAfterFiltering() {
-        sharedPreferences = getContext().getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
 
         binding.rvPopularViewMoreMenu.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL
                 , false));
 
         binding.rvPopularViewMoreMenu.setHasFixedSize(true);
         binding.rvPopularViewMoreMenu.setItemAnimator(new DefaultItemAnimator());
-        filterWithFood();
-    }
-
-    // fetch data of each restaurant when filtering from laravel api
-    private void filterWithFood(){
-        ArrayList<Food> filteringResult = new ArrayList<>();
-
-        StringRequest request = new StringRequest(Request.Method.GET, Constants.FILTER_FOOD + "food", response -> {
-            try {
-                JSONObject object = new JSONObject(response);
-                if (object.getBoolean("status")){
-                    JSONArray array = new JSONArray(object.getString("data"));
-                    for (int i = 0; i < array.length(); i++){
-                        JSONObject filteringWithFood = array.getJSONObject(i);
-                        Food food = new Food();
-                        food.setId(filteringWithFood.getInt("id"));
-                        food.setName(filteringWithFood.getString("name"));
-                        food.setImage(filteringWithFood.getString("pic"));
-                        food.setPrice(filteringWithFood.getString("price"));
-
-                        filteringResult.add(food);
-                    }
-                    foodAdapter = new FoodAdapter(requireContext(), filteringResult, this);
-                    binding.rvPopularViewMoreMenu.setAdapter(foodAdapter);
-                }
-            }catch (JSONException e){
-                e.printStackTrace();
-            }
-        }, error -> {
-                error.printStackTrace();
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> map = new HashMap<>();
-                map.put("Authorization", "Bearer " + token);
-                return map;
-            }
-        };
-
-        RequestQueue queue = Volley.newRequestQueue(requireContext());
-        queue.add(request);
     }
 
     private void addChip(Context context){
@@ -186,9 +148,9 @@ public class PopularMenuFragment extends Fragment implements FoodAdapter.OnItemC
     public void onClickItem(Food food) {
         Intent intent = new Intent(getActivity(),DetailMenuActivity.class);
         intent.putExtra("pic", food.getImage());
-        intent.putExtra("name", food.getName());
+        intent.putExtra("name", food.getFoodName());
         intent.putExtra("price", food.getPrice());
-        intent.putExtra("id", food.getId());
+//        intent.putExtra("id", food.getId());
         startActivity(intent);
     }
 }

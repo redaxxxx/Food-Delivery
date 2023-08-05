@@ -65,32 +65,7 @@ public class PopularRestaurantFragment extends Fragment implements RestroAdapter
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_popular_restaurant, container, false);
 
-        sharedPreferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
-
-        token = sharedPreferences.getString("token", null);
-
-        mDB = FoodDatabase.getInstance(getContext());
-        FoodViewModelFactory factory = new FoodViewModelFactory(mDB);
-        viewModel = new ViewModelProvider(this, factory).get(FoodViewModel.class);
-
-        viewModel.getRestaurant(getContext(), token).observe(getViewLifecycleOwner(), new Observer<List<Restro>>() {
-            @Override
-            public void onChanged(List<Restro> restroList) {
-                bundle = getArguments();
-                if (bundle != null){
-                    resultsList = bundle.getStringArrayList("selectedChipData");
-                    if (bundle.getBoolean("isFiltering")) {
-                        addChip(getActivity());
-                        prepareRvRestaurantAfterFiltering();
-
-                    }
-                } else {
-                    prepareRestaurantRV(restroList);
-                }
-            }
-        });
-
-
+        prepareRestaurantRV();
 
         return binding.getRoot();
     }
@@ -128,62 +103,19 @@ public class PopularRestaurantFragment extends Fragment implements RestroAdapter
                 GridLayoutManager.VERTICAL, false));
         binding.rvPopularRestro.setHasFixedSize(true);
         binding.rvPopularRestro.setItemAnimator(new DefaultItemAnimator());
-        filterRestaurantWithName();
     }
 
     //prepare recycler view of all restaurants
-    private void prepareRestaurantRV(List<Restro> restroList) {
+    private void prepareRestaurantRV() {
+        restroList = Restro.createRestroList();
+
         binding.rvPopularRestro.setLayoutManager(new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false));
 
         binding.rvPopularRestro.setHasFixedSize(true);
         binding.rvPopularRestro.setItemAnimator(new DefaultItemAnimator());
 
-        restroAdapter = new RestroAdapter(getContext(), restroList, this);
+        restroAdapter = new RestroAdapter(restroList, this);
         binding.rvPopularRestro.setAdapter(restroAdapter);
-
-    }
-
-    // fetch data of each restaurant when filtering from laravel api
-    private void filterRestaurantWithName() {
-        ArrayList<Restro> filteringResults = new ArrayList<>();
-
-        StringRequest request = new StringRequest(Request.Method.GET, Constants.FILTER_FOOD + "/restaurant",
-                response -> {
-                    try {
-                        JSONObject object = new JSONObject(response);
-                        if (object.getBoolean("status")) {
-                            JSONArray array = new JSONArray(object.getString("data"));
-                            for (int i = 0; i < array.length(); i++) {
-                                JSONObject restroWithName = array.getJSONObject(i);
-                                Restro restro = new Restro();
-                                restro.setId(restroWithName.getInt("id"));
-                                restro.setName(restroWithName.getString("name"));
-                                restro.setPic(restroWithName.getString("pic"));
-
-                                Log.i(Constants.TAG, "name is: " + restroWithName.getString("name"));
-                                filteringResults.add(restro);
-                            }
-                            restroAdapter = new RestroAdapter(getContext(), filteringResults, this);
-                            binding.rvPopularRestro.setAdapter(restroAdapter);
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }, error -> {
-            error.printStackTrace();
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> map = new HashMap<>();
-                map.put("Authorization", "Bearer " + token);
-                map.put("Content-Type", "text/plain");
-                map.put("Accept", "application/json");
-                return map;
-            }
-        };
-
-        RequestQueue queue = Volley.newRequestQueue(requireContext());
-        queue.add(request);
     }
 
     @Override

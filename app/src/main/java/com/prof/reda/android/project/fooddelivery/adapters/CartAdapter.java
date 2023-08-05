@@ -1,12 +1,14 @@
 package com.prof.reda.android.project.fooddelivery.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.prof.reda.android.project.fooddelivery.R;
 import com.prof.reda.android.project.fooddelivery.databinding.CartItemBinding;
 import com.prof.reda.android.project.fooddelivery.models.EntityOrder;
 import com.squareup.picasso.Picasso;
@@ -37,6 +39,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
         holder.binding.priceTV.setText("$ ");
         holder.binding.priceTV.append(String.valueOf(order.getPrice()));
         holder.binding.processBtn.setTag(position);
+        holder.binding.processBtn.setOnClickListener(view -> {
+
+        });
     }
 
     @Override

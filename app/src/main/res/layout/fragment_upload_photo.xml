@@ -16,6 +16,7 @@
             android:id="@+id/arrowBackBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:scaleType="centerCrop"
             android:src="@drawable/iconback"
             app:layout_constraintStart_toStartOf="@id/guideline1"
@@ -25,7 +26,7 @@
             android:id="@+id/paymentMethod_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="16dp"
             android:text="Upload Your Photo \nProfile"
             android:textColor="@color/black"
             android:textSize="22sp"
@@ -38,15 +39,16 @@
             android:id="@+id/textview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="16dp"
             android:text="This data will be displayed in your account profile for security"
-            android:textSize="11sp"
+            android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@id/paymentMethod_tv"
             app:layout_constraintTop_toBottomOf="@id/paymentMethod_tv" />
 
         <FrameLayout
+            android:id="@+id/uploadPhotoFrame"
             android:layout_width="0dp"
             android:layout_height="305dp"
             app:layout_constraintEnd_toEndOf="@+id/textview"
@@ -64,6 +66,7 @@
                     android:layout_width="325dp"
                     android:layout_height="117dp"
                     android:layout_marginTop="15dp"
+                    android:layout_gravity="center_horizontal"
                     app:cardCornerRadius="10dp"
                     app:layout_constraintStart_toStartOf="@id/textview"
                     app:layout_constraintTop_toBottomOf="@id/textview">
@@ -100,6 +103,7 @@
                     android:layout_width="325dp"
                     android:layout_height="117dp"
                     android:layout_marginTop="20dp"
+                    android:layout_gravity="center_horizontal"
                     app:cardCornerRadius="10dp"
                     app:layout_constraintStart_toStartOf="@id/gelleryCardView"
                     app:layout_constraintTop_toBottomOf="@id/gelleryCardView">
@@ -134,6 +138,27 @@
             </LinearLayout>
         </FrameLayout>
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/photoCardView"
+            android:layout_width="0dp"
+            android:layout_height="305dp"
+            app:layout_constraintEnd_toEndOf="@+id/textview"
+            app:layout_constraintStart_toStartOf="@id/textview"
+            app:layout_constraintTop_toBottomOf="@id/textview"
+            android:layout_marginTop="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardUseCompatPadding="true"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/profileImgView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/photoprofile"
+                android:scaleType="fitCenter"/>
+
+        </androidx.cardview.widget.CardView>
+
         <Button
             android:id="@+id/nextBtn"
             android:layout_width="wrap_content"
@@ -142,7 +167,7 @@
             app:layout_constraintStart_toStartOf="@id/guideline1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guideline2"
-            android:layout_marginBottom="25dp"
+            android:layout_marginBottom="8dp"
             android:text="Next"
             android:textSize="17sp"
             android:textStyle="bold"

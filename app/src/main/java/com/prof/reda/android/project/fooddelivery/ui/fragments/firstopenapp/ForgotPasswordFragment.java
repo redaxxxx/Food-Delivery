@@ -58,7 +58,6 @@ public class ForgotPasswordFragment extends Fragment {
     }
 
     private void resetPasswordViaSms(){
-
     }
 
 }

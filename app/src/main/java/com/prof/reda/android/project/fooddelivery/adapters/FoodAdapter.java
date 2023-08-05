@@ -2,6 +2,7 @@ package com.prof.reda.android.project.fooddelivery.adapters;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -15,6 +16,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.prof.reda.android.project.fooddelivery.R;
 import com.prof.reda.android.project.fooddelivery.databinding.MenuItemsBinding;
 import com.prof.reda.android.project.fooddelivery.models.Food;
@@ -34,13 +40,16 @@ import java.util.Map;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.PopularViewHolder> {
 
-    private final Context context;
-    private List<Food> foods;
-    private OnItemClickListener onItemClickListener;
-    public FoodAdapter(Context context, List<Food> foods, OnItemClickListener onItemClickListener){
-        this.context = context;
+    private List<Food> foods = new ArrayList<>();
+    private final OnItemClickListener onItemClickListener;
+
+    private StorageReference foodImgRef;
+
+    public FoodAdapter(List<Food> foods, OnItemClickListener onItemClickListener){
         this.foods = foods;
         this.onItemClickListener = onItemClickListener;
+        foodImgRef = FirebaseStorage.getInstance().getReference("food");
+
     }
 
     @NonNull
@@ -53,14 +62,16 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.PopularViewHol
     @Override
     public void onBindViewHolder(@NonNull PopularViewHolder holder, int position) {
 
+        holder.binding.priceTV.setText("$");
+
         if (foods.size() > 0){
             Food food = foods.get(position);
 
-            getPicture(holder.binding.menuImgView, food);
+            holder.binding.menuNameTV.setText(food.getFoodName());
+            holder.binding.restroName.setText(food.getRestroName());
+            holder.binding.menuImgView.setImageResource(food.getImage());
 
-            holder.binding.menuNameTV.setText(food.getName());
-            holder.binding.restroName.setText(food.getName());
-            holder.binding.priceTV.setText("$" + food.getPrice());
+            holder.binding.priceTV.append(food.getPrice());
 
             holder.itemView.setOnClickListener(view -> {
                 onItemClickListener.onClickItem(food);
@@ -79,36 +90,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.PopularViewHol
             super(menuItemsBinding.getRoot());
             binding = menuItemsBinding;
         }
-    }
-
-    private void getPicture(ImageView imageView, Food food){
-        StringRequest request = new StringRequest(Request.Method.GET, Constants.HOME + food.getImage(),
-                response -> {
-                    try {
-                        JSONObject object = new JSONObject(response);
-                        if (object.getBoolean("status")){
-                            JSONArray jsonArray = new JSONArray(object.getString("data"));
-                            if (jsonArray.length() < 0){
-                                imageView.setImageResource(R.drawable.menu1);
-                            }else {
-
-                            }
-                        }
-                    }catch (JSONException e){
-                        e.printStackTrace();
-                    }
-                }, error -> {
-                    error.printStackTrace();
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> map = new HashMap<>();
-                map.put("Authorization", "Bearer 610|NlAqHfcHkLiGtRVFW9Li7wDmdfCm5dl3CCcwccYM");
-                return map;
-            }
-        };
-        RequestQueue queue = Volley.newRequestQueue(context);
-        queue.add(request);
     }
 
     public interface OnItemClickListener{

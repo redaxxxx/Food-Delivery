@@ -14,7 +14,13 @@ public class Constants {
     public static final String ORDERS = HOME + "/order";
 
 
-    public static String KEY_PASSWORD="password";
+    public static final String KEY_FIRST_NAME = "com.prof.reda.android.project.fooddelivery.firstName";
+    public static final String KEY_SECOND_NAME = "com.prof.reda.android.project.fooddelivery.secondName";
+    public static final String KEY_PHONE_NUMBER = "com.prof.reda.android.project.fooddelivery.phoneNumber";
+    public static final String KEY_IMAGE = "com.prof.reda.android.project.fooddelivery.img";
+    public static final String KEY_E_MMAIL = "com.prof.reda.android.project.fooddelivery.email";
+    public static final String KEY_USERNAME = "com.prof.reda.android.project.fooddelivery.username";
     public static String KEY_EMAIL="Email";
     public static final String TAG = "FoodDelivery";
+
 }

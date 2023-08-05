@@ -41,13 +41,10 @@ import java.util.Map;
 
 public class RestroAdapter extends RecyclerView.Adapter<RestroAdapter.RestroViewHolder> {
 
-    private Context mContext;
-    private List<Restro> restroList;
+    private final List<Restro> restroList;
     private OnClickItemListener onClickItemListener;
-    private String imageUrl;
 
-    public RestroAdapter(Context context, List<Restro> restaurantsList, OnClickItemListener onClickItemListener){
-        mContext = context;
+    public RestroAdapter( List<Restro> restaurantsList, OnClickItemListener onClickItemListener){
         restroList = restaurantsList;
         this.onClickItemListener = onClickItemListener;
     }
@@ -63,11 +60,9 @@ public class RestroAdapter extends RecyclerView.Adapter<RestroAdapter.RestroView
         if (restroList.size() > 0){
             Restro restaurant = restroList.get(position);
 
-            getPicture(holder.binding.restaurantImgView, restaurant);
-
-            Log.d(Constants.TAG, "Image url is: " + restaurant.getPic());
             holder.binding.restroNameTv.setText(restaurant.getName());
             holder.binding.distanceInMinute.setText(restaurant.getDeliveryTime());
+            holder.binding.restaurantImgView.setImageResource(restaurant.getPic());
 
             holder.itemView.setOnClickListener(view -> {
                 onClickItemListener.onClickRestroItem(restaurant);
@@ -86,37 +81,6 @@ public class RestroAdapter extends RecyclerView.Adapter<RestroAdapter.RestroView
             super(restaurantItemsBinding.getRoot());
             binding = restaurantItemsBinding;
         }
-    }
-
-    private void getPicture(ImageView imageView, Restro restro){
-
-        StringRequest request = new StringRequest(Request.Method.GET, Constants.HOME + restro.getPic(),
-                response -> {
-            try {
-                JSONObject object = new JSONObject(response);
-                if (object.getBoolean("status")){
-                    JSONArray jsonArray = new JSONArray(object.getString("data"));
-                    if (jsonArray.length() < 0){
-                        imageView.setImageResource(R.drawable.restaurant1);
-                    }else {
-
-                    }
-                }
-            }catch (JSONException e){
-                e.printStackTrace();
-            }
-        }, error -> {
-                error.printStackTrace();
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> map = new HashMap<>();
-                map.put("Authorization", "Bearer 610|NlAqHfcHkLiGtRVFW9Li7wDmdfCm5dl3CCcwccYM");
-                return map;
-            }
-        };
-        RequestQueue queue = Volley.newRequestQueue(mContext);
-        queue.add(request);
     }
 
     public interface OnClickItemListener{

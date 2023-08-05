@@ -29,8 +29,6 @@ import java.util.List;
 public class CartFragment extends Fragment {
     private FragmentCartBinding binding;
     private CartAdapter cartAdapter;
-    private FoodDatabase mDB;
-    private FoodViewModel viewModel;
 
     @Nullable
     @Override
@@ -41,17 +39,7 @@ public class CartFragment extends Fragment {
             Navigation.findNavController(view).navigate(R.id.action_cartFragment_to_orderDetailsFragment);
         });
 
-        mDB = FoodDatabase.getInstance(getContext());
-        FoodViewModelFactory factory = new FoodViewModelFactory(mDB);
 
-        viewModel = new ViewModelProvider(this, factory).get(FoodViewModel.class);
-
-        viewModel.getCartIfno().observe(getViewLifecycleOwner(), new Observer<List<EntityOrder>>() {
-            @Override
-            public void onChanged(List<EntityOrder> orders) {
-                prepareRecyclerView(orders);
-            }
-        });
 
         return binding.getRoot();
     }
