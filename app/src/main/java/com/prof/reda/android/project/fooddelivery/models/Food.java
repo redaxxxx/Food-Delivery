@@ -9,13 +9,10 @@ public class Food {
     private String foodName;
     private String price;
     private String restroName;
-    private int image;
+    private String image;
 
-    public Food(String foodName, String restroName, String price, int image) {
-        this.foodName = foodName;
-        this.restroName = restroName;
-        this.price = price;
-        this.image = image;
+    public Food(){
+
     }
 
     public String getFoodName() {
@@ -42,20 +39,20 @@ public class Food {
         this.price = price;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
-    public static ArrayList<Food> createFoodList(){
-        ArrayList<Food> foods = new ArrayList<>();
-        foods.add(new Food("Herbal Pancake", "Warung Herbal", "7", R.drawable.menu2));
-        foods.add(new Food("Fruit Salad", "Wijie Resto", "5", R.drawable.menu3));
-        foods.add(new Food("Green Noddle", "Noodle Home", "15", R.drawable.menu1));
-
-        return foods;
-    }
+//    public static ArrayList<Food> createFoodList(){
+//        ArrayList<Food> foods = new ArrayList<>();
+//        foods.add(new Food("Herbal Pancake", "Warung Herbal", "7", R.drawable.menu2));
+//        foods.add(new Food("Fruit Salad", "Wijie Resto", "5", R.drawable.menu3));
+//        foods.add(new Food("Green Noddle", "Noodle Home", "15", R.drawable.menu1));
+//
+//        return foods;
+//    }
 }

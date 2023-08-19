@@ -26,7 +26,11 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.chip.Chip;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.prof.reda.android.project.fooddelivery.R;
 import com.prof.reda.android.project.fooddelivery.adapters.RestroAdapter;
 import com.prof.reda.android.project.fooddelivery.database.FoodDatabase;
@@ -35,6 +39,7 @@ import com.prof.reda.android.project.fooddelivery.models.Food;
 import com.prof.reda.android.project.fooddelivery.models.Restro;
 import com.prof.reda.android.project.fooddelivery.ui.activities.DetailsProductActivity;
 import com.prof.reda.android.project.fooddelivery.utils.Constants;
+import com.prof.reda.android.project.fooddelivery.utils.OnClickRestaurantItemListener;
 import com.prof.reda.android.project.fooddelivery.viewModel.FoodViewModel;
 import com.prof.reda.android.project.fooddelivery.viewModel.FoodViewModelFactory;
 
@@ -47,25 +52,33 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PopularRestaurantFragment extends Fragment implements RestroAdapter.OnClickItemListener {
+public class PopularRestaurantFragment extends Fragment implements OnClickRestaurantItemListener {
 
     private FragmentPopularRestaurantBinding binding;
-    private ArrayList<Restro> restroList;
     private RestroAdapter restroAdapter;
     private SharedPreferences sharedPreferences;
-    private String token;
     private ArrayList<String> resultsList;
     private Bundle bundle;
 
+    private FirebaseFirestore firestore;
     private FoodViewModel viewModel;
-    private FoodDatabase mDB;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_popular_restaurant, container, false);
 
-        prepareRestaurantRV();
+        firestore = FirebaseFirestore.getInstance();
+
+        FoodViewModelFactory factory = new FoodViewModelFactory(getActivity());
+        viewModel = new ViewModelProvider(this, factory).get(FoodViewModel.class);
+
+        viewModel.getRestaurant().observe(getViewLifecycleOwner(), new Observer<List<Restro>>() {
+            @Override
+            public void onChanged(List<Restro> restroList) {
+                prepareRestaurantRV(restroList);
+            }
+        });
 
         return binding.getRoot();
     }
@@ -106,8 +119,7 @@ public class PopularRestaurantFragment extends Fragment implements RestroAdapter
     }
 
     //prepare recycler view of all restaurants
-    private void prepareRestaurantRV() {
-        restroList = Restro.createRestroList();
+    private void prepareRestaurantRV(List<Restro> restroList) {
 
         binding.rvPopularRestro.setLayoutManager(new GridLayoutManager(getActivity(), 2, GridLayoutManager.VERTICAL, false));
 
@@ -117,11 +129,12 @@ public class PopularRestaurantFragment extends Fragment implements RestroAdapter
         restroAdapter = new RestroAdapter(restroList, this);
         binding.rvPopularRestro.setAdapter(restroAdapter);
     }
-
     @Override
-    public void onClickRestroItem(Restro restaurants) {
-
+    public void onClickRestaurantItem(Restro restro) {
         Intent intent = new Intent(getActivity(), DetailsProductActivity.class);
+
+        intent.putExtra(Constants.KEY_RESTRO_NAME, restro.getName());
+
         startActivity(intent);
     }
 }

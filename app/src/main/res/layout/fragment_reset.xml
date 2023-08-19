@@ -51,6 +51,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            app:passwordToggleTint="@color/green"
+            app:passwordToggleEnabled="true"
             app:hintAnimationEnabled="true"
             android:elevation="4dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -64,7 +66,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="New Password"
-                android:drawableEnd="@drawable/eye_vector"
                 android:textColorHint="@color/gray"
                 android:inputType="textPassword"
                 android:imeOptions="actionNext" />
@@ -74,6 +75,8 @@
             android:id="@+id/confirmPassword_outline"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/green"
             android:layout_marginTop="16dp"
             app:hintAnimationEnabled="true"
             android:elevation="4dp"
@@ -89,12 +92,11 @@
                 android:layout_height="match_parent"
                 android:hint="Confirm Password"
                 android:textColorHint="@color/gray"
-                android:drawableEnd="@drawable/eye_vector_gray"
                 android:inputType="textPassword"
                 android:imeOptions="actionNext" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/nextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -105,6 +107,7 @@
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guidelineRight"
             app:layout_constraintStart_toStartOf="@id/guidelineLeft" />

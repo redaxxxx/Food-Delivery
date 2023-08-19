@@ -6,12 +6,14 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.prof.reda.android.project.fooddelivery.R;
 import com.prof.reda.android.project.fooddelivery.adapters.DetailsProductAdapter;
 import com.prof.reda.android.project.fooddelivery.databinding.ActivityDetailsProductBinding;
 import com.prof.reda.android.project.fooddelivery.models.Menu;
+import com.prof.reda.android.project.fooddelivery.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +21,7 @@ import java.util.List;
 public class DetailsProductActivity extends AppCompatActivity {
 
     private ActivityDetailsProductBinding binding;
-    private List<Menu> menuList = new ArrayList<>();
+    private final List<Menu> menuList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +29,8 @@ public class DetailsProductActivity extends AppCompatActivity {
 
         menuList.add(new Menu(R.drawable.menu4, "Spacy fresh crab", 12));
         menuList.add(new Menu(R.drawable.menu5, "Spacy fresh crab", 16));
+
+        binding.restaurantNameInDetail.setText(getIntent().getStringExtra(Constants.KEY_RESTRO_NAME));
 
         prepareDetailsProductRecyclerview(menuList);
     }
@@ -53,14 +57,5 @@ public class DetailsProductActivity extends AppCompatActivity {
         ActionBar supportActionBar = ((AppCompatActivity) this).getSupportActionBar();
         if (supportActionBar != null)
             supportActionBar.hide();
-    }
-
-    public static class ForgotPasswordActivity extends AppCompatActivity {
-
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_forgot_password);
-        }
     }
 }

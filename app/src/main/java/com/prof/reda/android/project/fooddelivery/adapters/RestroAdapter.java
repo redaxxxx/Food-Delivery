@@ -1,52 +1,34 @@
 package com.prof.reda.android.project.fooddelivery.adapters;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
-import com.prof.reda.android.project.fooddelivery.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.prof.reda.android.project.fooddelivery.databinding.RestaurantItemsBinding;
 import com.prof.reda.android.project.fooddelivery.models.Restro;
 import com.prof.reda.android.project.fooddelivery.utils.Constants;
-import com.squareup.picasso.Picasso;
+import com.prof.reda.android.project.fooddelivery.utils.OnClickRestaurantItemListener;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class RestroAdapter extends RecyclerView.Adapter<RestroAdapter.RestroViewHolder> {
 
     private final List<Restro> restroList;
-    private OnClickItemListener onClickItemListener;
-
-    public RestroAdapter( List<Restro> restaurantsList, OnClickItemListener onClickItemListener){
+    private OnClickRestaurantItemListener onClickRestroItem;
+    private StorageReference restroImgRef;
+    public RestroAdapter( List<Restro> restaurantsList, OnClickRestaurantItemListener onClickRestroItem){
         restroList = restaurantsList;
-        this.onClickItemListener = onClickItemListener;
+        this.onClickRestroItem = onClickRestroItem;
     }
     @NonNull
     @Override
@@ -62,10 +44,31 @@ public class RestroAdapter extends RecyclerView.Adapter<RestroAdapter.RestroView
 
             holder.binding.restroNameTv.setText(restaurant.getName());
             holder.binding.distanceInMinute.setText(restaurant.getDeliveryTime());
-            holder.binding.restaurantImgView.setImageResource(restaurant.getPic());
+
+            restroImgRef = FirebaseStorage.getInstance().getReference(Constants.RESTAURANTS_STORAGE_REF
+                    + "/" + restaurant.getPic());
+
+            try {
+                File file = File.createTempFile("restaurant", "png");
+                restroImgRef.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        Glide.with(holder.itemView)
+                                .load(file)
+                                .into(holder.binding.restaurantImgView);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
             holder.itemView.setOnClickListener(view -> {
-                onClickItemListener.onClickRestroItem(restaurant);
+                onClickRestroItem.onClickRestaurantItem(restaurant);
             });
         }
     }
@@ -81,9 +84,5 @@ public class RestroAdapter extends RecyclerView.Adapter<RestroAdapter.RestroView
             super(restaurantItemsBinding.getRoot());
             binding = restaurantItemsBinding;
         }
-    }
-
-    public interface OnClickItemListener{
-        void onClickRestroItem(Restro restro);
     }
 }

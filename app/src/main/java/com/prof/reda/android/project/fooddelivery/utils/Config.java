@@ -1,6 +1,7 @@
 package com.prof.reda.android.project.fooddelivery.utils;
 
-public class Config {
+import com.google.firebase.auth.FirebaseAuth;
 
-    public static String firebaseUSerID;
+public class Config {
+    public static final String firebaseUSerID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 }

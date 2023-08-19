@@ -1,8 +1,8 @@
 package com.prof.reda.android.project.fooddelivery.ui.fragments.firstopenapp;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -19,17 +19,19 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.prof.reda.android.project.fooddelivery.R;
 import com.prof.reda.android.project.fooddelivery.databinding.FragmentSignUpBinding;
+import com.prof.reda.android.project.fooddelivery.models.User;
+import com.prof.reda.android.project.fooddelivery.ui.activities.FillBioActivity;
+import com.prof.reda.android.project.fooddelivery.utils.Config;
 import com.prof.reda.android.project.fooddelivery.utils.Constants;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class SignupFragment extends Fragment {
     private FragmentSignUpBinding binding;
@@ -52,7 +54,6 @@ public class SignupFragment extends Fragment {
 
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
-
         pref = getActivity().getSharedPreferences("users", Context.MODE_PRIVATE);
 
         binding.createBtn.setOnClickListener(view -> {
@@ -64,8 +65,8 @@ public class SignupFragment extends Fragment {
         });
 
         binding.alreadyHaveAccount.setOnClickListener(view -> {
-            Bundle bundle = new Bundle();
-            bundle.putBoolean("isAlreadySignup", false);
+//            Bundle bundle = new Bundle();
+//            bundle.putBoolean("isAlreadySignup", false);
 
             Fragment fragment = new LoginFragment();
 
@@ -113,15 +114,20 @@ public class SignupFragment extends Fragment {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
                                         dialog.dismiss();
-                                        Bundle bundle = new Bundle();
-                                        bundle.putString(Constants.KEY_E_MMAIL, email);
-                                        bundle.putString(Constants.KEY_USERNAME, binding.usernameEt.getText().toString());
-                                        Fragment fragment = new FillInBioFragment();
-                                        fragment.setArguments(bundle);
-                                        getActivity().getSupportFragmentManager().beginTransaction()
-                                                .replace(R.id.frameAuthContainer, fragment)
-                                                .commit();
+
+                                        SharedPreferences.Editor editor = pref.edit();
+                                        editor.putString(Constants.KEY_USERNAME, binding.usernameEt.getText().toString());
+                                        editor.putString(Constants.KEY_E_MMAIL, binding.emailEt.getText().toString());
+                                        editor.apply();
+//                                        Bundle bundle = new Bundle();
+//                                        bundle.putString(Constants.KEY_E_MMAIL, email);
+//                                        bundle.putString(Constants.KEY_USERNAME, binding.usernameEt.getText().toString());
+//                                        Fragment fragment = new FillInBioFragment();
+//                                        fragment.setArguments(bundle);
+                                        startActivity(new Intent(getActivity(), FillBioActivity.class));
+                                        getActivity().finish();
                                     }else{
+                                        dialog.dismiss();
                                         Log.d(Constants.TAG, "task is not success");
                                     }
                                 }
@@ -135,5 +141,6 @@ public class SignupFragment extends Fragment {
             }
         });
     }
+
 
 }

@@ -9,7 +9,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="103dp"
+        android:layout_height="90dp"
         app:cardCornerRadius="15dp"
         android:elevation="5dp"
         app:cardUseCompatPadding="true"
@@ -27,7 +27,7 @@
                 android:id="@+id/imgCardView"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="8dp"
                 android:elevation="5dp"
                 app:cardCornerRadius="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -80,7 +80,7 @@
                 android:id="@+id/addImageButton"
                 android:layout_width="26dp"
                 android:layout_height="26dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/add_rectangle_background"
                 android:src="@drawable/baseline_add_24"
                 app:layout_constraintBottom_toBottomOf="parent"

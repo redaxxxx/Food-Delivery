@@ -1,21 +1,28 @@
 package com.prof.reda.android.project.fooddelivery.models;
 
-public class Order {
-    private String orderId;
+public class Cart {
+    private String cartId;
     private String foodName;
     private String restroName;
     private String price;
     private String foodImage;
-    public Order(){
+
+    public Cart(){
 
     }
-
-    public String getOrderId() {
-        return orderId;
+    public Cart(String foodName, String restroName, String price, String foodImage) {
+        this.foodName = foodName;
+        this.restroName = restroName;
+        this.price = price;
+        this.foodImage = foodImage;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+    public String getCartId() {
+        return cartId;
+    }
+
+    public void setCartId(String cartId) {
+        this.cartId = cartId;
     }
 
     public String getFoodName() {
@@ -41,6 +48,7 @@ public class Order {
     public void setPrice(String price) {
         this.price = price;
     }
+
     public String getFoodImage() {
         return foodImage;
     }

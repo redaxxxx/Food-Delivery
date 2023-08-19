@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,14 +28,14 @@ import com.prof.reda.android.project.fooddelivery.databinding.FragmentLoginBindi
 import com.prof.reda.android.project.fooddelivery.ui.activities.ForgotPasswordActivity;
 import com.prof.reda.android.project.fooddelivery.ui.activities.HomeActivity;
 import com.prof.reda.android.project.fooddelivery.utils.Constants;
+import com.prof.reda.android.project.fooddelivery.utils.DataSource;
 
 public class LoginFragment extends Fragment {
 
     private FragmentLoginBinding binding;
     private FirebaseAuth firebaseAuth;
     private Dialog dialog;
-    private SharedPreferences pref;
-
+    private DataSource dataSource;
 
     @Nullable
     @Override
@@ -47,15 +48,15 @@ public class LoginFragment extends Fragment {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.progress_bar);
         dialog.setCanceledOnTouchOutside(false);
+        SharedPreferences preferences = getActivity().getSharedPreferences(Constants.USERS_PREF, Context.MODE_PRIVATE);
 
-        pref = getActivity().getSharedPreferences("users", Context.MODE_PRIVATE);
+        dataSource = new DataSource(preferences);
 
         binding.loginBtn.setOnClickListener(view -> {
             // validate fields first
             if (isValidate()){
                 login(binding.emailEt.getText().toString(),
                         binding.passwordEt.getText().toString());
-
             }
         });
 
@@ -94,17 +95,20 @@ public class LoginFragment extends Fragment {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
+                    dialog.dismiss();
 
                     if (firebaseAuth.getCurrentUser().isEmailVerified()){
+
                         startActivity(new Intent(getActivity(), HomeActivity.class));
 
                     } else {
                         Toast.makeText(getActivity(), "Verify your Email", Toast.LENGTH_SHORT).show();
                     }
 
-                    dialog.dismiss();
                 }else {
-                    Toast.makeText(getActivity(), "Login Failed", Toast.LENGTH_SHORT).show();
+                    Log.d(Constants.TAG, "Login Failed: " + task.getException());
+                    Toast.makeText(getActivity(), "Login Failed " + task.getException(), Toast.LENGTH_SHORT).show();
+
                 }
             }
         });

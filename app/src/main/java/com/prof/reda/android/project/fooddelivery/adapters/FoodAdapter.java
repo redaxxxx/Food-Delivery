@@ -1,55 +1,36 @@
 package com.prof.reda.android.project.fooddelivery.adapters;
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.prof.reda.android.project.fooddelivery.R;
 import com.prof.reda.android.project.fooddelivery.databinding.MenuItemsBinding;
 import com.prof.reda.android.project.fooddelivery.models.Food;
-import com.prof.reda.android.project.fooddelivery.models.Menu;
-import com.prof.reda.android.project.fooddelivery.models.Restro;
+import com.prof.reda.android.project.fooddelivery.utils.OnClickFoodItemListener;
 import com.prof.reda.android.project.fooddelivery.utils.Constants;
-import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.PopularViewHolder> {
 
-    private List<Food> foods = new ArrayList<>();
-    private final OnItemClickListener onItemClickListener;
+    private final List<Food> foods;
+    private final OnClickFoodItemListener onClickFoodItemListener;
 
     private StorageReference foodImgRef;
 
-    public FoodAdapter(List<Food> foods, OnItemClickListener onItemClickListener){
+    public FoodAdapter(List<Food> foods, OnClickFoodItemListener onClickFoodItemListener){
         this.foods = foods;
-        this.onItemClickListener = onItemClickListener;
-        foodImgRef = FirebaseStorage.getInstance().getReference("food");
-
+        this.onClickFoodItemListener = onClickFoodItemListener;
     }
 
     @NonNull
@@ -69,12 +50,32 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.PopularViewHol
 
             holder.binding.menuNameTV.setText(food.getFoodName());
             holder.binding.restroName.setText(food.getRestroName());
-            holder.binding.menuImgView.setImageResource(food.getImage());
+
+            foodImgRef = FirebaseStorage.getInstance().getReference(Constants.FOODS_STORAGE_REF
+                    + "/" + food.getImage());
+            try {
+                File file = File.createTempFile("food", "png");
+                foodImgRef.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        Glide.with(holder.itemView).load(file)
+                                .into(holder.binding.menuImgView);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
 
             holder.binding.priceTV.append(food.getPrice());
 
             holder.itemView.setOnClickListener(view -> {
-                onItemClickListener.onClickItem(food);
+                onClickFoodItemListener.onClickFoodItem(food);
             });
         }
     }
@@ -90,9 +91,5 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.PopularViewHol
             super(menuItemsBinding.getRoot());
             binding = menuItemsBinding;
         }
-    }
-
-    public interface OnItemClickListener{
-        void onClickItem(Food food);
     }
 }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,9 +25,12 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.chip.Chip;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -40,6 +44,7 @@ import com.prof.reda.android.project.fooddelivery.models.Food;
 import com.prof.reda.android.project.fooddelivery.models.Restro;
 import com.prof.reda.android.project.fooddelivery.ui.activities.DetailMenuActivity;
 import com.prof.reda.android.project.fooddelivery.utils.Constants;
+import com.prof.reda.android.project.fooddelivery.utils.OnClickFoodItemListener;
 import com.prof.reda.android.project.fooddelivery.viewModel.FoodViewModel;
 import com.prof.reda.android.project.fooddelivery.viewModel.FoodViewModelFactory;
 
@@ -52,12 +57,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PopularMenuFragment extends Fragment implements FoodAdapter.OnItemClickListener{
+public class PopularMenuFragment extends Fragment implements OnClickFoodItemListener {
 
     private FragmentPopularMenuBinding binding;
     private ArrayList<String> resultsList;
     private FirebaseFirestore db;
     private StorageReference foodRef;
+    private FoodViewModel viewModel;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -65,45 +71,36 @@ public class PopularMenuFragment extends Fragment implements FoodAdapter.OnItemC
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_popular_menu, container, false);
 
+        FoodViewModelFactory factory = new FoodViewModelFactory(getActivity());
+        viewModel = new ViewModelProvider(this, factory).get(FoodViewModel.class);
+
+        viewModel.getFood().observe(getViewLifecycleOwner(), new Observer<List<Food>>() {
+            @Override
+            public void onChanged(List<Food> foodList) {
+                prepareMenuRV(foodList);
+            }
+        });
+
         db = FirebaseFirestore.getInstance();
         foodRef = FirebaseStorage.getInstance().getReference();
 
-        prepareMenuRV();
 
         return binding.getRoot();
     }
 
-    private void prepareMenuRV() {
-        List<Food> foods = new ArrayList<>();
+    private void prepareMenuRV(List<Food> foodList) {
+
         binding.rvPopularViewMoreMenu.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL
                 , false));
 
         binding.rvPopularViewMoreMenu.setHasFixedSize(true);
         binding.rvPopularViewMoreMenu.setItemAnimator(new DefaultItemAnimator());
-
-        FoodAdapter foodAdapter = new FoodAdapter(foods, this);
+        FoodAdapter foodAdapter = new FoodAdapter(foodList, this);
         binding.rvPopularViewMoreMenu.setAdapter(foodAdapter);
 
-        db.collection("foods").get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        if (!queryDocumentSnapshots.isEmpty()){
-                            List<DocumentSnapshot> documentSnapshots = queryDocumentSnapshots.getDocuments();
-                            for (DocumentSnapshot d : documentSnapshots){
-                                Food food = d.toObject(Food.class);
-                                foods.add(food);
-                            }
-                        }else{
-                            Toast.makeText(getActivity(), "No data found in Database", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        e.printStackTrace();
-                    }
-                });
+
+
+
 
     }
 
@@ -142,15 +139,14 @@ public class PopularMenuFragment extends Fragment implements FoodAdapter.OnItemC
         }
         binding.foodChipGroupFilter.invalidate();
     }
-
-
     @Override
-    public void onClickItem(Food food) {
+    public void onClickFoodItem(Food food) {
         Intent intent = new Intent(getActivity(),DetailMenuActivity.class);
-        intent.putExtra("pic", food.getImage());
-        intent.putExtra("name", food.getFoodName());
-        intent.putExtra("price", food.getPrice());
-//        intent.putExtra("id", food.getId());
+        intent.putExtra(Constants.KEY_IMAGE, food.getImage());
+        intent.putExtra(Constants.KEY_FOOD_NAME, food.getFoodName());
+        intent.putExtra(Constants.KEY_PRICE, food.getPrice());
+        intent.putExtra(Constants.KEY_RESTRO_NAME, food.getRestroName());
+
         startActivity(intent);
     }
 }

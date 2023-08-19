@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:contentScrim="@color/white"
-                app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:title="Meal name">
 
                 <androidx.cardview.widget.CardView
@@ -55,8 +55,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingBottom="50dp"
-                android:background="@drawable/background_details_product">
+                android:elevation="10dp"
+                android:paddingTop="20dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -265,13 +265,14 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/addToCardBtn"
             android:layout_width="325dp"
             android:layout_height="57dp"
             app:layout_anchor="@id/linearLayout"
             android:layout_gravity="center_horizontal"
             android:text="Add To Cart"
+            android:textColor="@color/white"
             android:textAllCaps="false"
             app:layout_anchorGravity="bottom|center_horizontal"
             android:background="@drawable/add_to_cart_btn_background"/>

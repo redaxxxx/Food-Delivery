@@ -6,11 +6,17 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.prof.reda.android.project.fooddelivery.R;
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.prof.reda.android.project.fooddelivery.databinding.OrderItemsBinding;
-import com.prof.reda.android.project.fooddelivery.models.EntityOrder;
 import com.prof.reda.android.project.fooddelivery.models.Order;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder> {
@@ -51,6 +57,25 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
                 holder.binding.quantityTv.setText(String.valueOf(quantity));
             }
         });
+
+        StorageReference foodImgRef = FirebaseStorage.getInstance().getReference("food/" + order.getFoodImage());
+        try {
+            File file = File.createTempFile("food", "png");
+            foodImgRef.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    Glide.with(holder.itemView).load(file)
+                            .into(holder.binding.orderImgView);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -65,4 +90,5 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             binding = orderItemsBinding;
         }
     }
+
 }

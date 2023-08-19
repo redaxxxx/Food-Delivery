@@ -67,7 +67,7 @@
                 android:textSize="20sp"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/nextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -75,6 +75,7 @@
             android:background="@drawable/next_btn_background"
             android:gravity="center"
             android:text="Next"
+            android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"

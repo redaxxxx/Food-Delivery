@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.prof.reda.android.project.fooddelivery.R;
 import com.prof.reda.android.project.fooddelivery.databinding.FragmentPaymentMethodsBinding;
+import com.prof.reda.android.project.fooddelivery.ui.activities.CompleteSignUpActivity;
 import com.prof.reda.android.project.fooddelivery.utils.Constants;
 
 import java.util.HashMap;
@@ -28,14 +29,9 @@ public class PaymentMethodsFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_payment_methods, container, false);
 
-
-        Bundle bundle = getArguments();
-        Fragment fragment = new UploadPhotoFragment();
-        fragment.setArguments(bundle);
-
         binding.nextBtn.setOnClickListener(view-> {
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.frameAuthContainer, fragment).commit();
+            startActivity(new Intent(getActivity(), CompleteSignUpActivity.class));
+            getActivity().finish();
         });
 
         return binding.getRoot();

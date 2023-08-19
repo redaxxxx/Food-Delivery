@@ -9,7 +9,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="345dp"
+        android:layout_width="match_parent"
         android:layout_height="110dp"
         android:elevation="3dp"
         app:cardBackgroundColor="@color/white"
@@ -86,7 +86,7 @@
             </LinearLayout>
 
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/buyAgainBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

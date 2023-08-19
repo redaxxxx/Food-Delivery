@@ -230,14 +230,15 @@
 
         </com.google.android.material.chip.ChipGroup>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="25dp"
             android:background="@drawable/background_search_btn"
             android:text="search"
             android:textAllCaps="false"
-            android:textSize="15sp"
+            android:textSize="14sp"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guideline"
             app:layout_constraintStart_toStartOf="@id/guideline3" />

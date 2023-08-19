@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.prof.reda.android.project.fooddelivery.R;
 import com.prof.reda.android.project.fooddelivery.databinding.FragmentSignUpSuccessBinding;
+import com.prof.reda.android.project.fooddelivery.ui.activities.AuthActivity;
 import com.prof.reda.android.project.fooddelivery.ui.activities.HomeActivity;
 
 
@@ -25,8 +26,9 @@ public class SignUpSuccessFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sign_up_success, container, false);
 
         binding.tryOrderBtn.setOnClickListener(view -> {
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.frameAuthContainer, new LoginFragment()).commit();
+            startActivity(new Intent(getActivity(), AuthActivity.class));
+            getActivity().finish();
+
         });
 
         return binding.getRoot();

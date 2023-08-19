@@ -1,6 +1,5 @@
 package com.prof.reda.android.project.fooddelivery.ui.fragments.home;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -29,11 +28,11 @@ import com.prof.reda.android.project.fooddelivery.R;
 import com.prof.reda.android.project.fooddelivery.adapters.OrderAdapter;
 import com.prof.reda.android.project.fooddelivery.database.FoodDatabase;
 import com.prof.reda.android.project.fooddelivery.databinding.FragmentOrderDetailsBinding;
-import com.prof.reda.android.project.fooddelivery.models.EntityOrder;
 import com.prof.reda.android.project.fooddelivery.models.Order;
 import com.prof.reda.android.project.fooddelivery.viewModel.FoodViewModel;
 import com.prof.reda.android.project.fooddelivery.viewModel.FoodViewModelFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDetailsFragment extends Fragment {
@@ -41,16 +40,11 @@ public class OrderDetailsFragment extends Fragment {
     private FragmentOrderDetailsBinding binding;
     private OrderAdapter orderAdapter;
 
-    private int priceTotal = 0;
-    private int mQuantity = 0;
-    private int mPrice = 0;
+//    private int priceTotal = 0;
+//    private int mQuantity = 0;
+//    private int mPrice = 0;
     private FoodViewModel viewModel;
-    private FoodDatabase mDB;
-
-    private SharedPreferences sharedPreferences;
-    private String token;
     private Bitmap icon;
-
     private List<Order> orderList;
 
     @Override
@@ -58,6 +52,48 @@ public class OrderDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_order_details, container, false);
 
+        FoodViewModelFactory factory = new FoodViewModelFactory(getActivity());
+        viewModel = new ViewModelProvider(this, factory).get(FoodViewModel.class);
+
+        viewModel.getOrders().observe(getViewLifecycleOwner(), new Observer<List<Order>>() {
+            @Override
+            public void onChanged(List<Order> orders) {
+                orderList = orders;
+                prepareOrderRV(orders);
+            }
+        });
+
+        setItemtouchCallback();
+
+        binding.placeMyOrderBtn.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_orderDetailsFragment_to_fragmentPayments);
+        });
+
+
+
+
+        binding.arrowBackBtn.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_orderDetailsFragment_to_cartFragment);
+        });
+
+        return binding.getRoot();
+    }
+
+    private int convertDpToPx(int dp){
+        return Math.round(dp * (getResources().getDisplayMetrics().xdpi / DisplayMetrics.DENSITY_DEFAULT));
+    }
+
+    private void prepareOrderRV(List<Order> orders) {
+        binding.orderDetailsRv.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL
+                , false));
+
+        binding.orderDetailsRv.setHasFixedSize(true);
+        binding.orderDetailsRv.setItemAnimator(new DefaultItemAnimator());
+        orderAdapter = new OrderAdapter(orders);
+        binding.orderDetailsRv.setAdapter(orderAdapter);
+    }
+
+    private void setItemtouchCallback(){
         ItemTouchHelper.SimpleCallback itemTouchCallback = new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
             @Override
@@ -67,9 +103,9 @@ public class OrderDetailsFragment extends Fragment {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-
-                orderList.remove(viewHolder.getAdapterPosition());
-
+                Order order = orderList.remove(viewHolder.getAdapterPosition());
+                viewModel.deleteItem(order.getOrderId());
+//                orderList.remove(viewHolder.getAdapterPosition());
                 orderAdapter.notifyDataSetChanged();
             }
 
@@ -110,33 +146,5 @@ public class OrderDetailsFragment extends Fragment {
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchCallback);
         itemTouchHelper.attachToRecyclerView(binding.orderDetailsRv);
-
-        binding.placeMyOrderBtn.setOnClickListener(view -> {
-            Navigation.findNavController(view).navigate(R.id.action_orderDetailsFragment_to_fragmentPayments);
-        });
-
-
-
-
-        binding.arrowBackBtn.setOnClickListener(view -> {
-            Navigation.findNavController(view).navigate(R.id.action_orderDetailsFragment_to_cartFragment);
-        });
-
-        return binding.getRoot();
     }
-    private int convertDpToPx(int dp){
-        return Math.round(dp * (getResources().getDisplayMetrics().xdpi / DisplayMetrics.DENSITY_DEFAULT));
-    }
-
-    private void prepareOrderRV(List<Order> orders) {
-        binding.orderDetailsRv.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL
-                , false));
-
-        binding.orderDetailsRv.setHasFixedSize(true);
-        binding.orderDetailsRv.setItemAnimator(new DefaultItemAnimator());
-        orderAdapter = new OrderAdapter(orders);
-        binding.orderDetailsRv.setAdapter(orderAdapter);
-    }
-
-
 }
