@@ -1,7 +1,5 @@
 package com.prof.reda.android.project.fooddelivery.ui.fragments.home;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,11 +19,9 @@ import android.view.ViewGroup;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.prof.reda.android.project.fooddelivery.R;
 import com.prof.reda.android.project.fooddelivery.adapters.CartAdapter;
-import com.prof.reda.android.project.fooddelivery.database.FoodDatabase;
 import com.prof.reda.android.project.fooddelivery.databinding.FragmentCartBinding;
 import com.prof.reda.android.project.fooddelivery.models.Cart;
 import com.prof.reda.android.project.fooddelivery.models.Order;
@@ -35,13 +31,13 @@ import com.prof.reda.android.project.fooddelivery.utils.OnProcessOrderItemListen
 import com.prof.reda.android.project.fooddelivery.viewModel.FoodViewModel;
 import com.prof.reda.android.project.fooddelivery.viewModel.FoodViewModelFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CartFragment extends Fragment implements OnProcessOrderItemListener{
     private FragmentCartBinding binding;
     private FoodViewModel viewModel;
     private FirebaseFirestore db;
+    
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

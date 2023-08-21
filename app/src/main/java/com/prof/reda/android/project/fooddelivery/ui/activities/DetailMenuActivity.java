@@ -20,7 +20,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.prof.reda.android.project.fooddelivery.R;
-import com.prof.reda.android.project.fooddelivery.database.FoodDatabase;
 import com.prof.reda.android.project.fooddelivery.databinding.ActivityDetailMenuBinding;
 import com.prof.reda.android.project.fooddelivery.models.Cart;
 import com.prof.reda.android.project.fooddelivery.utils.Config;

@@ -45,7 +45,7 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/orderName"
+                android:id="@+id/foodNameTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="@id/imgCardView"
@@ -57,17 +57,17 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/RestroName"
+                android:id="@+id/restroNameTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Waroenk kita"
                 android:textSize="11sp"
                 android:textColor="@color/gray"
-                app:layout_constraintStart_toStartOf="@+id/orderName"
-                app:layout_constraintTop_toBottomOf="@+id/orderName" />
+                app:layout_constraintStart_toStartOf="@+id/foodNameTV"
+                app:layout_constraintTop_toBottomOf="@+id/foodNameTV" />
 
             <TextView
-                android:id="@+id/price_textView"
+                android:id="@+id/priceTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -75,8 +75,8 @@
                 android:textColor="@color/green"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imgCardView"
-                app:layout_constraintStart_toStartOf="@id/RestroName"
-                app:layout_constraintTop_toBottomOf="@+id/RestroName" />
+                app:layout_constraintStart_toStartOf="@id/restroNameTV"
+                app:layout_constraintTop_toBottomOf="@+id/restroNameTV" />
 
 
             <androidx.appcompat.widget.AppCompatButton

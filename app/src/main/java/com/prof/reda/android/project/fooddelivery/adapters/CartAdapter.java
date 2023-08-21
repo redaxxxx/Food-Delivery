@@ -1,6 +1,7 @@
 package com.prof.reda.android.project.fooddelivery.adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.google.firebase.storage.StorageReference;
 import com.prof.reda.android.project.fooddelivery.R;
 import com.prof.reda.android.project.fooddelivery.databinding.CartItemBinding;
 import com.prof.reda.android.project.fooddelivery.models.Cart;
+import com.prof.reda.android.project.fooddelivery.utils.GetFoodImageFromStorage;
 import com.prof.reda.android.project.fooddelivery.utils.OnProcessOrderItemListener;
 
 import java.io.File;
@@ -29,11 +31,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
 
     private Context mContext;
     private OnProcessOrderItemListener onProcess;
+    private SharedPreferences preferences;
 
     public CartAdapter(Context context, List<Cart> cartList, OnProcessOrderItemListener onProcess){
         this.cartList = cartList;
         mContext = context;
         this.onProcess = onProcess;
+        preferences = mContext.getSharedPreferences("ProcessButton" , Context.MODE_PRIVATE);
     }
     @NonNull
     @Override
@@ -45,36 +49,30 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
     @Override
     public void onBindViewHolder(@NonNull CartHolder holder, int position) {
         Cart cart = cartList.get(position);
-        holder.binding.menuNameTV.setText(cart.getFoodName());
+        holder.binding.foodNameTV.setText(cart.getFoodName());
         holder.binding.priceTV.setText("$ ");
         holder.binding.priceTV.append(cart.getPrice());
-        holder.binding.restroName.setText(cart.getRestroName());
+        holder.binding.restroNameTV.setText(cart.getRestroName());
 
-        StorageReference foodImgRef = FirebaseStorage.getInstance().getReference("food/" + cart.getFoodImage());
-        try {
-            File file = File.createTempFile("food", "png");
-            foodImgRef.getFile(file).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Glide.with(holder.itemView).load(file)
-                            .into(holder.binding.menuImgView);
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    e.printStackTrace();
-                }
-            });
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        GetFoodImageFromStorage foodImage = new GetFoodImageFromStorage(mContext, holder.binding.menuImgView,
+                cart.getFoodImage());
 
+        foodImage.getFoodImage();
+
+        SharedPreferences.Editor editor = preferences.edit();
         holder.binding.processBtn.setTag(position);
         holder.binding.processBtn.setOnClickListener(view -> {
             onProcess.processOrder(cart);
+            editor.putBoolean(cart.getCartId(), true);
+            editor.apply();
             view.setBackgroundColor(Color.GRAY);
             view.setClickable(false);
         });
+
+        if (preferences.getBoolean(cart.getCartId() , false)){
+            holder.binding.processBtn.setBackgroundColor(Color.GRAY);
+            holder.binding.processBtn.setClickable(false);
+        }
 
     }
 

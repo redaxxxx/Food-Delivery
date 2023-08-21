@@ -2,14 +2,11 @@ package com.prof.reda.android.project.fooddelivery.ui.fragments.home;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
@@ -20,42 +17,22 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.chip.Chip;
-import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.prof.reda.android.project.fooddelivery.R;
 import com.prof.reda.android.project.fooddelivery.adapters.FoodAdapter;
-import com.prof.reda.android.project.fooddelivery.database.FoodDatabase;
 import com.prof.reda.android.project.fooddelivery.databinding.FragmentPopularMenuBinding;
 import com.prof.reda.android.project.fooddelivery.models.Food;
-import com.prof.reda.android.project.fooddelivery.models.Restro;
 import com.prof.reda.android.project.fooddelivery.ui.activities.DetailMenuActivity;
 import com.prof.reda.android.project.fooddelivery.utils.Constants;
 import com.prof.reda.android.project.fooddelivery.utils.OnClickFoodItemListener;
 import com.prof.reda.android.project.fooddelivery.viewModel.FoodViewModel;
 import com.prof.reda.android.project.fooddelivery.viewModel.FoodViewModelFactory;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class PopularMenuFragment extends Fragment implements OnClickFoodItemListener {
 
@@ -95,7 +72,7 @@ public class PopularMenuFragment extends Fragment implements OnClickFoodItemList
 
         binding.rvPopularViewMoreMenu.setHasFixedSize(true);
         binding.rvPopularViewMoreMenu.setItemAnimator(new DefaultItemAnimator());
-        FoodAdapter foodAdapter = new FoodAdapter(foodList, this);
+        FoodAdapter foodAdapter = new FoodAdapter(getActivity(), foodList, this);
         binding.rvPopularViewMoreMenu.setAdapter(foodAdapter);
 
 

@@ -10,20 +10,15 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.prof.reda.android.project.fooddelivery.R;
 import com.prof.reda.android.project.fooddelivery.adapters.FoodAdapter;
 import com.prof.reda.android.project.fooddelivery.adapters.RestroAdapter;
-import com.prof.reda.android.project.fooddelivery.database.FoodDatabase;
 import com.prof.reda.android.project.fooddelivery.databinding.FragmentHomeBinding;
 import com.prof.reda.android.project.fooddelivery.models.Food;
 import com.prof.reda.android.project.fooddelivery.models.Restro;
@@ -108,7 +103,6 @@ public class HomeFragment extends Fragment implements OnClickRestaurantItemListe
 
         binding.rvNearestRestaurant.setHasFixedSize(true);
         binding.rvNearestRestaurant.setItemAnimator(new DefaultItemAnimator());
-        binding.rvNearestRestaurant.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
         RestroAdapter restroAdapter = new RestroAdapter(restroList, this);
         binding.rvNearestRestaurant.setAdapter(restroAdapter);
     }
@@ -119,7 +113,7 @@ public class HomeFragment extends Fragment implements OnClickRestaurantItemListe
 
         binding.rvPopularMenu.setHasFixedSize(true);
         binding.rvPopularMenu.setItemAnimator(new DefaultItemAnimator());
-        FoodAdapter foodAdapter = new FoodAdapter(foodList, this);
+        FoodAdapter foodAdapter = new FoodAdapter(getActivity(), foodList, this);
         binding.rvPopularMenu.setAdapter(foodAdapter);
 
     }

@@ -44,8 +44,8 @@
 
             <ImageButton
                 android:id="@+id/filterBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/filter_icon_background"
                 android:src="@drawable/filter"
@@ -55,7 +55,7 @@
             <EditText
                 android:id="@+id/editText"
                 android:layout_width="235dp"
-                android:layout_height="50dp"
+                android:layout_height="35dp"
                 android:background="@drawable/search_icon_background"
                 android:drawableLeft="@drawable/iconsearch"
                 android:drawablePadding="8dp"
@@ -144,8 +144,8 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/frameLayout"
                     android:layout_width="0dp"
-                    android:layout_height="150dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_height="140dp"
+                    android:layout_marginTop="16dp"
                     android:background="@drawable/homeframe"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -153,7 +153,7 @@
 
                     <ImageView
                         android:layout_width="250dp"
-                        android:layout_height="150dp"
+                        android:layout_height="140dp"
                         android:scaleType="fitStart"
                         android:src="@drawable/icecream"
                         app:layout_constraintStart_toStartOf="parent"
@@ -209,8 +209,8 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_nearestRestaurant"
                     android:layout_width="match_parent"
-                    android:layout_height="184dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_height="164dp"
+                    android:layout_marginTop="8dp"
                     app:layout_constraintEnd_toEndOf="@id/frameLayout"
                     app:layout_constraintStart_toStartOf="@id/frameLayout"
                     app:layout_constraintTop_toBottomOf="@id/nearestRestaurantTV" />
@@ -241,7 +241,7 @@
                     android:id="@+id/rv_popularMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="8dp"
                     app:layout_constraintEnd_toEndOf="@id/frameLayout"
                     app:layout_constraintStart_toStartOf="@id/frameLayout"
                     app:layout_constraintTop_toBottomOf="@id/popularTV" />

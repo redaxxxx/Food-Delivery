@@ -6,8 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.prof.reda.android.project.fooddelivery.database.FoodDatabase;
-
 public class FoodViewModelFactory implements ViewModelProvider.Factory {
 
     private final Context context;

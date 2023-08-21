@@ -2,7 +2,6 @@ package com.prof.reda.android.project.fooddelivery.viewModel;
 
 import android.content.Context;
 import android.util.Log;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -11,12 +10,9 @@ import androidx.lifecycle.ViewModel;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.prof.reda.android.project.fooddelivery.database.FoodDatabase;
-import com.prof.reda.android.project.fooddelivery.models.EntityOrder;
 import com.prof.reda.android.project.fooddelivery.models.Food;
 import com.prof.reda.android.project.fooddelivery.models.Cart;
 import com.prof.reda.android.project.fooddelivery.models.Order;

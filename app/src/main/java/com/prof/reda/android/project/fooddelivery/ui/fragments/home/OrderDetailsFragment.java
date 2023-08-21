@@ -1,6 +1,5 @@
 package com.prof.reda.android.project.fooddelivery.ui.fragments.home;
 
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -20,29 +19,29 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.prof.reda.android.project.fooddelivery.R;
 import com.prof.reda.android.project.fooddelivery.adapters.OrderAdapter;
-import com.prof.reda.android.project.fooddelivery.database.FoodDatabase;
 import com.prof.reda.android.project.fooddelivery.databinding.FragmentOrderDetailsBinding;
 import com.prof.reda.android.project.fooddelivery.models.Order;
+import com.prof.reda.android.project.fooddelivery.utils.Constants;
+import com.prof.reda.android.project.fooddelivery.utils.PriceOrderSelectedListener;
 import com.prof.reda.android.project.fooddelivery.viewModel.FoodViewModel;
 import com.prof.reda.android.project.fooddelivery.viewModel.FoodViewModelFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class OrderDetailsFragment extends Fragment {
+public class OrderDetailsFragment extends Fragment implements PriceOrderSelectedListener{
 
     private FragmentOrderDetailsBinding binding;
     private OrderAdapter orderAdapter;
 
-//    private int priceTotal = 0;
-//    private int mQuantity = 0;
-//    private int mPrice = 0;
+    private int subTotal = 0;
+//    private int price;
     private FoodViewModel viewModel;
     private Bitmap icon;
     private List<Order> orderList;
@@ -55,6 +54,7 @@ public class OrderDetailsFragment extends Fragment {
         FoodViewModelFactory factory = new FoodViewModelFactory(getActivity());
         viewModel = new ViewModelProvider(this, factory).get(FoodViewModel.class);
 
+        setItemtouchCallback();
         viewModel.getOrders().observe(getViewLifecycleOwner(), new Observer<List<Order>>() {
             @Override
             public void onChanged(List<Order> orders) {
@@ -63,20 +63,22 @@ public class OrderDetailsFragment extends Fragment {
             }
         });
 
-        setItemtouchCallback();
-
         binding.placeMyOrderBtn.setOnClickListener(view -> {
             Navigation.findNavController(view).navigate(R.id.action_orderDetailsFragment_to_fragmentPayments);
         });
 
-
-
-
         binding.arrowBackBtn.setOnClickListener(view -> {
             Navigation.findNavController(view).navigate(R.id.action_orderDetailsFragment_to_cartFragment);
         });
+        binding.subTotalPriceTv.setText(String.valueOf(subTotal));
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void orderPrice(int totalPrice) {
+        Log.d(Constants.TAG, "totalPrice = " + totalPrice);
+
     }
 
     private int convertDpToPx(int dp){
@@ -89,10 +91,9 @@ public class OrderDetailsFragment extends Fragment {
 
         binding.orderDetailsRv.setHasFixedSize(true);
         binding.orderDetailsRv.setItemAnimator(new DefaultItemAnimator());
-        orderAdapter = new OrderAdapter(orders);
+        orderAdapter = new OrderAdapter(getActivity(), orders, this);
         binding.orderDetailsRv.setAdapter(orderAdapter);
     }
-
     private void setItemtouchCallback(){
         ItemTouchHelper.SimpleCallback itemTouchCallback = new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {

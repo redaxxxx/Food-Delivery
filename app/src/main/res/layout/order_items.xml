@@ -65,16 +65,27 @@
                 app:layout_constraintTop_toBottomOf="@+id/orderName" />
 
             <TextView
-                android:id="@+id/price_textView"
+                android:id="@+id/dollar_symbol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="$35"
+                android:text="$"
                 android:textColor="@color/green"
-                android:textSize="13sp"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imgCardView"
                 app:layout_constraintStart_toStartOf="@id/RestroName"
                 app:layout_constraintTop_toBottomOf="@+id/RestroName" />
+
+            <TextView
+                android:id="@+id/price_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="35"
+                android:textColor="@color/green"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="@id/dollar_symbol"
+                app:layout_constraintStart_toEndOf="@id/dollar_symbol"/>
 
             <ImageButton
                 android:id="@+id/addImageButton"
