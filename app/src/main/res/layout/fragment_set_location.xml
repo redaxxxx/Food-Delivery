@@ -18,6 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
+            android:layout_marginTop="16dp"
             android:src="@drawable/iconback"
             app:layout_constraintStart_toStartOf="@id/guideline1"
             app:layout_constraintTop_toTopOf="parent" />
@@ -26,22 +27,23 @@
             android:id="@+id/paymentMethod_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="Set Your Location "
             android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@id/arrowBackBtn"
-            app:layout_constraintStart_toStartOf="@id/guideline1" />
+            app:layout_constraintEnd_toStartOf="@+id/guideline2"
+            app:layout_constraintStart_toStartOf="@id/guideline1"
+            app:layout_constraintTop_toBottomOf="@id/arrowBackBtn" />
 
         <TextView
             android:id="@+id/textview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="This data will be displayed in your account profile for security"
-            android:textSize="11sp"
-            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/black"
+            android:text="This data will be displayed in your account \n profile for security"
+            android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@id/paymentMethod_tv"
             app:layout_constraintTop_toBottomOf="@id/paymentMethod_tv" />
@@ -50,7 +52,7 @@
             android:id="@+id/gelleryCardView"
             android:layout_width="0dp"
             android:layout_height="129dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="16dp"
             app:cardCornerRadius="10dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline2"
             app:layout_constraintStart_toStartOf="@id/textview"
@@ -64,8 +66,8 @@
                     android:id="@+id/locationImgView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="17dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
                     android:src="@drawable/iconlocation"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -83,22 +85,24 @@
                     app:layout_constraintStart_toEndOf="@id/locationImgView"
                     app:layout_constraintTop_toTopOf="@id/locationImgView" />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/setLocationBtn"
-                    android:layout_width="300dp"
+                    android:layout_width="0dp"
                     android:layout_height="57dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
                     android:background="@drawable/set_location_btn_background"
                     android:text="Set Location"
                     android:textColor="@color/black"
                     android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/locationImgView"
                     app:layout_constraintTop_toBottomOf="@id/locationImgView" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/nextBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -106,8 +110,9 @@
             app:layout_constraintStart_toStartOf="@id/guideline1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guideline2"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="32dp"
             android:text="Next"
+            android:textColor="@color/white"
             android:textSize="17sp"
             android:textStyle="bold"
             android:textAllCaps="false" />

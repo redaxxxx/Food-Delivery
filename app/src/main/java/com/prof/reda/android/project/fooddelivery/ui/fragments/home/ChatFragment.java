@@ -61,10 +61,5 @@ public class ChatFragment extends Fragment implements ChatAdapter.OnClickItemOfC
         bundle.putString("Name", name);
 
         Navigation.findNavController(view).navigate(R.id.action_chatFragment2_to_chatDetailsFragment, bundle);
-
-//        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//        FragmentTransaction transaction = fragmentManager.beginTransaction();
-//        transaction.replace(R.id.container, fragment).commitAllowingStateLoss();
-
     }
 }

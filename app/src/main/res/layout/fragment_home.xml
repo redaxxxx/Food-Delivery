@@ -17,7 +17,7 @@
             android:id="@+id/first_Layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintStart_toStartOf="@id/guideline3"
             app:layout_constraintTop_toTopOf="parent">
@@ -44,9 +44,9 @@
 
             <ImageButton
                 android:id="@+id/filterBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/filter_icon_background"
                 android:src="@drawable/filter"
                 app:layout_constraintEnd_toEndOf="@+id/iconBtn"
@@ -55,7 +55,7 @@
             <EditText
                 android:id="@+id/editText"
                 android:layout_width="235dp"
-                android:layout_height="50dp"
+                android:layout_height="35dp"
                 android:background="@drawable/search_icon_background"
                 android:drawableLeft="@drawable/iconsearch"
                 android:drawablePadding="8dp"
@@ -65,6 +65,67 @@
                 android:textSize="11sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/filterBtn" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/noInternetLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/first_Layout"
+            app:layout_constraintStart_toStartOf="@id/guideline3"
+            app:layout_constraintEnd_toEndOf="@id/guideline"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/oops_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="OOPS!"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                android:id="@+id/noInternet_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="No Internet"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginTop="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/oops_textView" />
+
+            <TextView
+                android:id="@+id/pleaseCheckInternet_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="start"
+                android:text="Please check your network connection."
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/noInternet_textView" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Try Again"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/pleaseCheckInternet_textView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.core.widget.NestedScrollView
@@ -83,8 +144,8 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/frameLayout"
                     android:layout_width="0dp"
-                    android:layout_height="150dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_height="140dp"
+                    android:layout_marginTop="16dp"
                     android:background="@drawable/homeframe"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -92,7 +153,7 @@
 
                     <ImageView
                         android:layout_width="250dp"
-                        android:layout_height="150dp"
+                        android:layout_height="140dp"
                         android:scaleType="fitStart"
                         android:src="@drawable/icecream"
                         app:layout_constraintStart_toStartOf="parent"
@@ -148,8 +209,8 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_nearestRestaurant"
                     android:layout_width="match_parent"
-                    android:layout_height="184dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_height="164dp"
+                    android:layout_marginTop="8dp"
                     app:layout_constraintEnd_toEndOf="@id/frameLayout"
                     app:layout_constraintStart_toStartOf="@id/frameLayout"
                     app:layout_constraintTop_toBottomOf="@id/nearestRestaurantTV" />
@@ -180,7 +241,7 @@
                     android:id="@+id/rv_popularMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="8dp"
                     app:layout_constraintEnd_toEndOf="@id/frameLayout"
                     app:layout_constraintStart_toStartOf="@id/frameLayout"
                     app:layout_constraintTop_toBottomOf="@id/popularTV" />

@@ -1,46 +1,40 @@
 package com.prof.reda.android.project.fooddelivery.adapters;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.prof.reda.android.project.fooddelivery.R;
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.prof.reda.android.project.fooddelivery.databinding.MenuItemsBinding;
 import com.prof.reda.android.project.fooddelivery.models.Food;
-import com.prof.reda.android.project.fooddelivery.models.Menu;
-import com.prof.reda.android.project.fooddelivery.models.Restro;
+import com.prof.reda.android.project.fooddelivery.utils.GetFoodImageFromStorage;
+import com.prof.reda.android.project.fooddelivery.utils.OnClickFoodItemListener;
 import com.prof.reda.android.project.fooddelivery.utils.Constants;
-import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.PopularViewHolder> {
 
-    private final Context context;
-    private List<Food> foods;
-    private OnItemClickListener onItemClickListener;
-    public FoodAdapter(Context context, List<Food> foods, OnItemClickListener onItemClickListener){
-        this.context = context;
+    private Context mContext;
+    private final List<Food> foods;
+    private final OnClickFoodItemListener onClickFoodItemListener;
+
+    private StorageReference foodImgRef;
+
+    public FoodAdapter(Context mContext, List<Food> foods, OnClickFoodItemListener onClickFoodItemListener){
         this.foods = foods;
-        this.onItemClickListener = onItemClickListener;
+        this.onClickFoodItemListener = onClickFoodItemListener;
+        this.mContext = mContext;
     }
 
     @NonNull
@@ -53,17 +47,23 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.PopularViewHol
     @Override
     public void onBindViewHolder(@NonNull PopularViewHolder holder, int position) {
 
+        holder.binding.priceTV.setText("$");
+
         if (foods.size() > 0){
             Food food = foods.get(position);
 
-            getPicture(holder.binding.menuImgView, food);
+            holder.binding.menuNameTV.setText(food.getFoodName());
+            holder.binding.restroName.setText(food.getRestroName());
 
-            holder.binding.menuNameTV.setText(food.getName());
-            holder.binding.restroName.setText(food.getName());
-            holder.binding.priceTV.setText("$" + food.getPrice());
+            GetFoodImageFromStorage foodImage = new GetFoodImageFromStorage(mContext, holder.binding.menuImgView,
+                    food.getImage());
+
+            foodImage.getFoodImage();
+
+            holder.binding.priceTV.append(food.getPrice());
 
             holder.itemView.setOnClickListener(view -> {
-                onItemClickListener.onClickItem(food);
+                onClickFoodItemListener.onClickFoodItem(food);
             });
         }
     }
@@ -79,39 +79,5 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.PopularViewHol
             super(menuItemsBinding.getRoot());
             binding = menuItemsBinding;
         }
-    }
-
-    private void getPicture(ImageView imageView, Food food){
-        StringRequest request = new StringRequest(Request.Method.GET, Constants.HOME + food.getImage(),
-                response -> {
-                    try {
-                        JSONObject object = new JSONObject(response);
-                        if (object.getBoolean("status")){
-                            JSONArray jsonArray = new JSONArray(object.getString("data"));
-                            if (jsonArray.length() < 0){
-                                imageView.setImageResource(R.drawable.menu1);
-                            }else {
-
-                            }
-                        }
-                    }catch (JSONException e){
-                        e.printStackTrace();
-                    }
-                }, error -> {
-                    error.printStackTrace();
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String,String> map = new HashMap<>();
-                map.put("Authorization", "Bearer 610|NlAqHfcHkLiGtRVFW9Li7wDmdfCm5dl3CCcwccYM");
-                return map;
-            }
-        };
-        RequestQueue queue = Volley.newRequestQueue(context);
-        queue.add(request);
-    }
-
-    public interface OnItemClickListener{
-        void onClickItem(Food food);
     }
 }

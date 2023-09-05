@@ -49,7 +49,8 @@
 
         <action
             android:id="@+id/action_cartFragment_to_orderDetailsFragment"
-            app:destination="@id/orderDetailsFragment" />
+            app:destination="@id/orderDetailsFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -181,7 +182,6 @@
         <action
             android:id="@+id/action_orderDetailsFragment_to_cartFragment"
             app:destination="@id/cartFragment"
-            app:popUpTo="@id/cartFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="false" />
     </fragment>
 </navigation>

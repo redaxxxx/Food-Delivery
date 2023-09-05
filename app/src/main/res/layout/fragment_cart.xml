@@ -85,13 +85,14 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginBottom="10dp"/>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/complete_order"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="25dp"
                 android:background="@drawable/background_search_btn"
-                android:text="Complete Order"
+                android:text="Check out"
+                android:textColor="@color/white"
                 android:textAllCaps="false"
                 android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -12,59 +12,86 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.prof.reda.android.project.fooddelivery.R;
 import com.prof.reda.android.project.fooddelivery.adapters.CartAdapter;
-import com.prof.reda.android.project.fooddelivery.database.FoodDatabase;
 import com.prof.reda.android.project.fooddelivery.databinding.FragmentCartBinding;
-import com.prof.reda.android.project.fooddelivery.models.EntityOrder;
+import com.prof.reda.android.project.fooddelivery.models.Cart;
+import com.prof.reda.android.project.fooddelivery.models.Order;
+import com.prof.reda.android.project.fooddelivery.utils.Config;
+import com.prof.reda.android.project.fooddelivery.utils.Constants;
+import com.prof.reda.android.project.fooddelivery.utils.OnProcessOrderItemListener;
 import com.prof.reda.android.project.fooddelivery.viewModel.FoodViewModel;
 import com.prof.reda.android.project.fooddelivery.viewModel.FoodViewModelFactory;
 
 import java.util.List;
 
-public class CartFragment extends Fragment {
+public class CartFragment extends Fragment implements OnProcessOrderItemListener{
     private FragmentCartBinding binding;
-    private CartAdapter cartAdapter;
-    private FoodDatabase mDB;
     private FoodViewModel viewModel;
-
+    private FirebaseFirestore db;
+    
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_cart, container, false);
 
-        binding.completeOrder.setOnClickListener(view -> {
-            Navigation.findNavController(view).navigate(R.id.action_cartFragment_to_orderDetailsFragment);
-        });
-
-        mDB = FoodDatabase.getInstance(getContext());
-        FoodViewModelFactory factory = new FoodViewModelFactory(mDB);
-
+        FoodViewModelFactory factory = new FoodViewModelFactory(getActivity());
         viewModel = new ViewModelProvider(this, factory).get(FoodViewModel.class);
 
-        viewModel.getCartIfno().observe(getViewLifecycleOwner(), new Observer<List<EntityOrder>>() {
+        db = FirebaseFirestore.getInstance();
+        viewModel.getCartInfo().observe(getViewLifecycleOwner(), new Observer<List<Cart>>() {
             @Override
-            public void onChanged(List<EntityOrder> orders) {
-                prepareRecyclerView(orders);
+            public void onChanged(List<Cart> cartList) {
+                prepareRecyclerView(cartList);
             }
+        });
+
+        binding.completeOrder.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_cartFragment_to_orderDetailsFragment);
         });
 
         return binding.getRoot();
     }
 
-    private void prepareRecyclerView(List<EntityOrder> orders){
+    private void prepareRecyclerView(List<Cart> cartList){
         binding.ordersRv.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL
                 , false));
 
         binding.ordersRv.setHasFixedSize(true);
         binding.ordersRv.setItemAnimator(new DefaultItemAnimator());
-
-        cartAdapter = new CartAdapter(getContext(), orders);
+        CartAdapter cartAdapter = new CartAdapter(getActivity(), cartList,this);
         binding.ordersRv.setAdapter(cartAdapter);
     }
 
+    @Override
+    public void processOrder(Cart cart) {
+        Order order = new Order();
+        order.setOrderId(cart.getCartId());
+        order.setFoodName(cart.getFoodName());
+        order.setRestroName(cart.getRestroName());
+        order.setPrice(cart.getPrice());
+        order.setFoodImage(cart.getFoodImage());
+
+        db.collection(Constants.USERS_COLLECTION).document(Config.firebaseUSerID)
+                .collection(Constants.ORDERS_COLLECTION).document(cart.getCartId()).set(order)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d(Constants.TAG, "Order is added");
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d(Constants.TAG, "Failed in add order: " + e.getLocalizedMessage());
+                    }
+                });
+    }
 }

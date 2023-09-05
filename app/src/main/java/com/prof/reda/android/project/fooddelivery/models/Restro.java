@@ -1,19 +1,16 @@
 package com.prof.reda.android.project.fooddelivery.models;
 
+import com.prof.reda.android.project.fooddelivery.R;
+
+import java.util.ArrayList;
+
 public class Restro {
-    private int id;
     private String pic;
     private String name;
     private String deliveryTime;
-    private String cover_photo;
-    private String latitude,longitude;
 
-    public int getId() {
-        return id;
-    }
+    public Restro(){
 
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getPic() {
@@ -40,27 +37,4 @@ public class Restro {
         this.deliveryTime = deliveryTime;
     }
 
-    public String getCover_photo() {
-        return cover_photo;
-    }
-
-    public void setCover_photo(String cover_photo) {
-        this.cover_photo = cover_photo;
-    }
-
-    public String getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
-
-    public String getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
-    }
 }

@@ -1,22 +1,51 @@
 package com.prof.reda.android.project.fooddelivery.models;
 
 public class Order {
-    private int id;
-    private String quantity;
+    private String orderId;
+    private String foodName;
+    private String restroName;
+    private String price;
+    private String foodImage;
+    public Order(){
 
-    public int getId() {
-        return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getOrderId() {
+        return orderId;
     }
 
-    public String getQuantity() {
-        return quantity;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
-    public void setQuantity(String quantity) {
-        this.quantity = quantity;
+    public String getFoodName() {
+        return foodName;
+    }
+
+    public void setFoodName(String foodName) {
+        this.foodName = foodName;
+    }
+
+    public String getRestroName() {
+        return restroName;
+    }
+
+    public void setRestroName(String restroName) {
+        this.restroName = restroName;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+    public String getFoodImage() {
+        return foodImage;
+    }
+
+    public void setFoodImage(String foodImage) {
+        this.foodImage = foodImage;
     }
 }

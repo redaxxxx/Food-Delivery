@@ -9,7 +9,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="103dp"
+        android:layout_height="90dp"
         app:cardCornerRadius="15dp"
         android:elevation="5dp"
         app:cardUseCompatPadding="true"
@@ -27,7 +27,7 @@
                 android:id="@+id/imgCardView"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="8dp"
                 android:elevation="5dp"
                 app:cardCornerRadius="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -65,22 +65,33 @@
                 app:layout_constraintTop_toBottomOf="@+id/orderName" />
 
             <TextView
-                android:id="@+id/price_textView"
+                android:id="@+id/dollar_symbol"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="$35"
+                android:text="$"
                 android:textColor="@color/green"
-                android:textSize="13sp"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imgCardView"
                 app:layout_constraintStart_toStartOf="@id/RestroName"
                 app:layout_constraintTop_toBottomOf="@+id/RestroName" />
+
+            <TextView
+                android:id="@+id/price_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="35"
+                android:textColor="@color/green"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="@id/dollar_symbol"
+                app:layout_constraintStart_toEndOf="@id/dollar_symbol"/>
 
             <ImageButton
                 android:id="@+id/addImageButton"
                 android:layout_width="26dp"
                 android:layout_height="26dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/add_rectangle_background"
                 android:src="@drawable/baseline_add_24"
                 app:layout_constraintBottom_toBottomOf="parent"

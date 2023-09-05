@@ -16,63 +16,68 @@
             android:id="@+id/imageView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="90dp"
             android:src="@drawable/illustrationimg"
-            app:layout_constraintEnd_toEndOf="@id/guideline2"
-            app:layout_constraintStart_toStartOf="@id/guideline1"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toTopOf="@id/congrats_tv"
+            app:layout_constraintEnd_toEndOf="@id/guidelinRight"
+            app:layout_constraintStart_toStartOf="@id/guidelineLeft"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
             android:id="@+id/congrats_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="17dp"
             android:text="Congrats!"
-            android:textSize="22dp"
             android:textColor="@color/green"
+            android:textSize="20sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/textView2"
             app:layout_constraintEnd_toEndOf="@+id/imageView3"
             app:layout_constraintStart_toStartOf="@+id/imageView3"
             app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
         <TextView
+            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="17dp"
             android:text="Your Profile Is Ready To Use"
-            android:textSize="17sp"
             android:textColor="@color/black"
+            android:textSize="16sp"
             android:textStyle="bold"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/tryOrderBtn"
             app:layout_constraintEnd_toEndOf="@+id/congrats_tv"
             app:layout_constraintStart_toStartOf="@+id/congrats_tv"
-            app:layout_constraintTop_toBottomOf="@+id/congrats_tv" />
+            app:layout_constraintTop_toBottomOf="@id/congrats_tv"/>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/tryOrderBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/next_btn_background"
-            app:layout_constraintStart_toStartOf="@id/guideline1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/guideline2"
             android:layout_marginBottom="25dp"
+            android:background="@drawable/next_btn_background"
             android:text="Try Order"
+            android:textAllCaps="false"
             android:textSize="17sp"
             android:textStyle="bold"
-            android:textAllCaps="false" />
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guidelinRight"
+            app:layout_constraintStart_toEndOf="@id/guidelineLeft" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline1"
+            android:id="@+id/guidelineLeft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.048661802" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline2"
+            android:id="@+id/guidelinRight"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.951338198" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

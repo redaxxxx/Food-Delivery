@@ -11,25 +11,6 @@ public class Restaurants {
     private String restroName;
     private String distanceInMins;
 
-
-    public Restaurants(int menuImg, String menuName, String restroName, int price){
-        this.menuImg = menuImg;
-        this.menuName = menuName;
-        this.restroName = restroName;
-        this.price = price;
-    }
-    public Restaurants(int restroImg, String restroName, String distanceInMins) {
-        this.restroImg = restroImg;
-        this.restroName = restroName;
-        this.distanceInMins = distanceInMins;
-    }
-
-    public Restaurants(int menuImg, String menuName, int price){
-        this.menuImg = menuImg;
-        this.menuName = menuName;
-        this.price = price;
-    }
-
     public int getRestroImg() {
         return restroImg;
     }

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/sign_up_navigation"
+    app:startDestination="@id/signupFragment">
+
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.ui.fragments.firstopenapp.SignupFragment"
+        android:label="SignupFragment"
+        tools:layout="@layout/fragment_sign_up">
+        <action
+            android:id="@+id/action_signupFragment_to_fillInBioFragment"
+            app:destination="@id/fillInBioFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fillInBioFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.ui.fragments.firstopenapp.FillInBioFragment"
+        android:label="FillInBioFragment"
+        tools:layout="@layout/fragment_fill_in_bio">
+        <action
+            android:id="@+id/action_fillInBioFragment_to_paymentMethodsFragment"
+            app:destination="@id/paymentMethodsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentMethodsFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.ui.fragments.firstopenapp.PaymentMethodsFragment"
+        android:label="PaymentMethodsFragment"
+        tools:layout="@layout/fragment_payment_methods">
+        <action
+            android:id="@+id/action_paymentMethodsFragment_to_uploadPhotoFragment"
+            app:destination="@id/uploadPhotoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/uploadPhotoFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.ui.fragments.firstopenapp.UploadPhotoFragment"
+        android:label="UploadPhotoFragment"
+        tools:layout="@layout/fragment_upload_photo">
+        <action
+            android:id="@+id/action_uploadPhotoFragment_to_setLocationFragment"
+            app:destination="@id/setLocationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/setLocationFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.ui.fragments.firstopenapp.SetLocationFragment"
+        android:label="SetLocationFragment"
+        tools:layout="@layout/fragment_set_location">
+        <action
+            android:id="@+id/action_setLocationFragment_to_signUpSuccessFragment"
+            app:destination="@id/signUpSuccessFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpSuccessFragment"
+        android:name="com.prof.reda.android.project.fooddelivery.ui.fragments.firstopenapp.SignUpSuccessFragment"
+        android:label="SignUpSuccessFragment"
+        tools:layout="@layout/fragment_sign_up_success"/>
+</navigation>
